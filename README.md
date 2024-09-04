@@ -1,1 +1,1 @@
-# HOG_human_detection
+# ASIC_for_smart_camera_using_HOG_in_human_detection
