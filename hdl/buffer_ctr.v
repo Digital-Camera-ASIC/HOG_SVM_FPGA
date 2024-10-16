@@ -16,12 +16,12 @@ module buffer_ctr #(
     assign full = (cnt == DEPTH);
 
     assign n_cnt =
-        (clear) ? 0 :
-        (i_valid && !full) ? cnt + 1 : cnt;
+        (clear) ? 32'b0 :
+        (i_valid && !full) ? cnt + 1'b1 : cnt;
     
     always @(posedge clk) begin
         if(!rst)
-            cnt = 0;
+            cnt = 32'b0;
         else
             cnt = n_cnt;
     end

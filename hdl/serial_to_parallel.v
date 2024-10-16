@@ -5,10 +5,10 @@ module serial_to_parallel #(
 ) (
     input                               clk,
     input                               rst,
-    input   [DATA_W - 1 : 0]        i_data,
+    input   [DATA_W - 1 : 0]            i_data,
     input                               i_valid,
     input                               clear,
-    output  [DATA_W * 2 - 1 : 0]    o_data,
+    output  [DATA_W * 2 - 1 : 0]        o_data,
     output                              o_valid
 );
     wire    [DATA_W - 1 : 0]            _data [0 : 2];
