@@ -70,7 +70,7 @@ module tb_hog_feature_gen;
         .fea_d      (vif.fea_d),
         .o_valid    (vif.o_valid)
     );
-
+    
     item obj;
     function void build_phase;
         obj = new;

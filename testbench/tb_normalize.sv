@@ -2,8 +2,6 @@
 class item;
     rand bit [31:0] data [9];
     constraint limit {
-        foreach (data[i])
-            data[i][31:16] < 23079;
         data.sum() < 23079;
     }
     function new;
@@ -78,48 +76,48 @@ module tb_normalize;
         for(int i = 0; i < 1; i++) begin
             vif.cb.i_valid <= 1;
             vif.cb.i_data[0] <= {
-                item_a.data[0], 
-                item_a.data[1],
-                item_a.data[2],
-                item_a.data[3],
-                item_a.data[4],
-                item_a.data[5],
-                item_a.data[6],
+                item_a.data[8], 
                 item_a.data[7],
-                item_a.data[8]
+                item_a.data[6],
+                item_a.data[5],
+                item_a.data[4],
+                item_a.data[3],
+                item_a.data[2],
+                item_a.data[1],
+                item_a.data[0]
             };
             vif.cb.i_data[1] <= {
-                item_b.data[0], 
-                item_b.data[1],
-                item_b.data[2],
-                item_b.data[3],
-                item_b.data[4],
-                item_b.data[5],
-                item_b.data[6],
+                item_b.data[8], 
                 item_b.data[7],
-                item_b.data[8]
+                item_b.data[6],
+                item_b.data[5],
+                item_b.data[4],
+                item_b.data[3],
+                item_b.data[2],
+                item_b.data[1],
+                item_b.data[0]
             };
             vif.cb.i_data[2] <= {
-                item_c.data[0], 
-                item_c.data[1],
-                item_c.data[2],
-                item_c.data[3],
-                item_c.data[4],
-                item_c.data[5],
-                item_c.data[6],
+                item_c.data[8], 
                 item_c.data[7],
-                item_c.data[8]
+                item_c.data[6],
+                item_c.data[5],
+                item_c.data[4],
+                item_c.data[3],
+                item_c.data[2],
+                item_c.data[1],
+                item_c.data[0]
             };
             vif.cb.i_data[3] <= {
-                item_d.data[0], 
-                item_d.data[1],
-                item_d.data[2],
-                item_d.data[3],
-                item_d.data[4],
-                item_d.data[5],
-                item_d.data[6],
+                item_d.data[8], 
                 item_d.data[7],
-                item_d.data[8]
+                item_d.data[6],
+                item_d.data[5],
+                item_d.data[4],
+                item_d.data[3],
+                item_d.data[2],
+                item_d.data[1],
+                item_d.data[0]
             };
             $display("---------------");
             foreach (item_a.data[i])
