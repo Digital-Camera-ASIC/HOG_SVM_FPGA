@@ -1,3 +1,4 @@
+
 module mag_cal_sbs #(
     parameter PIX_W = 8, // pixel width
     parameter MAG_I = 9, // integer part of magnitude
@@ -7,7 +8,6 @@ module mag_cal_sbs #(
     input                               clk,
     input                               rst,
     input   [PIX_W * 4 - 1 : 0]         pixel,
-    input                               i_valid,
     output reg  [MAG_I + MAG_F - 1 : 0] bin0,
     output reg  [MAG_I + MAG_F - 1 : 0] bin20,
     output reg  [MAG_I + MAG_F - 1 : 0] bin40,
@@ -16,17 +16,15 @@ module mag_cal_sbs #(
     output reg  [MAG_I + MAG_F - 1 : 0] bin100,
     output reg  [MAG_I + MAG_F - 1 : 0] bin120,
     output reg  [MAG_I + MAG_F - 1 : 0] bin140,
-    output reg  [MAG_I + MAG_F - 1 : 0] bin160,
-    output reg                          o_valid
+    output reg  [MAG_I + MAG_F - 1 : 0] bin160
 );
-
+    localparam pipe_cycle = 1;
     wire   [TAN_W - 1 : 0]         tan_n;
     wire                           negative_n;
     wire   [MAG_I + MAG_F - 1 : 0] magnitude_n;
     reg   [TAN_W - 1 : 0]         tan_r;
     reg                           negative_r;
     reg   [MAG_I + MAG_F - 1 : 0] magnitude_r;
-    reg                           i_valid_r;
     
     wire  [MAG_I + MAG_F - 1 : 0] bin0_n;
     wire  [MAG_I + MAG_F - 1 : 0] bin20_n;
@@ -59,12 +57,10 @@ module mag_cal_sbs #(
             tan_r <= 0;
             magnitude_r <= 0;
             negative_r <= 0;
-            i_valid_r <= 0;
         end else begin
             tan_r <= tan_n;
             magnitude_r <= magnitude_n;
             negative_r <= negative_n;
-            i_valid_r <= i_valid;
         end
     end
 
@@ -97,7 +93,6 @@ module mag_cal_sbs #(
             bin120 <= 0;
             bin140 <= 0;
             bin160 <= 0;
-            o_valid <= 0;
         end else begin
             bin0 <= bin0_n;
             bin20 <= bin20_n;
@@ -108,7 +103,6 @@ module mag_cal_sbs #(
             bin120 <= bin120_n;
             bin140 <= bin140_n;
             bin160 <= bin160_n;
-            o_valid <= i_valid_r;
         end
     end
 endmodule

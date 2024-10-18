@@ -26,9 +26,9 @@ module mag_cal #(
     //pixel order: {top, bottom, left right}
     assign {top, bottom, left, right} = pixel;
     assign {negative_y, max_y, min_y} = 
-        (bottom > top) ? {1'b0, bottom, top} : {1'b0, top, bottom};
+        (bottom < top) ? {1'b1, top, bottom} : {1'b0, bottom, top};
     assign {negative_x, max_x, min_x} = 
-        (right > left) ? {1'b0, right, left} : {1'b0, left, right};
+        (right < left) ? {1'b1, left, right} : {1'b0, right, left};
     
     assign mag_x = max_x - min_x;
     assign mag_y = max_y - min_y;
