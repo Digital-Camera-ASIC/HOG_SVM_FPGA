@@ -84,6 +84,7 @@ module tb_hog_feature_gen;
     
     task driver;
         for(int i = 0; i < 200; i++) begin
+            @vif.cb;
             vif.cb.i_valid <= 1;
             vif.cb.addr_fw <= 1;
             vif.cb.bin <= {
@@ -98,7 +99,7 @@ module tb_hog_feature_gen;
                 obj.data[0]
                 };
             obj.randomize();
-            @vif.cb;
+            // @vif.cb;
         end
     endtask
     task monitor;
@@ -107,6 +108,10 @@ module tb_hog_feature_gen;
         end
     endtask
     initial begin
+        clk = 0;
+        rst = 0;
+        $dumpfile("wave_2.vcd");
+        $dumpvars(0, tb_hog_feature_gen);
         build_phase;
         reset_phase;
         fork

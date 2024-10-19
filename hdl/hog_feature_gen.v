@@ -20,7 +20,7 @@ module hog_feature_gen #(
     output                                  o_valid
 );
     
-    localparam p_data_w = 18 * (BIN_I + BIN_F);
+    localparam p_data_w = 18 * (BIN_I + BIN_F); // 2 bin 1 bin la 9 * ...
     localparam buf_depth = 39;
 
     reg  [BID_W - 1 : 0]                 bid_r;
