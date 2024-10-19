@@ -84,7 +84,9 @@ module tb_hog_feature_gen;
     endtask
     
     task driver;
+    
         for(int i = 0; i < 200; i++) begin
+            @vif.cb;
             vif.cb.i_valid <= 1;
             vif.cb.addr_fw <= 1;
             vif.cb.bin <= {
@@ -99,15 +101,21 @@ module tb_hog_feature_gen;
                 obj.data[0]
                 };
             obj.randomize();
-            @vif.cb;
+            
         end
     endtask
     task monitor;
         forever begin
+            wait(vif.cb.o_valid);
+            // to do
             @vif.cb;
         end
     endtask
+    bit [31 : 0] a = 'h00001000;
+    real temp = a*1.0/2**28;
+    real gm = $sqrt(temp);
     initial begin
+        $display("gm: %.10f", gm);
         build_phase;
         reset_phase;
         fork
