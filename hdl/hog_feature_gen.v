@@ -1,5 +1,5 @@
 module hog_feature_gen #(
-    parameter ADDR_W =  13, // address width of cells
+    parameter ADDR_W =  10, // address width of cells
     parameter BIN_I =   16, // integer part of bin
     parameter BIN_F =   16, // fractional part of bin
     parameter BID_W =   13, // block id width
@@ -10,6 +10,7 @@ module hog_feature_gen #(
     input                                   clk,
     input                                   rst,
     input   [ADDR_W - 1 : 0]                addr_fw,
+    input   [ADDR_W - 1 : 0]                address,
     input   [9 * (BIN_I + BIN_F) - 1 : 0]   bin,
     input                                   i_valid,
     output  [BID_W - 1 : 0]                 bid,
@@ -21,7 +22,7 @@ module hog_feature_gen #(
 );
     
     localparam p_data_w = 18 * (BIN_I + BIN_F);
-    localparam buf_depth = 39;
+    localparam buf_depth = 38;
 
     reg  [BID_W - 1 : 0]                 bid_r;
     reg  [9 * (FEA_I + FEA_F) - 1 : 0]   fea_a_r;
@@ -49,9 +50,13 @@ module hog_feature_gen #(
     wire oc_valid; // one cell valid output
     wire i_valid_nor;
 
+    wire is_addr_valid;
+    wire i_valid_b;
     assign i_valid_nor = oc_valid & ol_valid;
     assign clear = !(|addr_fw); // addr_fw == 0
     
+    assign is_addr_valid = (address % (buf_depth + 2)) != 0;
+    assign i_valid_b = is_addr_valid & p_valid;
     serial_to_parallel #(
         .DATA_W     (9 * (BIN_I + BIN_F))
     ) u_serial_to_parallel (
@@ -76,7 +81,7 @@ module hog_feature_gen #(
         // input data
         .clear      (clear),
         // clear counter
-        .i_valid    (p_valid),
+        .i_valid    (i_valid_b),
         // input valid signal
         .o_data     ({bin_a, bin_b}),
         // output data
@@ -96,7 +101,7 @@ module hog_feature_gen #(
         // input data
         .clear      (clear),
         // clear counter
-        .i_valid    (p_valid),
+        .i_valid    (i_valid_b),
         // input valid signal
         .o_data     ({bin_c, bin_d}),
         // output data

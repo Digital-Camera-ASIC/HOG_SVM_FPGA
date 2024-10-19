@@ -23,7 +23,7 @@ module mag_cal #(
     wire [PIX_W - 1 : 0] mag_x;
     wire [PIX_W - 1 : 0] mag_y;
     wire [sum_w - 1 : 0] sum_of_square;
-    //pixel order: {top, bottom, left right}
+    //pixel order: {top, bottom, left, right}
     assign {top, bottom, left, right} = pixel;
     assign {negative_y, max_y, min_y} = 
         (bottom < top) ? {1'b1, top, bottom} : {1'b0, bottom, top};
