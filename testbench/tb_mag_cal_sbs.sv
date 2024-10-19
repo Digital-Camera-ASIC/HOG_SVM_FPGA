@@ -38,7 +38,6 @@ module tb_mag_cal_sbs;
         .clk        (clk),
         .rst        (rst),
         .pixel      (vif.pixel),
-        .i_valid    (vif.i_valid),
         .bin0       (vif.bin[0]),
         .bin20      (vif.bin[1]),
         .bin40      (vif.bin[2]),
@@ -47,8 +46,7 @@ module tb_mag_cal_sbs;
         .bin100     (vif.bin[5]),
         .bin120     (vif.bin[6]),
         .bin140     (vif.bin[7]),
-        .bin160     (vif.bin[8]),
-        .o_valid    (vif.o_valid)
+        .bin160     (vif.bin[8])
     );
     
     mag_item obj;
