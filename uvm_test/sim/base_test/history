@@ -1,3 +1,3 @@
 - Entry: 1
-  Time: Sun Oct 20 15:53:58 2024
+  Time: Sun Oct 20 16:50:09 2024
   Command: qrun -uvmhome uvm-1.2 +UVM_TESTNAME=base_test +UVM_NO_RELNOTES -verbose -lint=default -parallel -coverage +cover=sbteft -vlog.sv -vlog.timescale 1ns/1ps -vopt.access=rw+/. -vsim.sv_seed 1 -f dut.f -f top.f -top top -outdir base_test -l base_test/qrun.log -designfile base_test/base_test.bin -qwavedb=+memory=all+assertion+cell+signal+class+wavefile=base_test/base_test.db 
