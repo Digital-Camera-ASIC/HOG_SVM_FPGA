@@ -32,7 +32,7 @@ class base_driver extends uvm_driver #(base_item);
 
     task drive_item(base_item item);
       wait(vif.rst);
-      @vif.cb
+      @vif.cb;
       vif.cb.i_valid <= 1;
       vif.cb.addr_fw <= 1;
       vif.cb.bin <= {

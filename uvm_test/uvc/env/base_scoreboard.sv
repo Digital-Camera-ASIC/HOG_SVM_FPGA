@@ -127,6 +127,8 @@ class base_scoreboard extends uvm_scoreboard;
       
     virtual function void extract_phase(uvm_phase phase);
       `uvm_info(get_type_name(), "Extract phase", UVM_LOW)
+
+      
     endfunction
             
             

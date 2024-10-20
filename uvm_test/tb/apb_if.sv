@@ -17,6 +17,6 @@ interface dut_if #(
   clocking cb @(posedge clk);
       default input #1ps output #1ps;
       output  bin, i_valid, addr_fw;
-      input   o_valid, bid, fea_a, fea_b, fea_c, fea_d;
+      input   bid, fea_a, fea_b, fea_c, fea_d, o_valid;
   endclocking
 endinterface

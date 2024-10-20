@@ -1,11 +1,11 @@
 QuestaSim-64 qrun 2024.1 Utility 2024.02 Feb  1 2024
-Start time: 20:55:36 on Oct 20,2024
+Start time: 21:59:51 on Oct 20,2024
 qrun -uvmhome uvm-1.2 "+UVM_TESTNAME=base_test" "+UVM_NO_RELNOTES" -verbose -lint=default -parallel -coverage "+cover=sbteft" -vlog.sv -vlog.timescale 1ns/1ps -vopt.access=rw+/. -vsim.sv_seed 1 -f dut.f -f top.f -top top -outdir base_test -l base_test/qrun.log -designfile base_test/base_test.bin -qwavedb=+memory=all+assertion+cell+signal+class+wavefile=base_test/base_test.db 
 ***Vlib command: vlib -statslog base_test/stats_log base_test/work
 Creating library 'base_test/work'.
 ***Compiling UVM: vlog -work base_test/work +incdir+C:/questasim64_2024.1/verilog_src/uvm-1.2/src -ccflags -Wno-return-type -ccflags -DQUESTA C:/questasim64_2024.1/verilog_src/uvm-1.2/src/dpi/uvm_dpi.cc C:/questasim64_2024.1/verilog_src/uvm-1.2/src/uvm_pkg.sv C:/questasim64_2024.1/verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv -csession=incr -csessiondir base_test/sessions -csessionid=0
 QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
-Start time: 20:55:36 on Oct 20,2024
+Start time: 21:59:51 on Oct 20,2024
 vlog -work base_test/work "+incdir+C:/questasim64_2024.1/verilog_src/uvm-1.2/src" -ccflags "-Wno-return-type" -ccflags "-DQUESTA" C:/questasim64_2024.1/verilog_src/uvm-1.2/src/dpi/uvm_dpi.cc C:/questasim64_2024.1/verilog_src/uvm-1.2/src/uvm_pkg.sv C:/questasim64_2024.1/verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv -csession=incr -csessiondir base_test/sessions -csessionid=0 
 -- Compiling package uvm_pkg (uvm-1.2 Built-in)
 -- Compiling package questa_uvm_pkg
@@ -127,11 +127,11 @@ C:/questasim64_2024.1/verilog_src/uvm-1.2/src/dpi/uvm_svcmd_dpi.c:129:13: warnin
  extern void uvm_dpi_regfree (regex_t* re)
              ^~~~~~~~~~~~~~~
 
-End time: 20:55:38 on Oct 20,2024, Elapsed time: 0:00:02
+End time: 21:59:52 on Oct 20,2024, Elapsed time: 0:00:01
 Errors: 0, Warnings: 0
 ***Vlog command: vlog -sv -timescale 1ns/1ps +incdir+../uvc/env +incdir+../uvc/seq +incdir+../uvc/tests +incdir+../tb +incdir+../rtl ../uvc/env/base_uvm_pkg.sv ../tb/top.sv -work base_test/work +incdir+C:/questasim64_2024.1/verilog_src/uvm-1.2/src -statslog base_test/stats_log -writesessionid +base_test/top_dus -csession=incr -csessiondir base_test/sessions -csessionid=1
 QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
-Start time: 20:55:38 on Oct 20,2024
+Start time: 21:59:52 on Oct 20,2024
 vlog -sv -timescale 1ns/1ps "+incdir+../uvc/env" "+incdir+../uvc/seq" "+incdir+../uvc/tests" "+incdir+../tb" "+incdir+../rtl" ../uvc/env/base_uvm_pkg.sv ../tb/top.sv -work base_test/work "+incdir+C:/questasim64_2024.1/verilog_src/uvm-1.2/src" -statslog base_test/stats_log -writesessionid "+base_test/top_dus" -csession=incr -csessiondir base_test/sessions -csessionid=1 
 -- Compiling package base_uvm_pkg
 -- Importing package uvm_pkg (uvm-1.2 Built-in)
@@ -157,7 +157,7 @@ Top level modules:
 	hog_fetch
 	mag_cal_sbs
 	top
-End time: 20:55:38 on Oct 20,2024, Elapsed time: 0:00:00
+End time: 21:59:53 on Oct 20,2024, Elapsed time: 0:00:01
 Errors: 0, Warnings: 0
 *** Report compile parallel jobs:
 === Total number of jobs: 1
@@ -168,7 +168,7 @@ Errors: 0, Warnings: 0
 For more detailed parallel flow information add " -scriptg <output file>"
 ***Vopt command: vopt -lint=default +cover=sbteft -access=rw+/. -designfile base_test/base_test.bin top -work base_test/work -statslog base_test/stats_log -csession=incr -csessiondir base_test/sessions -o qrun_opt
 QuestaSim-64 vopt 2024.1 Compiler 2024.02 Feb  1 2024
-Start time: 20:55:39 on Oct 20,2024
+Start time: 21:59:53 on Oct 20,2024
 vopt -lint=default "+cover=sbteft" -access=rw+/. -designfile base_test/base_test.bin top -work base_test/work -statslog base_test/stats_log -csession=incr -csessiondir base_test/sessions -o qrun_opt -csessionid=2 
 
 Top level modules:
@@ -441,22 +441,22 @@ One of the assignments is implicit. See ../tb/top.sv(62).
 One of the assignments is implicit. See ../tb/top.sv(63). 
 -- Optimizing interface dut_if(fast)
 viscom:
-VISCOM: Start time: 20:55:40 on Oct 20,2024
+VISCOM: Start time: 21:59:54 on Oct 20,2024
 
 VISCOM: QuestaSim C:/questasim64_2024.1/win64/VisualizerRls/bin/viscom.exe 2024.1 at 2024.02 Feb  1 2024
 VISCOM: Writing base_test/base_test.bin
 VISCOM: Done writing base_test/base_test.bin
-VISCOM: End time: 20:55:41 on Oct 20,2024, Elapsed time: 0:00:01 (Process Size : 105MB, Peak Process Size : 3GB)
+VISCOM: End time: 21:59:55 on Oct 20,2024, Elapsed time: 0:00:01 (Process Size : 105MB, Peak Process Size : 3GB)
 
 
 Optimized design name is qrun_opt
-End time: 20:55:42 on Oct 20,2024, Elapsed time: 0:00:03
+End time: 21:59:56 on Oct 20,2024, Elapsed time: 0:00:03
 Errors: 0, Warnings: 224
 ***Vsim command: vsim +UVM_TESTNAME=base_test +UVM_NO_RELNOTES -sv_seed 1 -qwavedb=+memory=all+assertion+cell+signal+class+wavefile=base_test/base_test.db -lib base_test/work -c -coverage -do "coverage save -onexit base_test_$Sv_Seed.ucdb" -do "run -all; quit -f" -statslog base_test/stats_log qrun_opt -appendlog -l base_test/qrun.log -csession=incr -csessiondir base_test/sessions -csessionid=3
 # vsim "+UVM_TESTNAME=base_test" "+UVM_NO_RELNOTES" -sv_seed 1 -qwavedb=+memory=all+assertion+cell+signal+class+wavefile=base_test/base_test.db -lib base_test/work -c -coverage -do "coverage save -onexit base_test_$Sv_Seed.ucdb" -do "run -all; quit -f" -statslog base_test/stats_log qrun_opt -appendlog -l base_test/qrun.log -csession=incr -csessiondir base_test/sessions -csessionid=3 
-# Start time: 20:55:43 on Oct 20,2024
+# Start time: 21:59:56 on Oct 20,2024
 # Loading Siemens Visualizer shared object 'C:/questasim64_2024.1/win64/VisualizerRls/bin/libqvisualizer.dll'
-# Loading C:/Users/datph/AppData/Local/Temp\datph@PHANDAT2003_dpi_16124\win64_gcc-7.4.0\export_tramp.dll
+# Loading C:/Users/datph/AppData/Local/Temp\datph@PHANDAT2003_dpi_8272\win64_gcc-7.4.0\export_tramp.dll
 # //  Questa Sim-64
 # //  Version 2024.1 win64 Feb  1 2024
 # //
@@ -497,8 +497,8 @@ Errors: 0, Warnings: 224
 # One of the assignments is implicit. See ../tb/top.sv(64).
 #    Time: 0 ps  Iteration: 0  Instance: /top/vif File: ../tb/apb_if.sv Line: 9
 # ** Note: (vsim-7082) For C/C++ auto compile, choosing compiler C:\questasim64_2024.1\gcc-7.4.0-mingw64vc16\bin\g++.exe set by the CppPath modelsim.ini variable.
-# Compiling C:/Users/datph/AppData/Local/Temp\datph@PHANDAT2003_dpi_16124\win64_gcc-7.4.0\exportwrapper.c
-# Loading C:/Users/datph/AppData/Local/Temp\datph@PHANDAT2003_dpi_16124\win64_gcc-7.4.0\vsim_auto_compile.dll
+# Compiling C:/Users/datph/AppData/Local/Temp\datph@PHANDAT2003_dpi_8272\win64_gcc-7.4.0\exportwrapper.c
+# Loading C:/Users/datph/AppData/Local/Temp\datph@PHANDAT2003_dpi_8272\win64_gcc-7.4.0\vsim_auto_compile.dll
 # coverage save -onexit base_test_$Sv_Seed.ucdb
 # run -all
 #  wave file name = base_test/base_test.db
@@ -3297,16 +3297,16 @@ Errors: 0, Warnings: 224
 # base_item  base_item  -     @1198                                                                    
 #   r_bin    integral   288   'h0                                                                      
 #   i_valid  integral   1     'h0X                                                                     
-#   o_valid  integral   1     'h0X                                                                     
+#   o_valid  integral   1     'h1                                                                      
 #   addr_fw  integral   13    'h0Xxxx                                                                  
-#   bid      integral   13    'h0Xxxx                                                                  
-#   fea_a    integral   288   'h3385ecf0426a9e501e14c3f01a3e62f00cee10f025a2d7b027a495f0464ebf101088bdf
-#   fea_b    integral   288   'h1658cef023b3057046cb80303127c4302ea5a1f02783e9f00a78abf02f3a2db02f8357f
-#   fea_c    integral   288   'h1b98207022a4d7301d0c5670263a6ff0237abbb0485fd6d022339eb032cdadf007c9ebf
-#   fea_d    integral   288   'h301f7870230727b028dc6e302a08d5703fa9f370416a8030068d5ff0168fb5f01701717
+#   bid      integral   13    'h0                                                                      
+#   fea_a    integral   288   'h31f8dc7043cbec903db501f02233933003e42ff0210901f035cc64b013fbe1f0159f27f
+#   fea_b    integral   288   'h3336f6704204d3d01de6a9f01a1629f00cda3ff0256928f02767d47045e2fe10106f677
+#   fea_c    integral   288   'h60e4ff0204b94b017d1a4f04e1dc5f03d41d3f02edddff0105c8f7036218bf015bc89f 
+#   fea_d    integral   288   'h1b6dd6f0226fbfb01cdfd1f025ffd9b023445ab047f0ead021ff3430327fd17007bdfff
 # -----------------------------------------------------------------------------------------------------
 # 
-# feature a[0]: 0.064587
+# feature a[0]: 0.084460
 # feature a[1]: 0.139925
 # feature a[2]: 0.277485
 # feature a[3]: 0.192667
@@ -3315,7 +3315,7 @@ Errors: 0, Warnings: 224
 # feature a[6]: 0.041043
 # feature a[7]: 0.185110
 # feature a[8]: 0.186230
-# feature b[0]: 0.185598
+# feature b[0]: 0.064200
 # feature b[1]: 0.066886
 # feature b[2]: 0.281306
 # feature b[3]: 0.096481
@@ -3324,7 +3324,7 @@ Errors: 0, Warnings: 224
 # feature b[6]: 0.202305
 # feature b[7]: 0.095340
 # feature b[8]: 0.118725
-# feature c[0]: 0.030425
+# feature c[0]: 0.084908
 # feature c[1]: 0.185978
 # feature c[2]: 0.065297
 # feature c[3]: 0.203405
@@ -3333,7 +3333,7 @@ Errors: 0, Warnings: 224
 # feature c[6]: 0.169288
 # feature c[7]: 0.160267
 # feature c[8]: 0.159162
-# feature d[0]: 0.089866
+# feature d[0]: 0.030243
 # feature d[1]: 0.120049
 # feature d[2]: 0.183787
 # feature d[3]: 0.094909
@@ -3467,16 +3467,16 @@ Errors: 0, Warnings: 224
 # base_item  base_item  -     @1218                                                                    
 #   r_bin    integral   288   'h0                                                                      
 #   i_valid  integral   1     'h0X                                                                     
-#   o_valid  integral   1     'h0X                                                                     
+#   o_valid  integral   1     'h1                                                                      
 #   addr_fw  integral   13    'h0Xxxx                                                                  
-#   bid      integral   13    'h0Xxxx                                                                  
-#   fea_a    integral   288   'h164eb7f023a2e6f046ab88b0311191b02e909170277212300a73f1f02f24d9f02f6de3f
-#   fea_b    integral   288   'heaa16f01108df7047a4b17018926d705306f8f0067ea3f03385f1f0184807f01e3caff 
-#   fea_c    integral   288   'h3009bd7022f756b028c9fab029f5daf03f8d33f0414cf690068a6bf01685857016f70ef
-#   fea_d    integral   288   'ha0689f0217c9df031edeaf0267ed9302c4561f004fd5ff01898dff03cb1e5f036080e7 
+#   bid      integral   13    'h1                                                                      
+#   fea_a    integral   288   'h3385ecf0426a9e501e14c3f01a3e62f00cee10f025a2d7b027a495f0464ebf101088bdf
+#   fea_b    integral   288   'h1658cef023b3057046cb80303127c4302ea5a1f02783e9f00a78abf02f3a2db02f8357f
+#   fea_c    integral   288   'h1b98207022a4d7301d0c5670263a6ff0237abbb0485fd6d022339eb032cdadf007c9ebf
+#   fea_d    integral   288   'h301f7870230727b028dc6e302a08d5703fa9f370416a8030068d5ff0168fb5f01701717
 # -----------------------------------------------------------------------------------------------------
 # 
-# feature a[0]: 0.185271
+# feature a[0]: 0.064587
 # feature a[1]: 0.066179
 # feature a[2]: 0.278332
 # feature a[3]: 0.095461
@@ -3485,7 +3485,7 @@ Errors: 0, Warnings: 224
 # feature a[6]: 0.200166
 # feature a[7]: 0.094332
 # feature a[8]: 0.117470
-# feature b[0]: 0.118114
+# feature b[0]: 0.185598
 # feature b[1]: 0.246021
 # feature b[2]: 0.113370
 # feature b[3]: 0.093441
@@ -3494,7 +3494,7 @@ Errors: 0, Warnings: 224
 # feature b[6]: 0.153421
 # feature b[7]: 0.099372
 # feature b[8]: 0.137851
-# feature c[0]: 0.089707
+# feature c[0]: 0.030425
 # feature c[1]: 0.118780
 # feature c[2]: 0.181844
 # feature c[3]: 0.093905
@@ -3503,7 +3503,7 @@ Errors: 0, Warnings: 224
 # feature c[6]: 0.109359
 # feature c[7]: 0.183091
 # feature c[8]: 0.258788
-# feature d[0]: 0.211060
+# feature d[0]: 0.089866
 # feature d[1]: 0.258192
 # feature d[2]: 0.089610
 # feature d[3]: 0.287203
@@ -3637,16 +3637,16 @@ Errors: 0, Warnings: 224
 # base_item  base_item  -     @1238                                                                    
 #   r_bin    integral   288   'h0                                                                      
 #   i_valid  integral   1     'h0X                                                                     
-#   o_valid  integral   1     'h0X                                                                     
+#   o_valid  integral   1     'h1                                                                      
 #   addr_fw  integral   13    'h0Xxxx                                                                  
-#   bid      integral   13    'h0Xxxx                                                                  
-#   fea_a    integral   288   'hef209f0115c737049043310190afc70549e5570069e7ff03482bc7018bf2af01ed109f 
-#   fea_b    integral   288   'h31e07c70408a48f01dbdb37018834ef02ac2d4b03c773d30283f7a301a119df02429ca3
-#   fea_c    integral   288   'ha37bbf02220e9b032e2e370273bb8302d1e97f00515dbf019118ef03ddbb0703711277 
-#   fea_d    integral   288   'h2d206d303045cff010f2e1f034cbd4701418d7702e3f42b02bf0d03029996830294ff6f
+#   bid      integral   13    'h2                                                                      
+#   fea_a    integral   288   'h164eb7f023a2e6f046ab88b0311191b02e909170277212300a73f1f02f24d9f02f6de3f
+#   fea_b    integral   288   'heaa16f01108df7047a4b17018926d705306f8f0067ea3f03385f1f0184807f01e3caff 
+#   fea_c    integral   288   'h3009bd7022f756b028c9fab029f5daf03f8d33f0414cf690068a6bf01685857016f70ef
+#   fea_d    integral   288   'ha0689f0217c9df031edeaf0267ed9302c4561f004fd5ff01898dff03cb1e5f036080e7 
 # -----------------------------------------------------------------------------------------------------
 # 
-# feature a[0]: 0.120377
+# feature a[0]: 0.185271
 # feature a[1]: 0.244343
 # feature a[2]: 0.112597
 # feature a[3]: 0.092804
@@ -3655,7 +3655,7 @@ Errors: 0, Warnings: 224
 # feature a[6]: 0.152375
 # feature a[7]: 0.098694
 # feature a[8]: 0.136911
-# feature b[0]: 0.141263
+# feature b[0]: 0.118114
 # feature b[1]: 0.172088
 # feature b[2]: 0.219556
 # feature b[3]: 0.149876
@@ -3664,7 +3664,7 @@ Errors: 0, Warnings: 224
 # feature b[6]: 0.078492
 # feature b[7]: 0.253128
 # feature b[8]: 0.113127
-# feature c[0]: 0.215106
+# feature c[0]: 0.089707
 # feature c[1]: 0.256432
 # feature c[2]: 0.088999
 # feature c[3]: 0.285244
@@ -3673,7 +3673,7 @@ Errors: 0, Warnings: 224
 # feature c[6]: 0.057489
 # feature c[7]: 0.134770
 # feature c[8]: 0.104599
-# feature d[0]: 0.161376
+# feature d[0]: 0.211060
 # feature d[1]: 0.181196
 # feature d[2]: 0.032154
 # feature d[3]: 0.180385
@@ -3807,16 +3807,16 @@ Errors: 0, Warnings: 224
 # base_item  base_item  -     @1258                                                                    
 #   r_bin    integral   288   'h0                                                                      
 #   i_valid  integral   1     'h0X                                                                     
-#   o_valid  integral   1     'h0X                                                                     
+#   o_valid  integral   1     'h1                                                                      
 #   addr_fw  integral   13    'h0Xxxx                                                                  
-#   bid      integral   13    'h0Xxxx                                                                  
-#   fea_a    integral   288   'h31aa2bf0404400901d9d4ff018689df02a9443f03c3564b02813a57019f53b70240268b
-#   fea_b    integral   288   'h75fbff02d42f67039bf0ef0276b5bf03dd3f6701ebc3af014a4fff0429372101dc10af 
-#   fea_c    integral   288   'h2cef493030113e7010e06cf0349255f01402f4702e0ce5f02bc0f6f0296c1b302922f9b
-#   fea_d    integral   288   'h116e4c701f0717f02f804ff01887a87035986df02082eff01c9118f02fd3b5f04399c4f
+#   bid      integral   13    'h3                                                                      
+#   fea_a    integral   288   'hef209f0115c737049043310190afc70549e5570069e7ff03482bc7018bf2af01ed109f 
+#   fea_b    integral   288   'h31e07c70408a48f01dbdb37018834ef02ac2d4b03c773d30283f7a301a119df02429ca3
+#   fea_c    integral   288   'ha37bbf02220e9b032e2e370273bb8302d1e97f00515dbf019118ef03ddbb0703711277 
+#   fea_d    integral   288   'h2d206d303045cff010f2e1f034cbd4701418d7702e3f42b02bf0d03029996830294ff6f
 # -----------------------------------------------------------------------------------------------------
 # 
-# feature a[0]: 0.140662
+# feature a[0]: 0.120377
 # feature a[1]: 0.176578
 # feature a[2]: 0.225284
 # feature a[3]: 0.153786
@@ -3825,7 +3825,7 @@ Errors: 0, Warnings: 224
 # feature a[6]: 0.080540
 # feature a[7]: 0.259731
 # feature a[8]: 0.116079
-# feature b[0]: 0.116227
+# feature b[0]: 0.141263
 # feature b[1]: 0.153556
 # feature b[2]: 0.131104
 # feature b[3]: 0.110374
@@ -3834,7 +3834,7 @@ Errors: 0, Warnings: 224
 # feature b[6]: 0.202225
 # feature b[7]: 0.138750
 # feature b[8]: 0.248240
-# feature c[0]: 0.160690
+# feature c[0]: 0.215106
 # feature c[1]: 0.185923
 # feature c[2]: 0.032992
 # feature c[3]: 0.185091
@@ -3843,7 +3843,7 @@ Errors: 0, Warnings: 224
 # feature c[6]: 0.307412
 # feature c[7]: 0.108202
 # feature c[8]: 0.090127
-# feature d[0]: 0.264065
+# feature d[0]: 0.161376
 # feature d[1]: 0.217448
 # feature d[2]: 0.078742
 # feature d[3]: 0.340094
@@ -3977,16 +3977,16 @@ Errors: 0, Warnings: 224
 # base_item  base_item  -     @1278                                                                    
 #   r_bin    integral   288   'h0                                                                      
 #   i_valid  integral   1     'h0X                                                                     
-#   o_valid  integral   1     'h0X                                                                     
+#   o_valid  integral   1     'h1                                                                      
 #   addr_fw  integral   13    'h0Xxxx                                                                  
-#   bid      integral   13    'h0Xxxx                                                                  
-#   fea_a    integral   288   'h76687f02d6ca13039f437f0278fa5f03e0ce1301ed885f014b800f042d0bbf01ddc6ff 
-#   fea_b    integral   288   'h320a2db02780883021b9ebf01c64c3f0060157f01057d2703405a1f023b178b03fdc027
-#   fea_c    integral   288   'h117e58701f23a8702fac0af0189e3d7035c9c4b020a0ddf01cab65702fffbdf043d8001
-#   fea_d    integral   288   'h3620e07043b000d0177df5f04b4af9301e170c701c4d7ff00f2cc5f02392ebb01b9c1ff
+#   bid      integral   13    'h4                                                                      
+#   fea_a    integral   288   'h31aa2bf0404400901d9d4ff018689df02a9443f03c3564b02813a57019f53b70240268b
+#   fea_b    integral   288   'h75fbff02d42f67039bf0ef0276b5bf03dd3f6701ebc3af014a4fff0429372101dc10af 
+#   fea_c    integral   288   'h2cef493030113e7010e06cf0349255f01402f4702e0ce5f02bc0f6f0296c1b302922f9b
+#   fea_d    integral   288   'h116e4c701f0717f02f804ff01887a87035986df02082eff01c9118f02fd3b5f04399c4f
 # -----------------------------------------------------------------------------------------------------
 # 
-# feature a[0]: 0.116645
+# feature a[0]: 0.140662
 # feature a[1]: 0.153417
 # feature a[2]: 0.130985
 # feature a[3]: 0.110274
@@ -3995,7 +3995,7 @@ Errors: 0, Warnings: 224
 # feature a[6]: 0.202041
 # feature a[7]: 0.138624
 # feature a[8]: 0.248015
-# feature b[0]: 0.249451
+# feature b[0]: 0.116227
 # feature b[1]: 0.241751
 # feature b[2]: 0.083405
 # feature b[3]: 0.157731
@@ -4004,7 +4004,7 @@ Errors: 0, Warnings: 224
 # feature b[6]: 0.330501
 # feature b[7]: 0.068124
 # feature b[8]: 0.068606
-# feature c[0]: 0.265015
+# feature c[0]: 0.160690
 # feature c[1]: 0.217251
 # feature c[2]: 0.078671
 # feature c[3]: 0.339786
@@ -4013,7 +4013,7 @@ Errors: 0, Warnings: 224
 # feature c[6]: 0.126870
 # feature c[7]: 0.120735
 # feature c[8]: 0.110989
-# feature d[0]: 0.107851
+# feature d[0]: 0.264065
 # feature d[1]: 0.202491
 # feature d[2]: 0.121924
 # feature d[3]: 0.113852
@@ -4147,16 +4147,16 @@ Errors: 0, Warnings: 224
 # base_item  base_item  -     @1298                                                                    
 #   r_bin    integral   288   'h0                                                                      
 #   i_valid  integral   1     'h0X                                                                     
-#   o_valid  integral   1     'h0X                                                                     
+#   o_valid  integral   1     'h1                                                                      
 #   addr_fw  integral   13    'h0Xxxx                                                                  
-#   bid      integral   13    'h0Xxxx                                                                  
-#   fea_a    integral   288   'h31b417f0273c93f0217fe7301c33ebf005f703f0103bb4f033ac2370237410f03f6e267
-#   fea_b    integral   288   'h2555c3b03dd3fd701554bd70285704f020e081701d2d04705486b8d0116c42f0118bcaf
-#   fea_c    integral   288   'h35c3c230433b8f3017558a704ac971b01de348f01c1ccff00f12a9f02355b8701b6ca0f
-#   fea_d    integral   288   'h141313f02f81caf0086e23f02f4b5ff023796af038c0e1f04e8cc4501ba5cef017077f7
+#   bid      integral   13    'h5                                                                      
+#   fea_a    integral   288   'h76687f02d6ca13039f437f0278fa5f03e0ce1301ed885f014b800f042d0bbf01ddc6ff 
+#   fea_b    integral   288   'h320a2db02780883021b9ebf01c64c3f0060157f01057d2703405a1f023b178b03fdc027
+#   fea_c    integral   288   'h117e58701f23a8702fac0af0189e3d7035c9c4b020a0ddf01cab65702fffbdf043d8001
+#   fea_d    integral   288   'h3620e07043b000d0177df5f04b4af9301e170c701c4d7ff00f2cc5f02392ebb01b9c1ff
 # -----------------------------------------------------------------------------------------------------
 # 
-# feature a[0]: 0.247775
+# feature a[0]: 0.116645
 # feature a[1]: 0.246476
 # feature a[2]: 0.085036
 # feature a[3]: 0.160814
@@ -4165,7 +4165,7 @@ Errors: 0, Warnings: 224
 # feature a[6]: 0.336962
 # feature a[7]: 0.069456
 # feature a[8]: 0.069947
-# feature b[0]: 0.068539
+# feature b[0]: 0.249451
 # feature b[1]: 0.143133
 # feature b[2]: 0.246918
 # feature b[3]: 0.093722
@@ -4174,7 +4174,7 @@ Errors: 0, Warnings: 224
 # feature b[6]: 0.182040
 # feature b[7]: 0.139820
 # feature b[8]: 0.119137
-# feature c[0]: 0.107126
+# feature c[0]: 0.265015
 # feature c[1]: 0.206450
 # feature c[2]: 0.124308
 # feature c[3]: 0.116077
@@ -4183,7 +4183,7 @@ Errors: 0, Warnings: 224
 # feature c[6]: 0.176416
 # feature c[7]: 0.156754
 # feature c[8]: 0.100131
-# feature d[0]: 0.089958
+# feature d[0]: 0.107851
 # feature d[1]: 0.162090
 # feature d[2]: 0.143177
 # feature d[3]: 0.100693
@@ -4317,9 +4317,60 @@ Errors: 0, Warnings: 224
 # base_item  base_item  -     @1318                                                                    
 #   r_bin    integral   288   'h0                                                                      
 #   i_valid  integral   1     'h0X                                                                     
-#   o_valid  integral   1     'h0X                                                                     
+#   o_valid  integral   1     'h1                                                                      
 #   addr_fw  integral   13    'h0Xxxx                                                                  
-#   bid      integral   13    'h0Xxxx                                                                  
+#   bid      integral   13    'h6                                                                      
+#   fea_a    integral   288   'h31b417f0273c93f0217fe7301c33ebf005f703f0103bb4f033ac2370237410f03f6e267
+#   fea_b    integral   288   'h2555c3b03dd3fd701554bd70285704f020e081701d2d04705486b8d0116c42f0118bcaf
+#   fea_c    integral   288   'h35c3c230433b8f3017558a704ac971b01de348f01c1ccff00f12a9f02355b8701b6ca0f
+#   fea_d    integral   288   'h141313f02f81caf0086e23f02f4b5ff023796af038c0e1f04e8cc4501ba5cef017077f7
+# -----------------------------------------------------------------------------------------------------
+# 
+# feature a[0]: 0.247775
+# feature a[1]: 0.141579
+# feature a[2]: 0.244237
+# feature a[3]: 0.092704
+# feature a[4]: 0.107162
+# feature a[5]: 0.112012
+# feature a[6]: 0.180063
+# feature a[7]: 0.138301
+# feature a[8]: 0.117843
+# feature b[0]: 0.068539
+# feature b[1]: 0.184350
+# feature b[2]: 0.033658
+# feature b[3]: 0.060712
+# feature b[4]: 0.283207
+# feature b[5]: 0.095224
+# feature b[6]: 0.151480
+# feature b[7]: 0.140935
+# feature b[8]: 0.228432
+# feature c[0]: 0.107126
+# feature c[1]: 0.160330
+# feature c[2]: 0.141623
+# feature c[3]: 0.099600
+# feature c[4]: 0.249731
+# feature c[5]: 0.040106
+# feature c[6]: 0.213539
+# feature c[7]: 0.134013
+# feature c[8]: 0.241800
+# feature d[0]: 0.089958
+# feature d[1]: 0.319399
+# feature d[2]: 0.214392
+# feature d[3]: 0.069096
+# feature d[4]: 0.087073
+# feature d[5]: 0.262625
+# feature d[6]: 0.093909
+# feature d[7]: 0.101224
+# feature d[8]: 0.131741
+# UVM_INFO ../uvc/env/base_scoreboard.sv(107) @ 222000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from mon -----------------------------------------------------------------------------------------------------
+# Name       Type       Size  Value                                                                    
+# -----------------------------------------------------------------------------------------------------
+# base_item  base_item  -     @1326                                                                    
+#   r_bin    integral   288   'h0                                                                      
+#   i_valid  integral   1     'h0X                                                                     
+#   o_valid  integral   1     'h1                                                                      
+#   addr_fw  integral   13    'h0Xxxx                                                                  
+#   bid      integral   13    'h7                                                                      
 #   fea_a    integral   288   'h261637303f12b1f015c2b1702926f5f02189fab01dc36970563a6eb011c6127011e63cf
 #   fea_b    integral   288   'h1d77547024a0b0703f2fa8b017fbbbf01bb941701cfa79702e9577b023c79bb01e7caef
 #   fea_c    integral   288   'h147a8e703076adb0089998f0303f2a702430467039e56ef05021ab701c3451f0177e34f
@@ -4362,14 +4413,14 @@ Errors: 0, Warnings: 224
 # feature d[6]: 0.093909
 # feature d[7]: 0.101224
 # feature d[8]: 0.131741
-# UVM_INFO C:/questasim64_2024.1/verilog_src/uvm-1.2/src/base/uvm_objection.svh(1270) @ 218000: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
-# UVM_INFO ../uvc/env/base_scoreboard.sv(129) @ 218000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Extract phase
-# UVM_INFO ../uvc/tests/base_test.sv(47) @ 218000: uvm_test_top [base_test] ** TEST PASSED **
-# UVM_INFO C:/questasim64_2024.1/verilog_src/uvm-1.2/src/base/uvm_report_server.svh(847) @ 218000: reporter [UVM/REPORT/SERVER] 
+# UVM_INFO C:/questasim64_2024.1/verilog_src/uvm-1.2/src/base/uvm_objection.svh(1270) @ 224000: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+# UVM_INFO ../uvc/env/base_scoreboard.sv(129) @ 224000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Extract phase
+# UVM_INFO ../uvc/tests/base_test.sv(48) @ 224000: uvm_test_top [base_test] ** TEST PASSED **
+# UVM_INFO C:/questasim64_2024.1/verilog_src/uvm-1.2/src/base/uvm_report_server.svh(847) @ 224000: reporter [UVM/REPORT/SERVER] 
 # --- UVM Report Summary ---
 # 
 # ** Report counts by severity
-# UVM_INFO :  123
+# UVM_INFO :  124
 # UVM_WARNING :    0
 # UVM_ERROR :    0
 # UVM_FATAL :    0
@@ -4378,18 +4429,18 @@ Errors: 0, Warnings: 224
 # [RNTST]     1
 # [TEST_DONE]     1
 # [UVMTOP]     1
-# [base_scoreboard]    67
+# [base_scoreboard]    68
 # [base_test]     1
 # [run_phase]    50
 # 
 # ** Note: $finish    : C:/questasim64_2024.1/verilog_src/uvm-1.2/src/base/uvm_root.svh(517)
-#    Time: 218 ns  Iteration: 84  Instance: /top
+#    Time: 224 ns  Iteration: 68  Instance: /top
 # Saving coverage database on exit...
-# qwavedb_dumpvars : Simulation ending at [0 218000] 0
+# qwavedb_dumpvars : Simulation ending at [0 224000] 0
 # 	 Class Filter File used = C:/questasim64_2024.1/win64/VisualizerRls/bin/../config/uvmclassfilter.txt
-# End time: 20:55:45 on Oct 20,2024, Elapsed time: 0:00:02
+# End time: 21:59:59 on Oct 20,2024, Elapsed time: 0:00:03
 # Errors: 0, Warnings: 6
-End time: 20:55:45 on Oct 20,2024, Elapsed time: 0:00:09
+End time: 22:00:00 on Oct 20,2024, Elapsed time: 0:00:09
 *** Summary *********************************************
     qrun: Errors:   0, Warnings:   0
     vlog: Errors:   0, Warnings:   0
