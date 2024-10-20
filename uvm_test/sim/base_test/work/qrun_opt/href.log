@@ -1,0 +1,17 @@
+BEGIN 3:dut_if:fast__2:work
+    o_valid :  1:top:fast:work
+    addr_fw :  1:top:fast:work
+    bid :  1:top:fast:work
+    fea_b :  1:top:fast:work
+    fea_c :  1:top:fast:work
+    fea_d :  1:top:fast:work
+    i_valid :  1:top:fast:work
+    fea_a :  1:top:fast:work
+    bin :  1:top:fast:work
+END 
+BEGIN 3:dut_if:fast__1:work
+    fea_b :  1:base_uvm_pkg:fast:work
+    fea_c :  1:base_uvm_pkg:fast:work
+    fea_d :  1:base_uvm_pkg:fast:work
+    fea_a :  1:base_uvm_pkg:fast:work
+END 
