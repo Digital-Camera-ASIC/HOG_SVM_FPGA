@@ -83,10 +83,25 @@ module normalize #(
 
 
     // output
-    assign fea_a = {sqrt_out[0], sqrt_out[1], sqrt_out[2], sqrt_out[3], sqrt_out[4], sqrt_out[5], sqrt_out[6], sqrt_out[7], sqrt_out[8]};
-    assign fea_b = {sqrt_out[9], sqrt_out[10], sqrt_out[11], sqrt_out[12], sqrt_out[13], sqrt_out[14], sqrt_out[15], sqrt_out[16], sqrt_out[17]};
-    assign fea_c = {sqrt_out[18], sqrt_out[19], sqrt_out[20], sqrt_out[21], sqrt_out[22], sqrt_out[23], sqrt_out[24], sqrt_out[25], sqrt_out[26]};
-    assign fea_d = {sqrt_out[27], sqrt_out[28], sqrt_out[29], sqrt_out[30], sqrt_out[31], sqrt_out[32], sqrt_out[33], sqrt_out[34], sqrt_out[35]};
+    assign fea_a = {
+        sqrt_out[8], sqrt_out[7], sqrt_out[6], 
+        sqrt_out[5], sqrt_out[4], sqrt_out[3], 
+        sqrt_out[2], sqrt_out[1], sqrt_out[0]
+        };
+    assign fea_b = {
+        sqrt_out[17], sqrt_out[16], sqrt_out[15], 
+        sqrt_out[14], sqrt_out[13], sqrt_out[12], 
+        sqrt_out[11], sqrt_out[10], sqrt_out[9]
+        };
+    assign fea_c = {
+        sqrt_out[26], sqrt_out[25], sqrt_out[24], 
+        sqrt_out[23], sqrt_out[22], sqrt_out[21],
+        sqrt_out[20], sqrt_out[19], sqrt_out[18]
+        };
+    assign fea_d = {
+        sqrt_out[35], sqrt_out[34], sqrt_out[33], 
+        sqrt_out[32], sqrt_out[31], sqrt_out[30], 
+        sqrt_out[29], sqrt_out[28], sqrt_out[27]};
 
     assign o_valid = i_valid;
     assign bid = cnt;
