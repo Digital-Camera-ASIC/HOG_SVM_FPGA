@@ -1,11 +1,11 @@
 QuestaSim-64 qrun 2024.1 Utility 2024.02 Feb  1 2024
-Start time: 16:50:09 on Oct 20,2024
+Start time: 20:55:36 on Oct 20,2024
 qrun -uvmhome uvm-1.2 "+UVM_TESTNAME=base_test" "+UVM_NO_RELNOTES" -verbose -lint=default -parallel -coverage "+cover=sbteft" -vlog.sv -vlog.timescale 1ns/1ps -vopt.access=rw+/. -vsim.sv_seed 1 -f dut.f -f top.f -top top -outdir base_test -l base_test/qrun.log -designfile base_test/base_test.bin -qwavedb=+memory=all+assertion+cell+signal+class+wavefile=base_test/base_test.db 
 ***Vlib command: vlib -statslog base_test/stats_log base_test/work
 Creating library 'base_test/work'.
 ***Compiling UVM: vlog -work base_test/work +incdir+C:/questasim64_2024.1/verilog_src/uvm-1.2/src -ccflags -Wno-return-type -ccflags -DQUESTA C:/questasim64_2024.1/verilog_src/uvm-1.2/src/dpi/uvm_dpi.cc C:/questasim64_2024.1/verilog_src/uvm-1.2/src/uvm_pkg.sv C:/questasim64_2024.1/verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv -csession=incr -csessiondir base_test/sessions -csessionid=0
 QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
-Start time: 16:50:09 on Oct 20,2024
+Start time: 20:55:36 on Oct 20,2024
 vlog -work base_test/work "+incdir+C:/questasim64_2024.1/verilog_src/uvm-1.2/src" -ccflags "-Wno-return-type" -ccflags "-DQUESTA" C:/questasim64_2024.1/verilog_src/uvm-1.2/src/dpi/uvm_dpi.cc C:/questasim64_2024.1/verilog_src/uvm-1.2/src/uvm_pkg.sv C:/questasim64_2024.1/verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv -csession=incr -csessiondir base_test/sessions -csessionid=0 
 -- Compiling package uvm_pkg (uvm-1.2 Built-in)
 -- Compiling package questa_uvm_pkg
@@ -127,11 +127,11 @@ C:/questasim64_2024.1/verilog_src/uvm-1.2/src/dpi/uvm_svcmd_dpi.c:129:13: warnin
  extern void uvm_dpi_regfree (regex_t* re)
              ^~~~~~~~~~~~~~~
 
-End time: 16:50:10 on Oct 20,2024, Elapsed time: 0:00:01
+End time: 20:55:38 on Oct 20,2024, Elapsed time: 0:00:02
 Errors: 0, Warnings: 0
 ***Vlog command: vlog -sv -timescale 1ns/1ps +incdir+../uvc/env +incdir+../uvc/seq +incdir+../uvc/tests +incdir+../tb +incdir+../rtl ../uvc/env/base_uvm_pkg.sv ../tb/top.sv -work base_test/work +incdir+C:/questasim64_2024.1/verilog_src/uvm-1.2/src -statslog base_test/stats_log -writesessionid +base_test/top_dus -csession=incr -csessiondir base_test/sessions -csessionid=1
 QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
-Start time: 16:50:10 on Oct 20,2024
+Start time: 20:55:38 on Oct 20,2024
 vlog -sv -timescale 1ns/1ps "+incdir+../uvc/env" "+incdir+../uvc/seq" "+incdir+../uvc/tests" "+incdir+../tb" "+incdir+../rtl" ../uvc/env/base_uvm_pkg.sv ../tb/top.sv -work base_test/work "+incdir+C:/questasim64_2024.1/verilog_src/uvm-1.2/src" -statslog base_test/stats_log -writesessionid "+base_test/top_dus" -csession=incr -csessiondir base_test/sessions -csessionid=1 
 -- Compiling package base_uvm_pkg
 -- Importing package uvm_pkg (uvm-1.2 Built-in)
@@ -157,7 +157,7 @@ Top level modules:
 	hog_fetch
 	mag_cal_sbs
 	top
-End time: 16:50:11 on Oct 20,2024, Elapsed time: 0:00:01
+End time: 20:55:38 on Oct 20,2024, Elapsed time: 0:00:00
 Errors: 0, Warnings: 0
 *** Report compile parallel jobs:
 === Total number of jobs: 1
@@ -168,7 +168,7 @@ Errors: 0, Warnings: 0
 For more detailed parallel flow information add " -scriptg <output file>"
 ***Vopt command: vopt -lint=default +cover=sbteft -access=rw+/. -designfile base_test/base_test.bin top -work base_test/work -statslog base_test/stats_log -csession=incr -csessiondir base_test/sessions -o qrun_opt
 QuestaSim-64 vopt 2024.1 Compiler 2024.02 Feb  1 2024
-Start time: 16:50:11 on Oct 20,2024
+Start time: 20:55:39 on Oct 20,2024
 vopt -lint=default "+cover=sbteft" -access=rw+/. -designfile base_test/base_test.bin top -work base_test/work -statslog base_test/stats_log -csession=incr -csessiondir base_test/sessions -o qrun_opt -csessionid=2 
 
 Top level modules:
@@ -441,22 +441,22 @@ One of the assignments is implicit. See ../tb/top.sv(62).
 One of the assignments is implicit. See ../tb/top.sv(63). 
 -- Optimizing interface dut_if(fast)
 viscom:
-VISCOM: Start time: 16:50:12 on Oct 20,2024
+VISCOM: Start time: 20:55:40 on Oct 20,2024
 
 VISCOM: QuestaSim C:/questasim64_2024.1/win64/VisualizerRls/bin/viscom.exe 2024.1 at 2024.02 Feb  1 2024
 VISCOM: Writing base_test/base_test.bin
 VISCOM: Done writing base_test/base_test.bin
-VISCOM: End time: 16:50:12 on Oct 20,2024, Elapsed time: 0:00:00 (Process Size : 105MB, Peak Process Size : 3GB)
+VISCOM: End time: 20:55:41 on Oct 20,2024, Elapsed time: 0:00:01 (Process Size : 105MB, Peak Process Size : 3GB)
 
 
 Optimized design name is qrun_opt
-End time: 16:50:13 on Oct 20,2024, Elapsed time: 0:00:02
+End time: 20:55:42 on Oct 20,2024, Elapsed time: 0:00:03
 Errors: 0, Warnings: 224
 ***Vsim command: vsim +UVM_TESTNAME=base_test +UVM_NO_RELNOTES -sv_seed 1 -qwavedb=+memory=all+assertion+cell+signal+class+wavefile=base_test/base_test.db -lib base_test/work -c -coverage -do "coverage save -onexit base_test_$Sv_Seed.ucdb" -do "run -all; quit -f" -statslog base_test/stats_log qrun_opt -appendlog -l base_test/qrun.log -csession=incr -csessiondir base_test/sessions -csessionid=3
 # vsim "+UVM_TESTNAME=base_test" "+UVM_NO_RELNOTES" -sv_seed 1 -qwavedb=+memory=all+assertion+cell+signal+class+wavefile=base_test/base_test.db -lib base_test/work -c -coverage -do "coverage save -onexit base_test_$Sv_Seed.ucdb" -do "run -all; quit -f" -statslog base_test/stats_log qrun_opt -appendlog -l base_test/qrun.log -csession=incr -csessiondir base_test/sessions -csessionid=3 
-# Start time: 16:50:14 on Oct 20,2024
+# Start time: 20:55:43 on Oct 20,2024
 # Loading Siemens Visualizer shared object 'C:/questasim64_2024.1/win64/VisualizerRls/bin/libqvisualizer.dll'
-# Loading C:/Users/datph/AppData/Local/Temp\datph@PHANDAT2003_dpi_36616\win64_gcc-7.4.0\export_tramp.dll
+# Loading C:/Users/datph/AppData/Local/Temp\datph@PHANDAT2003_dpi_16124\win64_gcc-7.4.0\export_tramp.dll
 # //  Questa Sim-64
 # //  Version 2024.1 win64 Feb  1 2024
 # //
@@ -497,8 +497,8 @@ Errors: 0, Warnings: 224
 # One of the assignments is implicit. See ../tb/top.sv(64).
 #    Time: 0 ps  Iteration: 0  Instance: /top/vif File: ../tb/apb_if.sv Line: 9
 # ** Note: (vsim-7082) For C/C++ auto compile, choosing compiler C:\questasim64_2024.1\gcc-7.4.0-mingw64vc16\bin\g++.exe set by the CppPath modelsim.ini variable.
-# Compiling C:/Users/datph/AppData/Local/Temp\datph@PHANDAT2003_dpi_36616\win64_gcc-7.4.0\exportwrapper.c
-# Loading C:/Users/datph/AppData/Local/Temp\datph@PHANDAT2003_dpi_36616\win64_gcc-7.4.0\vsim_auto_compile.dll
+# Compiling C:/Users/datph/AppData/Local/Temp\datph@PHANDAT2003_dpi_16124\win64_gcc-7.4.0\exportwrapper.c
+# Loading C:/Users/datph/AppData/Local/Temp\datph@PHANDAT2003_dpi_16124\win64_gcc-7.4.0\vsim_auto_compile.dll
 # coverage save -onexit base_test_$Sv_Seed.ucdb
 # run -all
 #  wave file name = base_test/base_test.db
@@ -576,7 +576,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 22000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 22000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @647                                                                       
@@ -592,6 +592,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    0                                                                          
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 1
 # FIFO[0]: 02648d35020b445d0ed04c0d0595effa0013d71205fcaf2d137d39ff178687dc0cc80aa6
 # UVM_INFO ../uvc/env/base_driver.sv(24) @ 22000: uvm_test_top.bus_env.master.driver [run_phase] Start driver: ---------------------------------------------------------------------------------------------------------------------------
 # Name                           Type       Size  Value                                                                      
@@ -613,7 +614,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 26000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 26000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @682                                                                       
@@ -629,6 +630,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    22000                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 2
 # FIFO[0]: 0161ecab18ff980907f299600729d23000d870e8037ba7f104937b4c164ed5750d6cc95c
 # FIFO[1]: 02648d35020b445d0ed04c0d0595effa0013d71205fcaf2d137d39ff178687dc0cc80aa6
 # UVM_INFO ../uvc/env/base_driver.sv(24) @ 26000: uvm_test_top.bus_env.master.driver [run_phase] Start driver: ---------------------------------------------------------------------------------------------------------------------------
@@ -651,7 +653,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 30000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 30000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @694                                                                       
@@ -667,6 +669,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    26000                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 3
 # FIFO[0]: 0b6aa1220b479309008df48f07e5851e0b010de60c38295119589df40671efa30286851f
 # FIFO[1]: 0161ecab18ff980907f299600729d23000d870e8037ba7f104937b4c164ed5750d6cc95c
 # FIFO[2]: 02648d35020b445d0ed04c0d0595effa0013d71205fcaf2d137d39ff178687dc0cc80aa6
@@ -690,7 +693,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 34000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 34000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @706                                                                       
@@ -706,6 +709,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    30000                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 4
 # FIFO[0]: 04a3d85902fdff5d0d78f4010036cd0522fc2c4a031071511a0c92680179014a01176384
 # FIFO[1]: 0b6aa1220b479309008df48f07e5851e0b010de60c38295119589df40671efa30286851f
 # FIFO[2]: 0161ecab18ff980907f299600729d23000d870e8037ba7f104937b4c164ed5750d6cc95c
@@ -730,7 +734,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 38000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 38000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @718                                                                       
@@ -746,6 +750,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    34000                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 5
 # FIFO[0]: 0663c9430352079d07ea2fa811dd1ab408ef1e5102ef97640452606e145a2c7a0c27a642
 # FIFO[1]: 04a3d85902fdff5d0d78f4010036cd0522fc2c4a031071511a0c92680179014a01176384
 # FIFO[2]: 0b6aa1220b479309008df48f07e5851e0b010de60c38295119589df40671efa30286851f
@@ -771,7 +776,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 42000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 42000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @730                                                                       
@@ -787,6 +792,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    38000                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 6
 # FIFO[0]: 045cd47715d783a90219a7d304a7b42f12d66a4307a84292106eb70f0a185d4b0044986f
 # FIFO[1]: 0663c9430352079d07ea2fa811dd1ab408ef1e5102ef97640452606e145a2c7a0c27a642
 # FIFO[2]: 04a3d85902fdff5d0d78f4010036cd0522fc2c4a031071511a0c92680179014a01176384
@@ -813,7 +819,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 46000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 46000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @742                                                                       
@@ -829,6 +835,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    42000                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 7
 # FIFO[0]: 13f3b691063bb0b60d3d9e55014e8904002d2b0b03f1c24b0590aa2107a269fe0c403968
 # FIFO[1]: 045cd47715d783a90219a7d304a7b42f12d66a4307a84292106eb70f0a185d4b0044986f
 # FIFO[2]: 0663c9430352079d07ea2fa811dd1ab408ef1e5102ef97640452606e145a2c7a0c27a642
@@ -856,7 +863,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 50000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 50000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @754                                                                       
@@ -872,6 +879,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    46000                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 8
 # FIFO[0]: 0186d55001815db4236e32290438a341055c32dd0811df0d0241a34412f4f06706e98fef
 # FIFO[1]: 13f3b691063bb0b60d3d9e55014e8904002d2b0b03f1c24b0590aa2107a269fe0c403968
 # FIFO[2]: 045cd47715d783a90219a7d304a7b42f12d66a4307a84292106eb70f0a185d4b0044986f
@@ -900,7 +908,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 54000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 54000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @766                                                                       
@@ -916,6 +924,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    50000                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 9
 # FIFO[0]: 046dd4570619ad230a57357b0400644e03a999e702bdac9d13065d4c066493c504232a02
 # FIFO[1]: 0186d55001815db4236e32290438a341055c32dd0811df0d0241a34412f4f06706e98fef
 # FIFO[2]: 13f3b691063bb0b60d3d9e55014e8904002d2b0b03f1c24b0590aa2107a269fe0c403968
@@ -945,7 +954,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 58000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 58000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @778                                                                       
@@ -961,6 +970,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    54000                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 10
 # FIFO[0]: 10a46bb60655b71007517a7402e4561e1994926a012cf1a3005c7e400ad6c1ab11b07872
 # FIFO[1]: 046dd4570619ad230a57357b0400644e03a999e702bdac9d13065d4c066493c504232a02
 # FIFO[2]: 0186d55001815db4236e32290438a341055c32dd0811df0d0241a34412f4f06706e98fef
@@ -991,7 +1001,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 62000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 62000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @790                                                                       
@@ -1007,6 +1017,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    58000                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 11
 # FIFO[0]: 0dd53f481081c4b9052453f1047613dd1250fc9f0135fadc038ffc67035a41be05f66944
 # FIFO[1]: 10a46bb60655b71007517a7402e4561e1994926a012cf1a3005c7e400ad6c1ab11b07872
 # FIFO[2]: 046dd4570619ad230a57357b0400644e03a999e702bdac9d13065d4c066493c504232a02
@@ -1038,7 +1049,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 66000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 66000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @802                                                                       
@@ -1054,6 +1065,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    62000                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 12
 # FIFO[0]: 056e4c790d1c2b88097dda6b05a33e4705ac6f8201fdad620eac374801379c0201fa70b4
 # FIFO[1]: 0dd53f481081c4b9052453f1047613dd1250fc9f0135fadc038ffc67035a41be05f66944
 # FIFO[2]: 10a46bb60655b71007517a7402e4561e1994926a012cf1a3005c7e400ad6c1ab11b07872
@@ -1086,7 +1098,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 70000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 70000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @814                                                                       
@@ -1102,6 +1114,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    66000                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 13
 # FIFO[0]: 1252d9100cd6c10b00125fe008db81d804b5464215c0493602a4688a0a1aa87905cdcb4f
 # FIFO[1]: 056e4c790d1c2b88097dda6b05a33e4705ac6f8201fdad620eac374801379c0201fa70b4
 # FIFO[2]: 0dd53f481081c4b9052453f1047613dd1250fc9f0135fadc038ffc67035a41be05f66944
@@ -1135,7 +1148,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 74000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 74000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @826                                                                       
@@ -1151,6 +1164,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    70000                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 14
 # FIFO[0]: 0609e48d012fc240050446b20709261007a2d330099ca2320a13df2d0460a96b05e9a014
 # FIFO[1]: 1252d9100cd6c10b00125fe008db81d804b5464215c0493602a4688a0a1aa87905cdcb4f
 # FIFO[2]: 056e4c790d1c2b88097dda6b05a33e4705ac6f8201fdad620eac374801379c0201fa70b4
@@ -1185,7 +1199,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 78000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 78000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @838                                                                       
@@ -1201,6 +1215,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    74000                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 15
 # FIFO[0]: 1ae1b1f6002ccfc80acb678a011010a806110da408ab3c9f0f8dc8dc0abafa02076e3191
 # FIFO[1]: 0609e48d012fc240050446b20709261007a2d330099ca2320a13df2d0460a96b05e9a014
 # FIFO[2]: 1252d9100cd6c10b00125fe008db81d804b5464215c0493602a4688a0a1aa87905cdcb4f
@@ -1236,7 +1251,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 82000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 82000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @850                                                                       
@@ -1252,6 +1267,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    78000                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 16
 # FIFO[0]: 079d66df0aa0ae6215833e87053a13f608884dd405eda0fb028284f908d093ab00486d3d
 # FIFO[1]: 1ae1b1f6002ccfc80acb678a011010a806110da408ab3c9f0f8dc8dc0abafa02076e3191
 # FIFO[2]: 0609e48d012fc240050446b20709261007a2d330099ca2320a13df2d0460a96b05e9a014
@@ -1288,7 +1304,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 86000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 86000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @862                                                                       
@@ -1304,6 +1320,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    82000                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 17
 # FIFO[0]: 12779cdb0dc4459401826190059048d000651709078d50e40cf6142e15bd7575029ae218
 # FIFO[1]: 079d66df0aa0ae6215833e87053a13f608884dd405eda0fb028284f908d093ab00486d3d
 # FIFO[2]: 1ae1b1f6002ccfc80acb678a011010a806110da408ab3c9f0f8dc8dc0abafa02076e3191
@@ -1341,7 +1358,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 90000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 90000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @874                                                                       
@@ -1357,6 +1374,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    86000                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 18
 # FIFO[0]: 0de076000c59c35401ea2a560325eb3e0f89c0ae0424a29201df8eea017feba102b47522
 # FIFO[1]: 12779cdb0dc4459401826190059048d000651709078d50e40cf6142e15bd7575029ae218
 # FIFO[2]: 079d66df0aa0ae6215833e87053a13f608884dd405eda0fb028284f908d093ab00486d3d
@@ -1395,7 +1413,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 94000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 94000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @886                                                                       
@@ -1411,6 +1429,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    90000                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 19
 # FIFO[0]: 0aff69bb044b26a30dde04f9035d6ea10813d461063689571127402a159d2fbf001e9a54
 # FIFO[1]: 0de076000c59c35401ea2a560325eb3e0f89c0ae0424a29201df8eea017feba102b47522
 # FIFO[2]: 12779cdb0dc4459401826190059048d000651709078d50e40cf6142e15bd7575029ae218
@@ -1450,7 +1469,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 98000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 98000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @898                                                                       
@@ -1466,6 +1485,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    94000                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 20
 # FIFO[0]: 035d2777183fddc9002dda9707dc1a590760a1d2031ba9e5029599731cb4820e04f2bd19
 # FIFO[1]: 0aff69bb044b26a30dde04f9035d6ea10813d461063689571127402a159d2fbf001e9a54
 # FIFO[2]: 0de076000c59c35401ea2a560325eb3e0f89c0ae0424a29201df8eea017feba102b47522
@@ -1506,7 +1526,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 102000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 102000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @910                                                                       
@@ -1522,6 +1542,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    98000                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 21
 # FIFO[0]: 20629c480049a21602fe33d7019a77dc159ebaca05cf91b7054e44dc03e8a970074d2839
 # FIFO[1]: 035d2777183fddc9002dda9707dc1a590760a1d2031ba9e5029599731cb4820e04f2bd19
 # FIFO[2]: 0aff69bb044b26a30dde04f9035d6ea10813d461063689571127402a159d2fbf001e9a54
@@ -1563,7 +1584,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 106000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 106000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @922                                                                       
@@ -1579,6 +1600,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    102000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 22
 # FIFO[0]: 00b4ce4200b6b83704a75576089c750304354e34080f778510e8c61d1c4577f1028bf050
 # FIFO[1]: 20629c480049a21602fe33d7019a77dc159ebaca05cf91b7054e44dc03e8a970074d2839
 # FIFO[2]: 035d2777183fddc9002dda9707dc1a590760a1d2031ba9e5029599731cb4820e04f2bd19
@@ -1621,7 +1643,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 110000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 110000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @934                                                                       
@@ -1637,6 +1659,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    106000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 23
 # FIFO[0]: 050018a706892afd059bc7d804ba66e40fde38e718b920cc045bf8e7052ba66e09478c12
 # FIFO[1]: 00b4ce4200b6b83704a75576089c750304354e34080f778510e8c61d1c4577f1028bf050
 # FIFO[2]: 20629c480049a21602fe33d7019a77dc159ebaca05cf91b7054e44dc03e8a970074d2839
@@ -1680,7 +1703,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 114000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 114000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @946                                                                       
@@ -1696,6 +1719,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    110000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 24
 # FIFO[0]: 184ae4590f76ee10009e637a05c346810861237c0098adc900277e4f11df389205815c2f
 # FIFO[1]: 050018a706892afd059bc7d804ba66e40fde38e718b920cc045bf8e7052ba66e09478c12
 # FIFO[2]: 00b4ce4200b6b83704a75576089c750304354e34080f778510e8c61d1c4577f1028bf050
@@ -1740,7 +1764,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 118000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 118000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @958                                                                       
@@ -1756,6 +1780,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    114000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 25
 # FIFO[0]: 0405a21a02b3e263074e1fd403760b270d8737fc001ddf8c081799590e0791dd21bd0713
 # FIFO[1]: 184ae4590f76ee10009e637a05c346810861237c0098adc900277e4f11df389205815c2f
 # FIFO[2]: 050018a706892afd059bc7d804ba66e40fde38e718b920cc045bf8e7052ba66e09478c12
@@ -1801,7 +1826,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 122000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 122000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @970                                                                       
@@ -1817,6 +1842,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    118000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 26
 # FIFO[0]: 0f39e2d1006021fd18a64c7e028b52180163d89e000c1ef9046227f9113a4f9512905f8f
 # FIFO[1]: 0405a21a02b3e263074e1fd403760b270d8737fc001ddf8c081799590e0791dd21bd0713
 # FIFO[2]: 184ae4590f76ee10009e637a05c346810861237c0098adc900277e4f11df389205815c2f
@@ -1863,7 +1889,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 126000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 126000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @982                                                                       
@@ -1879,6 +1905,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    122000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 27
 # FIFO[0]: 01c5f75b08d9cc0d0704857a0323f40e1a5bc4fe07af9e0704fe340700dcfb5d06e3566c
 # FIFO[1]: 0f39e2d1006021fd18a64c7e028b52180163d89e000c1ef9046227f9113a4f9512905f8f
 # FIFO[2]: 0405a21a02b3e263074e1fd403760b270d8737fc001ddf8c081799590e0791dd21bd0713
@@ -1926,7 +1953,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 130000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 130000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @994                                                                       
@@ -1942,6 +1969,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    126000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 28
 # FIFO[0]: 0d7b9f9e0a63687a0033cf42003bcb5e01cf2757014f5d62044a9af3056df9fc319c96e1
 # FIFO[1]: 01c5f75b08d9cc0d0704857a0323f40e1a5bc4fe07af9e0704fe340700dcfb5d06e3566c
 # FIFO[2]: 0f39e2d1006021fd18a64c7e028b52180163d89e000c1ef9046227f9113a4f9512905f8f
@@ -1990,7 +2018,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 134000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 134000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1006                                                                      
@@ -2006,6 +2034,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    130000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 29
 # FIFO[0]: 11d9bf69001237571ae402a808fac4660b51e6170509fe0b010ddc6301539dae039b73e2
 # FIFO[1]: 0d7b9f9e0a63687a0033cf42003bcb5e01cf2757014f5d62044a9af3056df9fc319c96e1
 # FIFO[2]: 01c5f75b08d9cc0d0704857a0323f40e1a5bc4fe07af9e0704fe340700dcfb5d06e3566c
@@ -2055,7 +2084,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 138000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 138000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1018                                                                      
@@ -2071,6 +2100,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    134000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 30
 # FIFO[0]: 00cda65d067b6f7d1132dd1206bc8440018cd8d812c2b6a10aa1d2ab06cae6ab0688d1c2
 # FIFO[1]: 11d9bf69001237571ae402a808fac4660b51e6170509fe0b010ddc6301539dae039b73e2
 # FIFO[2]: 0d7b9f9e0a63687a0033cf42003bcb5e01cf2757014f5d62044a9af3056df9fc319c96e1
@@ -2121,7 +2151,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 142000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 142000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1030                                                                      
@@ -2137,6 +2167,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    138000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 31
 # FIFO[0]: 03b498c302f1dd2d0a07bc361236a23c0a1f81c90656d76c081989f00c4aa4e511e3be92
 # FIFO[1]: 00cda65d067b6f7d1132dd1206bc8440018cd8d812c2b6a10aa1d2ab06cae6ab0688d1c2
 # FIFO[2]: 11d9bf69001237571ae402a808fac4660b51e6170509fe0b010ddc6301539dae039b73e2
@@ -2188,7 +2219,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 146000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 146000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1042                                                                      
@@ -2204,6 +2235,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    142000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 32
 # FIFO[0]: 04826a6408585e3f03924d110fc4733e05b06359024db5140ee358101c4bfe25036cf3ba
 # FIFO[1]: 03b498c302f1dd2d0a07bc361236a23c0a1f81c90656d76c081989f00c4aa4e511e3be92
 # FIFO[2]: 00cda65d067b6f7d1132dd1206bc8440018cd8d812c2b6a10aa1d2ab06cae6ab0688d1c2
@@ -2256,7 +2288,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 150000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 150000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1054                                                                      
@@ -2272,6 +2304,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    146000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 33
 # FIFO[0]: 0d6272720ce69fe50005bf08075b00b107446bb6096d767202f2208113d5b19f03873e2d
 # FIFO[1]: 04826a6408585e3f03924d110fc4733e05b06359024db5140ee358101c4bfe25036cf3ba
 # FIFO[2]: 03b498c302f1dd2d0a07bc361236a23c0a1f81c90656d76c081989f00c4aa4e511e3be92
@@ -2325,7 +2358,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 154000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 154000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1066                                                                      
@@ -2341,6 +2374,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    150000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 34
 # FIFO[0]: 00955a4d02e36c2807b717e60e7fd81c016b050614b21978084440c8106c857c055386ee
 # FIFO[1]: 0d6272720ce69fe50005bf08075b00b107446bb6096d767202f2208113d5b19f03873e2d
 # FIFO[2]: 04826a6408585e3f03924d110fc4733e05b06359024db5140ee358101c4bfe25036cf3ba
@@ -2395,7 +2429,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 158000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 158000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1078                                                                      
@@ -2411,6 +2445,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    154000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 35
 # FIFO[0]: 0e39195c059e903417b3a5dd01e2d83a078a11bb0b6c118e04d0cf78073441620a53fef9
 # FIFO[1]: 00955a4d02e36c2807b717e60e7fd81c016b050614b21978084440c8106c857c055386ee
 # FIFO[2]: 0d6272720ce69fe50005bf08075b00b107446bb6096d767202f2208113d5b19f03873e2d
@@ -2466,7 +2501,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 162000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 162000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1090                                                                      
@@ -2482,6 +2517,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    158000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 36
 # FIFO[0]: 0fac6eea0ad69c93015d9d4f10d01d780acdf139049487ea0060fc7718c1867f027a48ac
 # FIFO[1]: 0e39195c059e903417b3a5dd01e2d83a078a11bb0b6c118e04d0cf78073441620a53fef9
 # FIFO[2]: 00955a4d02e36c2807b717e60e7fd81c016b050614b21978084440c8106c857c055386ee
@@ -2538,7 +2574,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 166000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 166000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1102                                                                      
@@ -2554,6 +2590,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    162000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 37
 # FIFO[0]: 0c26e873002e652501bfd88f1164b4a70d07d88f02853599092db05d08e025e71327972d
 # FIFO[1]: 0fac6eea0ad69c93015d9d4f10d01d780acdf139049487ea0060fc7718c1867f027a48ac
 # FIFO[2]: 0e39195c059e903417b3a5dd01e2d83a078a11bb0b6c118e04d0cf78073441620a53fef9
@@ -2611,7 +2648,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 170000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 170000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1114                                                                      
@@ -2627,6 +2664,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    166000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 38
 # FIFO[0]: 0c002eb600eb68290ecf8bec23afc158027d129406fcf2fe03da15ab00ad66db08dc7541
 # FIFO[1]: 0c26e873002e652501bfd88f1164b4a70d07d88f02853599092db05d08e025e71327972d
 # FIFO[2]: 0fac6eea0ad69c93015d9d4f10d01d780acdf139049487ea0060fc7718c1867f027a48ac
@@ -2685,7 +2723,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 174000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 174000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1126                                                                      
@@ -2701,6 +2739,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    170000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 39
 # FIFO[0]: 026b12690eff5636015ec3090b3e022a1334bc5e1f3b85a602e75fad055698a800300d5e
 # FIFO[1]: 0c002eb600eb68290ecf8bec23afc158027d129406fcf2fe03da15ab00ad66db08dc7541
 # FIFO[2]: 0c26e873002e652501bfd88f1164b4a70d07d88f02853599092db05d08e025e71327972d
@@ -2760,7 +2799,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 178000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 178000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1138                                                                      
@@ -2776,6 +2815,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    174000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 40
 # FIFO[0]: 004e899f0d0d710505ea67361a7d5eab065dac690763fb4e044469090611d2a003d9ca70
 # FIFO[1]: 026b12690eff5636015ec3090b3e022a1334bc5e1f3b85a602e75fad055698a800300d5e
 # FIFO[2]: 0c002eb600eb68290ecf8bec23afc158027d129406fcf2fe03da15ab00ad66db08dc7541
@@ -2836,7 +2876,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 182000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 182000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1150                                                                      
@@ -2852,6 +2892,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    178000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
+# cnt = 41
 # FIFO[0]: 02ad32a70292fd110037949515a414b7147f469108ef7e1608718ec50634766b0bb623d9
 # FIFO[1]: 004e899f0d0d710505ea67361a7d5eab065dac690763fb4e044469090611d2a003d9ca70
 # FIFO[2]: 026b12690eff5636015ec3090b3e022a1334bc5e1f3b85a602e75fad055698a800300d5e
@@ -2913,7 +2954,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 186000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 186000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1162                                                                      
@@ -2929,46 +2970,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    182000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(86) @ 186000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Feature valid message
-# --------------------
-# Bin_1: 02648d35020b445d0ed04c0d0595effa0013d71205fcaf2d137d39ff178687dc0cc80aa6, Bin_2: 0161ecab18ff980907f299600729d23000d870e8037ba7f104937b4c164ed5750d6cc95c, Bin_3: 02ad32a70292fd110037949515a414b7147f469108ef7e1608718ec50634766b0bb623d9, Bin_4: 0ed0ee1512b2252303120d3d002058a909f25d2107854fa60ca6de4005b0e4d1008295eb
-# feature a[0]: 0.197175
-# feature b[0]: 0.202078
-# feature c[0]: 0.188742
-# feature d[0]: 0.039390
-# feature a[1]: 0.267505
-# feature b[1]: 0.260491
-# feature c[1]: 0.137382
-# feature d[1]: 0.131570
-# feature a[2]: 0.243478
-# feature b[2]: 0.117981
-# feature c[2]: 0.160260
-# feature d[2]: 0.196173
-# feature a[3]: 0.134949
-# feature b[3]: 0.102930
-# feature c[3]: 0.164863
-# feature d[3]: 0.151249
-# feature a[4]: 0.015354
-# feature b[4]: 0.050712
-# feature c[4]: 0.249695
-# feature d[4]: 0.173941
-# feature a[5]: 0.130347
-# feature b[5]: 0.147612
-# feature c[5]: 0.256567
-# feature d[5]: 0.019604
-# feature a[6]: 0.212272
-# feature b[6]: 0.155483
-# feature c[6]: 0.025698
-# feature d[6]: 0.096642
-# feature a[7]: 0.078850
-# feature b[7]: 0.275752
-# feature c[7]: 0.088487
-# feature d[7]: 0.238471
-# feature a[8]: 0.085313
-# feature b[8]: 0.064848
-# feature c[8]: 0.090230
-# feature d[8]: 0.212290
-# --------------------
+# cnt = 42
 # FIFO[0]: 0ed0ee1512b2252303120d3d002058a909f25d2107854fa60ca6de4005b0e4d1008295eb
 # FIFO[1]: 02ad32a70292fd110037949515a414b7147f469108ef7e1608718ec50634766b0bb623d9
 # FIFO[2]: 004e899f0d0d710505ea67361a7d5eab065dac690763fb4e044469090611d2a003d9ca70
@@ -3010,6 +3012,47 @@ Errors: 0, Warnings: 224
 # FIFO[38]: 04a3d85902fdff5d0d78f4010036cd0522fc2c4a031071511a0c92680179014a01176384
 # FIFO[39]: 0b6aa1220b479309008df48f07e5851e0b010de60c38295119589df40671efa30286851f
 # FIFO[40]: 0161ecab18ff980907f299600729d23000d870e8037ba7f104937b4c164ed5750d6cc95c
+# FIFO[41]: 02648d35020b445d0ed04c0d0595effa0013d71205fcaf2d137d39ff178687dc0cc80aa6
+# UVM_INFO ../uvc/env/base_scoreboard.sv(96) @ 186000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Feature valid message
+# --------------------
+# Bin_1: 02648d35020b445d0ed04c0d0595effa0013d71205fcaf2d137d39ff178687dc0cc80aa6, Bin_2: 0161ecab18ff980907f299600729d23000d870e8037ba7f104937b4c164ed5750d6cc95c, Bin_3: 02ad32a70292fd110037949515a414b7147f469108ef7e1608718ec50634766b0bb623d9, Bin_4: 0ed0ee1512b2252303120d3d002058a909f25d2107854fa60ca6de4005b0e4d1008295eb
+# feature a[0]: 0.197175
+# feature a[1]: 0.267505
+# feature a[2]: 0.243478
+# feature a[3]: 0.134949
+# feature a[4]: 0.015354
+# feature a[5]: 0.130347
+# feature a[6]: 0.212272
+# feature a[7]: 0.078850
+# feature a[8]: 0.085313
+# feature b[0]: 0.202078
+# feature b[1]: 0.260491
+# feature b[2]: 0.117981
+# feature b[3]: 0.102930
+# feature b[4]: 0.050712
+# feature b[5]: 0.147612
+# feature b[6]: 0.155483
+# feature b[7]: 0.275752
+# feature b[8]: 0.064848
+# feature c[0]: 0.188742
+# feature c[1]: 0.137382
+# feature c[2]: 0.160260
+# feature c[3]: 0.164863
+# feature c[4]: 0.249695
+# feature c[5]: 0.256567
+# feature c[6]: 0.025698
+# feature c[7]: 0.088487
+# feature c[8]: 0.090230
+# feature d[0]: 0.039390
+# feature d[1]: 0.131570
+# feature d[2]: 0.196173
+# feature d[3]: 0.151249
+# feature d[4]: 0.173941
+# feature d[5]: 0.019604
+# feature d[6]: 0.096642
+# feature d[7]: 0.238471
+# feature d[8]: 0.212290
+# --------------------
 # UVM_INFO ../uvc/env/base_driver.sv(24) @ 186000: uvm_test_top.bus_env.master.driver [run_phase] Start driver: ---------------------------------------------------------------------------------------------------------------------------
 # Name                           Type       Size  Value                                                                      
 # ---------------------------------------------------------------------------------------------------------------------------
@@ -3030,7 +3073,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 190000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 190000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1176                                                                      
@@ -3046,46 +3089,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    186000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(86) @ 190000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Feature valid message
-# --------------------
-# Bin_1: 0161ecab18ff980907f299600729d23000d870e8037ba7f104937b4c164ed5750d6cc95c, Bin_2: 0b6aa1220b479309008df48f07e5851e0b010de60c38295119589df40671efa30286851f, Bin_3: 0ed0ee1512b2252303120d3d002058a909f25d2107854fa60ca6de4005b0e4d1008295eb, Bin_4: 0856c5e608748684096f0ba30a733aa001f930d20d9e8fc801674ed00b62b54809f32c14
-# feature a[0]: 0.203916
-# feature b[0]: 0.088444
-# feature c[0]: 0.039749
-# feature d[0]: 0.175552
-# feature a[1]: 0.262861
-# feature b[1]: 0.141289
-# feature c[1]: 0.132767
-# feature d[1]: 0.187790
-# feature a[2]: 0.119054
-# feature b[2]: 0.280189
-# feature c[2]: 0.197958
-# feature d[2]: 0.065934
-# feature a[3]: 0.103866
-# feature b[3]: 0.194545
-# feature c[3]: 0.152625
-# feature d[3]: 0.205388
-# feature a[4]: 0.051174
-# feature b[4]: 0.184618
-# feature c[4]: 0.175524
-# feature d[4]: 0.078181
-# feature a[5]: 0.148955
-# feature b[5]: 0.156392
-# feature c[5]: 0.019783
-# feature d[5]: 0.179910
-# feature a[6]: 0.156897
-# feature b[6]: 0.041443
-# feature c[6]: 0.097522
-# feature d[6]: 0.170938
-# feature a[7]: 0.278261
-# feature b[7]: 0.186914
-# feature c[7]: 0.240640
-# feature d[7]: 0.161829
-# feature a[8]: 0.065438
-# feature b[8]: 0.188045
-# feature c[8]: 0.214222
-# feature d[8]: 0.160713
-# --------------------
+# cnt = 42
 # FIFO[0]: 0856c5e608748684096f0ba30a733aa001f930d20d9e8fc801674ed00b62b54809f32c14
 # FIFO[1]: 0ed0ee1512b2252303120d3d002058a909f25d2107854fa60ca6de4005b0e4d1008295eb
 # FIFO[2]: 02ad32a70292fd110037949515a414b7147f469108ef7e1608718ec50634766b0bb623d9
@@ -3127,6 +3131,47 @@ Errors: 0, Warnings: 224
 # FIFO[38]: 0663c9430352079d07ea2fa811dd1ab408ef1e5102ef97640452606e145a2c7a0c27a642
 # FIFO[39]: 04a3d85902fdff5d0d78f4010036cd0522fc2c4a031071511a0c92680179014a01176384
 # FIFO[40]: 0b6aa1220b479309008df48f07e5851e0b010de60c38295119589df40671efa30286851f
+# FIFO[41]: 0161ecab18ff980907f299600729d23000d870e8037ba7f104937b4c164ed5750d6cc95c
+# UVM_INFO ../uvc/env/base_scoreboard.sv(96) @ 190000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Feature valid message
+# --------------------
+# Bin_1: 0161ecab18ff980907f299600729d23000d870e8037ba7f104937b4c164ed5750d6cc95c, Bin_2: 0b6aa1220b479309008df48f07e5851e0b010de60c38295119589df40671efa30286851f, Bin_3: 0ed0ee1512b2252303120d3d002058a909f25d2107854fa60ca6de4005b0e4d1008295eb, Bin_4: 0856c5e608748684096f0ba30a733aa001f930d20d9e8fc801674ed00b62b54809f32c14
+# feature a[0]: 0.203916
+# feature a[1]: 0.262861
+# feature a[2]: 0.119054
+# feature a[3]: 0.103866
+# feature a[4]: 0.051174
+# feature a[5]: 0.148955
+# feature a[6]: 0.156897
+# feature a[7]: 0.278261
+# feature a[8]: 0.065438
+# feature b[0]: 0.088444
+# feature b[1]: 0.141289
+# feature b[2]: 0.280189
+# feature b[3]: 0.194545
+# feature b[4]: 0.184618
+# feature b[5]: 0.156392
+# feature b[6]: 0.041443
+# feature b[7]: 0.186914
+# feature b[8]: 0.188045
+# feature c[0]: 0.039749
+# feature c[1]: 0.132767
+# feature c[2]: 0.197958
+# feature c[3]: 0.152625
+# feature c[4]: 0.175524
+# feature c[5]: 0.019783
+# feature c[6]: 0.097522
+# feature c[7]: 0.240640
+# feature c[8]: 0.214222
+# feature d[0]: 0.175552
+# feature d[1]: 0.187790
+# feature d[2]: 0.065934
+# feature d[3]: 0.205388
+# feature d[4]: 0.078181
+# feature d[5]: 0.179910
+# feature d[6]: 0.170938
+# feature d[7]: 0.161829
+# feature d[8]: 0.160713
+# --------------------
 # UVM_INFO ../uvc/env/base_driver.sv(24) @ 190000: uvm_test_top.bus_env.master.driver [run_phase] Start driver: ---------------------------------------------------------------------------------------------------------------------------
 # Name                           Type       Size  Value                                                                      
 # ---------------------------------------------------------------------------------------------------------------------------
@@ -3147,7 +3192,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 194000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 194000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1190                                                                      
@@ -3163,46 +3208,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    190000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(86) @ 194000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Feature valid message
-# --------------------
-# Bin_1: 0b6aa1220b479309008df48f07e5851e0b010de60c38295119589df40671efa30286851f, Bin_2: 04a3d85902fdff5d0d78f4010036cd0522fc2c4a031071511a0c92680179014a01176384, Bin_3: 0856c5e608748684096f0ba30a733aa001f930d20d9e8fc801674ed00b62b54809f32c14, Bin_4: 1684f6490b45a13904057a4e05356c220e27ae5802f713d90b1e741f04be7d60017f4afe
-# feature a[0]: 0.087590
-# feature b[0]: 0.057579
-# feature c[0]: 0.173857
-# feature d[0]: 0.067442
-# feature a[1]: 0.139925
-# feature b[1]: 0.066886
-# feature c[1]: 0.185978
-# feature d[1]: 0.120049
-# feature a[2]: 0.277485
-# feature b[2]: 0.281306
-# feature c[2]: 0.065297
-# feature d[2]: 0.183787
-# feature a[3]: 0.192667
-# feature b[3]: 0.096481
-# feature c[3]: 0.203405
-# feature d[3]: 0.094909
-# feature a[4]: 0.182836
-# feature b[4]: 0.326005
-# feature c[4]: 0.077427
-# feature d[4]: 0.207366
-# feature a[5]: 0.154882
-# feature b[5]: 0.025501
-# feature c[5]: 0.178174
-# feature d[5]: 0.125790
-# feature a[6]: 0.041043
-# feature b[6]: 0.202305
-# feature c[6]: 0.169288
-# feature d[6]: 0.110528
-# feature a[7]: 0.185110
-# feature b[7]: 0.095340
-# feature c[7]: 0.160267
-# feature d[7]: 0.185048
-# feature a[8]: 0.186230
-# feature b[8]: 0.118725
-# feature c[8]: 0.159162
-# feature d[8]: 0.261554
-# --------------------
+# cnt = 42
 # FIFO[0]: 1684f6490b45a13904057a4e05356c220e27ae5802f713d90b1e741f04be7d60017f4afe
 # FIFO[1]: 0856c5e608748684096f0ba30a733aa001f930d20d9e8fc801674ed00b62b54809f32c14
 # FIFO[2]: 0ed0ee1512b2252303120d3d002058a909f25d2107854fa60ca6de4005b0e4d1008295eb
@@ -3244,7 +3250,48 @@ Errors: 0, Warnings: 224
 # FIFO[38]: 045cd47715d783a90219a7d304a7b42f12d66a4307a84292106eb70f0a185d4b0044986f
 # FIFO[39]: 0663c9430352079d07ea2fa811dd1ab408ef1e5102ef97640452606e145a2c7a0c27a642
 # FIFO[40]: 04a3d85902fdff5d0d78f4010036cd0522fc2c4a031071511a0c92680179014a01176384
-# UVM_INFO ../uvc/env/base_scoreboard.sv(100) @ 194000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from mon -----------------------------------------------------------------------------------------------------
+# FIFO[41]: 0b6aa1220b479309008df48f07e5851e0b010de60c38295119589df40671efa30286851f
+# UVM_INFO ../uvc/env/base_scoreboard.sv(96) @ 194000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Feature valid message
+# --------------------
+# Bin_1: 0b6aa1220b479309008df48f07e5851e0b010de60c38295119589df40671efa30286851f, Bin_2: 04a3d85902fdff5d0d78f4010036cd0522fc2c4a031071511a0c92680179014a01176384, Bin_3: 0856c5e608748684096f0ba30a733aa001f930d20d9e8fc801674ed00b62b54809f32c14, Bin_4: 1684f6490b45a13904057a4e05356c220e27ae5802f713d90b1e741f04be7d60017f4afe
+# feature a[0]: 0.087590
+# feature a[1]: 0.139925
+# feature a[2]: 0.277485
+# feature a[3]: 0.192667
+# feature a[4]: 0.182836
+# feature a[5]: 0.154882
+# feature a[6]: 0.041043
+# feature a[7]: 0.185110
+# feature a[8]: 0.186230
+# feature b[0]: 0.057579
+# feature b[1]: 0.066886
+# feature b[2]: 0.281306
+# feature b[3]: 0.096481
+# feature b[4]: 0.326005
+# feature b[5]: 0.025501
+# feature b[6]: 0.202305
+# feature b[7]: 0.095340
+# feature b[8]: 0.118725
+# feature c[0]: 0.173857
+# feature c[1]: 0.185978
+# feature c[2]: 0.065297
+# feature c[3]: 0.203405
+# feature c[4]: 0.077427
+# feature c[5]: 0.178174
+# feature c[6]: 0.169288
+# feature c[7]: 0.160267
+# feature c[8]: 0.159162
+# feature d[0]: 0.067442
+# feature d[1]: 0.120049
+# feature d[2]: 0.183787
+# feature d[3]: 0.094909
+# feature d[4]: 0.207366
+# feature d[5]: 0.125790
+# feature d[6]: 0.110528
+# feature d[7]: 0.185048
+# feature d[8]: 0.261554
+# --------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(107) @ 194000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from mon -----------------------------------------------------------------------------------------------------
 # Name       Type       Size  Value                                                                    
 # -----------------------------------------------------------------------------------------------------
 # base_item  base_item  -     @1198                                                                    
@@ -3259,6 +3306,42 @@ Errors: 0, Warnings: 224
 #   fea_d    integral   288   'h301f7870230727b028dc6e302a08d5703fa9f370416a8030068d5ff0168fb5f01701717
 # -----------------------------------------------------------------------------------------------------
 # 
+# feature a[0]: 0.064587
+# feature a[1]: 0.139925
+# feature a[2]: 0.277485
+# feature a[3]: 0.192667
+# feature a[4]: 0.182836
+# feature a[5]: 0.154882
+# feature a[6]: 0.041043
+# feature a[7]: 0.185110
+# feature a[8]: 0.186230
+# feature b[0]: 0.185598
+# feature b[1]: 0.066886
+# feature b[2]: 0.281306
+# feature b[3]: 0.096481
+# feature b[4]: 0.326005
+# feature b[5]: 0.025501
+# feature b[6]: 0.202305
+# feature b[7]: 0.095340
+# feature b[8]: 0.118725
+# feature c[0]: 0.030425
+# feature c[1]: 0.185978
+# feature c[2]: 0.065297
+# feature c[3]: 0.203405
+# feature c[4]: 0.077427
+# feature c[5]: 0.178174
+# feature c[6]: 0.169288
+# feature c[7]: 0.160267
+# feature c[8]: 0.159162
+# feature d[0]: 0.089866
+# feature d[1]: 0.120049
+# feature d[2]: 0.183787
+# feature d[3]: 0.094909
+# feature d[4]: 0.207366
+# feature d[5]: 0.125790
+# feature d[6]: 0.110528
+# feature d[7]: 0.185048
+# feature d[8]: 0.261554
 # UVM_INFO ../uvc/env/base_driver.sv(24) @ 194000: uvm_test_top.bus_env.master.driver [run_phase] Start driver: ---------------------------------------------------------------------------------------------------------------------------
 # Name                           Type       Size  Value                                                                      
 # ---------------------------------------------------------------------------------------------------------------------------
@@ -3279,7 +3362,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 198000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 198000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1210                                                                      
@@ -3295,46 +3378,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    194000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(86) @ 198000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Feature valid message
-# --------------------
-# Bin_1: 04a3d85902fdff5d0d78f4010036cd0522fc2c4a031071511a0c92680179014a01176384, Bin_2: 0663c9430352079d07ea2fa811dd1ab408ef1e5102ef97640452606e145a2c7a0c27a642, Bin_3: 1684f6490b45a13904057a4e05356c220e27ae5802f713d90b1e741f04be7d60017f4afe, Bin_4: 03bac8b00631099f01206ba503eb4e39046e05ce1bbc6ccb02b33869166a70a50e55ac97
-# feature a[0]: 0.056971
-# feature b[0]: 0.190126
-# feature c[0]: 0.066729
-# feature d[0]: 0.206471
-# feature a[1]: 0.066179
-# feature b[1]: 0.246021
-# feature c[1]: 0.118780
-# feature d[1]: 0.258192
-# feature a[2]: 0.278332
-# feature b[2]: 0.113370
-# feature c[2]: 0.181844
-# feature d[2]: 0.089610
-# feature a[3]: 0.095461
-# feature b[3]: 0.093441
-# feature c[3]: 0.093905
-# feature d[3]: 0.287203
-# feature a[4]: 0.322558
-# feature b[4]: 0.163001
-# feature c[4]: 0.205174
-# feature d[4]: 0.114778
-# feature a[5]: 0.025231
-# feature b[5]: 0.230490
-# feature c[5]: 0.124460
-# feature d[5]: 0.107960
-# feature a[6]: 0.200166
-# feature b[6]: 0.153421
-# feature c[6]: 0.109359
-# feature d[6]: 0.057884
-# feature a[7]: 0.094332
-# feature b[7]: 0.099372
-# feature c[7]: 0.183091
-# feature d[7]: 0.135696
-# feature a[8]: 0.117470
-# feature b[8]: 0.137851
-# feature c[8]: 0.258788
-# feature d[8]: 0.105317
-# --------------------
+# cnt = 42
 # FIFO[0]: 03bac8b00631099f01206ba503eb4e39046e05ce1bbc6ccb02b33869166a70a50e55ac97
 # FIFO[1]: 1684f6490b45a13904057a4e05356c220e27ae5802f713d90b1e741f04be7d60017f4afe
 # FIFO[2]: 0856c5e608748684096f0ba30a733aa001f930d20d9e8fc801674ed00b62b54809f32c14
@@ -3376,7 +3420,48 @@ Errors: 0, Warnings: 224
 # FIFO[38]: 13f3b691063bb0b60d3d9e55014e8904002d2b0b03f1c24b0590aa2107a269fe0c403968
 # FIFO[39]: 045cd47715d783a90219a7d304a7b42f12d66a4307a84292106eb70f0a185d4b0044986f
 # FIFO[40]: 0663c9430352079d07ea2fa811dd1ab408ef1e5102ef97640452606e145a2c7a0c27a642
-# UVM_INFO ../uvc/env/base_scoreboard.sv(100) @ 198000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from mon -----------------------------------------------------------------------------------------------------
+# FIFO[41]: 04a3d85902fdff5d0d78f4010036cd0522fc2c4a031071511a0c92680179014a01176384
+# UVM_INFO ../uvc/env/base_scoreboard.sv(96) @ 198000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Feature valid message
+# --------------------
+# Bin_1: 04a3d85902fdff5d0d78f4010036cd0522fc2c4a031071511a0c92680179014a01176384, Bin_2: 0663c9430352079d07ea2fa811dd1ab408ef1e5102ef97640452606e145a2c7a0c27a642, Bin_3: 1684f6490b45a13904057a4e05356c220e27ae5802f713d90b1e741f04be7d60017f4afe, Bin_4: 03bac8b00631099f01206ba503eb4e39046e05ce1bbc6ccb02b33869166a70a50e55ac97
+# feature a[0]: 0.056971
+# feature a[1]: 0.066179
+# feature a[2]: 0.278332
+# feature a[3]: 0.095461
+# feature a[4]: 0.322558
+# feature a[5]: 0.025231
+# feature a[6]: 0.200166
+# feature a[7]: 0.094332
+# feature a[8]: 0.117470
+# feature b[0]: 0.190126
+# feature b[1]: 0.246021
+# feature b[2]: 0.113370
+# feature b[3]: 0.093441
+# feature b[4]: 0.163001
+# feature b[5]: 0.230490
+# feature b[6]: 0.153421
+# feature b[7]: 0.099372
+# feature b[8]: 0.137851
+# feature c[0]: 0.066729
+# feature c[1]: 0.118780
+# feature c[2]: 0.181844
+# feature c[3]: 0.093905
+# feature c[4]: 0.205174
+# feature c[5]: 0.124460
+# feature c[6]: 0.109359
+# feature c[7]: 0.183091
+# feature c[8]: 0.258788
+# feature d[0]: 0.206471
+# feature d[1]: 0.258192
+# feature d[2]: 0.089610
+# feature d[3]: 0.287203
+# feature d[4]: 0.114778
+# feature d[5]: 0.107960
+# feature d[6]: 0.057884
+# feature d[7]: 0.135696
+# feature d[8]: 0.105317
+# --------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(107) @ 198000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from mon -----------------------------------------------------------------------------------------------------
 # Name       Type       Size  Value                                                                    
 # -----------------------------------------------------------------------------------------------------
 # base_item  base_item  -     @1218                                                                    
@@ -3391,6 +3476,42 @@ Errors: 0, Warnings: 224
 #   fea_d    integral   288   'ha0689f0217c9df031edeaf0267ed9302c4561f004fd5ff01898dff03cb1e5f036080e7 
 # -----------------------------------------------------------------------------------------------------
 # 
+# feature a[0]: 0.185271
+# feature a[1]: 0.066179
+# feature a[2]: 0.278332
+# feature a[3]: 0.095461
+# feature a[4]: 0.322558
+# feature a[5]: 0.025231
+# feature a[6]: 0.200166
+# feature a[7]: 0.094332
+# feature a[8]: 0.117470
+# feature b[0]: 0.118114
+# feature b[1]: 0.246021
+# feature b[2]: 0.113370
+# feature b[3]: 0.093441
+# feature b[4]: 0.163001
+# feature b[5]: 0.230490
+# feature b[6]: 0.153421
+# feature b[7]: 0.099372
+# feature b[8]: 0.137851
+# feature c[0]: 0.089707
+# feature c[1]: 0.118780
+# feature c[2]: 0.181844
+# feature c[3]: 0.093905
+# feature c[4]: 0.205174
+# feature c[5]: 0.124460
+# feature c[6]: 0.109359
+# feature c[7]: 0.183091
+# feature c[8]: 0.258788
+# feature d[0]: 0.211060
+# feature d[1]: 0.258192
+# feature d[2]: 0.089610
+# feature d[3]: 0.287203
+# feature d[4]: 0.114778
+# feature d[5]: 0.107960
+# feature d[6]: 0.057884
+# feature d[7]: 0.135696
+# feature d[8]: 0.105317
 # UVM_INFO ../uvc/env/base_driver.sv(24) @ 198000: uvm_test_top.bus_env.master.driver [run_phase] Start driver: ---------------------------------------------------------------------------------------------------------------------------
 # Name                           Type       Size  Value                                                                      
 # ---------------------------------------------------------------------------------------------------------------------------
@@ -3411,7 +3532,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 202000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 202000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1230                                                                      
@@ -3427,46 +3548,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    198000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(86) @ 202000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Feature valid message
-# --------------------
-# Bin_1: 0663c9430352079d07ea2fa811dd1ab408ef1e5102ef97640452606e145a2c7a0c27a642, Bin_2: 045cd47715d783a90219a7d304a7b42f12d66a4307a84292106eb70f0a185d4b0044986f, Bin_3: 03bac8b00631099f01206ba503eb4e39046e05ce1bbc6ccb02b33869166a70a50e55ac97, Bin_4: 02a146c203ca661b1e98ee730ff901ec063d926d0b17934a005a38b60b31285901ff9760
-# feature a[0]: 0.188830
-# feature b[0]: 0.028036
-# feature c[0]: 0.205064
-# feature d[0]: 0.076566
-# feature a[1]: 0.244343
-# feature b[1]: 0.172088
-# feature c[1]: 0.256432
-# feature d[1]: 0.181196
-# feature a[2]: 0.112597
-# feature b[2]: 0.219556
-# feature c[2]: 0.088999
-# feature d[2]: 0.032154
-# feature a[3]: 0.092804
-# feature b[3]: 0.149876
-# feature c[3]: 0.285244
-# feature d[3]: 0.180385
-# feature a[4]: 0.161890
-# feature b[4]: 0.235075
-# feature c[4]: 0.113995
-# feature d[4]: 0.135302
-# feature a[5]: 0.228918
-# feature b[5]: 0.116858
-# feature c[5]: 0.107224
-# feature d[5]: 0.216463
-# feature a[6]: 0.152375
-# feature b[6]: 0.078492
-# feature c[6]: 0.057489
-# feature d[6]: 0.299597
-# feature a[7]: 0.098694
-# feature b[7]: 0.253128
-# feature c[7]: 0.134770
-# feature d[7]: 0.105451
-# feature a[8]: 0.136911
-# feature b[8]: 0.113127
-# feature c[8]: 0.104599
-# feature d[8]: 0.087836
-# --------------------
+# cnt = 42
 # FIFO[0]: 02a146c203ca661b1e98ee730ff901ec063d926d0b17934a005a38b60b31285901ff9760
 # FIFO[1]: 03bac8b00631099f01206ba503eb4e39046e05ce1bbc6ccb02b33869166a70a50e55ac97
 # FIFO[2]: 1684f6490b45a13904057a4e05356c220e27ae5802f713d90b1e741f04be7d60017f4afe
@@ -3508,7 +3590,48 @@ Errors: 0, Warnings: 224
 # FIFO[38]: 0186d55001815db4236e32290438a341055c32dd0811df0d0241a34412f4f06706e98fef
 # FIFO[39]: 13f3b691063bb0b60d3d9e55014e8904002d2b0b03f1c24b0590aa2107a269fe0c403968
 # FIFO[40]: 045cd47715d783a90219a7d304a7b42f12d66a4307a84292106eb70f0a185d4b0044986f
-# UVM_INFO ../uvc/env/base_scoreboard.sv(100) @ 202000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from mon -----------------------------------------------------------------------------------------------------
+# FIFO[41]: 0663c9430352079d07ea2fa811dd1ab408ef1e5102ef97640452606e145a2c7a0c27a642
+# UVM_INFO ../uvc/env/base_scoreboard.sv(96) @ 202000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Feature valid message
+# --------------------
+# Bin_1: 0663c9430352079d07ea2fa811dd1ab408ef1e5102ef97640452606e145a2c7a0c27a642, Bin_2: 045cd47715d783a90219a7d304a7b42f12d66a4307a84292106eb70f0a185d4b0044986f, Bin_3: 03bac8b00631099f01206ba503eb4e39046e05ce1bbc6ccb02b33869166a70a50e55ac97, Bin_4: 02a146c203ca661b1e98ee730ff901ec063d926d0b17934a005a38b60b31285901ff9760
+# feature a[0]: 0.188830
+# feature a[1]: 0.244343
+# feature a[2]: 0.112597
+# feature a[3]: 0.092804
+# feature a[4]: 0.161890
+# feature a[5]: 0.228918
+# feature a[6]: 0.152375
+# feature a[7]: 0.098694
+# feature a[8]: 0.136911
+# feature b[0]: 0.028036
+# feature b[1]: 0.172088
+# feature b[2]: 0.219556
+# feature b[3]: 0.149876
+# feature b[4]: 0.235075
+# feature b[5]: 0.116858
+# feature b[6]: 0.078492
+# feature b[7]: 0.253128
+# feature b[8]: 0.113127
+# feature c[0]: 0.205064
+# feature c[1]: 0.256432
+# feature c[2]: 0.088999
+# feature c[3]: 0.285244
+# feature c[4]: 0.113995
+# feature c[5]: 0.107224
+# feature c[6]: 0.057489
+# feature c[7]: 0.134770
+# feature c[8]: 0.104599
+# feature d[0]: 0.076566
+# feature d[1]: 0.181196
+# feature d[2]: 0.032154
+# feature d[3]: 0.180385
+# feature d[4]: 0.135302
+# feature d[5]: 0.216463
+# feature d[6]: 0.299597
+# feature d[7]: 0.105451
+# feature d[8]: 0.087836
+# --------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(107) @ 202000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from mon -----------------------------------------------------------------------------------------------------
 # Name       Type       Size  Value                                                                    
 # -----------------------------------------------------------------------------------------------------
 # base_item  base_item  -     @1238                                                                    
@@ -3523,6 +3646,42 @@ Errors: 0, Warnings: 224
 #   fea_d    integral   288   'h2d206d303045cff010f2e1f034cbd4701418d7702e3f42b02bf0d03029996830294ff6f
 # -----------------------------------------------------------------------------------------------------
 # 
+# feature a[0]: 0.120377
+# feature a[1]: 0.244343
+# feature a[2]: 0.112597
+# feature a[3]: 0.092804
+# feature a[4]: 0.161890
+# feature a[5]: 0.228918
+# feature a[6]: 0.152375
+# feature a[7]: 0.098694
+# feature a[8]: 0.136911
+# feature b[0]: 0.141263
+# feature b[1]: 0.172088
+# feature b[2]: 0.219556
+# feature b[3]: 0.149876
+# feature b[4]: 0.235075
+# feature b[5]: 0.116858
+# feature b[6]: 0.078492
+# feature b[7]: 0.253128
+# feature b[8]: 0.113127
+# feature c[0]: 0.215106
+# feature c[1]: 0.256432
+# feature c[2]: 0.088999
+# feature c[3]: 0.285244
+# feature c[4]: 0.113995
+# feature c[5]: 0.107224
+# feature c[6]: 0.057489
+# feature c[7]: 0.134770
+# feature c[8]: 0.104599
+# feature d[0]: 0.161376
+# feature d[1]: 0.181196
+# feature d[2]: 0.032154
+# feature d[3]: 0.180385
+# feature d[4]: 0.135302
+# feature d[5]: 0.216463
+# feature d[6]: 0.299597
+# feature d[7]: 0.105451
+# feature d[8]: 0.087836
 # UVM_INFO ../uvc/env/base_driver.sv(24) @ 202000: uvm_test_top.bus_env.master.driver [run_phase] Start driver: ---------------------------------------------------------------------------------------------------------------------------
 # Name                           Type       Size  Value                                                                      
 # ---------------------------------------------------------------------------------------------------------------------------
@@ -3543,7 +3702,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 206000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 206000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1250                                                                      
@@ -3559,46 +3718,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    202000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(86) @ 206000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Feature valid message
-# --------------------
-# Bin_1: 045cd47715d783a90219a7d304a7b42f12d66a4307a84292106eb70f0a185d4b0044986f, Bin_2: 13f3b691063bb0b60d3d9e55014e8904002d2b0b03f1c24b0590aa2107a269fe0c403968, Bin_3: 02a146c203ca661b1e98ee730ff901ec063d926d0b17934a005a38b60b31285901ff9760, Bin_4: 03fee46004ba6988053890910133c578039053522572edcf0201eb420f4f2d8c09e0afc0
-# feature a[0]: 0.028768
-# feature b[0]: 0.194519
-# feature c[0]: 0.078563
-# feature d[0]: 0.174665
-# feature a[1]: 0.176578
-# feature b[1]: 0.153556
-# feature c[1]: 0.185923
-# feature d[1]: 0.217448
-# feature a[2]: 0.225284
-# feature b[2]: 0.131104
-# feature c[2]: 0.032992
-# feature d[2]: 0.078742
-# feature a[3]: 0.153786
-# feature b[3]: 0.110374
-# feature c[3]: 0.185091
-# feature d[3]: 0.340094
-# feature a[4]: 0.241208
-# feature b[4]: 0.023344
-# feature c[4]: 0.138832
-# feature d[4]: 0.104914
-# feature a[5]: 0.119907
-# feature b[5]: 0.063530
-# feature c[5]: 0.222110
-# feature d[5]: 0.060936
-# feature a[6]: 0.080540
-# feature b[6]: 0.202225
-# feature c[6]: 0.307412
-# feature d[6]: 0.126985
-# feature a[7]: 0.259731
-# feature b[7]: 0.138750
-# feature c[7]: 0.108202
-# feature d[7]: 0.120844
-# feature a[8]: 0.116079
-# feature b[8]: 0.248240
-# feature c[8]: 0.090127
-# feature d[8]: 0.111090
-# --------------------
+# cnt = 42
 # FIFO[0]: 03fee46004ba6988053890910133c578039053522572edcf0201eb420f4f2d8c09e0afc0
 # FIFO[1]: 02a146c203ca661b1e98ee730ff901ec063d926d0b17934a005a38b60b31285901ff9760
 # FIFO[2]: 03bac8b00631099f01206ba503eb4e39046e05ce1bbc6ccb02b33869166a70a50e55ac97
@@ -3640,7 +3760,48 @@ Errors: 0, Warnings: 224
 # FIFO[38]: 046dd4570619ad230a57357b0400644e03a999e702bdac9d13065d4c066493c504232a02
 # FIFO[39]: 0186d55001815db4236e32290438a341055c32dd0811df0d0241a34412f4f06706e98fef
 # FIFO[40]: 13f3b691063bb0b60d3d9e55014e8904002d2b0b03f1c24b0590aa2107a269fe0c403968
-# UVM_INFO ../uvc/env/base_scoreboard.sv(100) @ 206000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from mon -----------------------------------------------------------------------------------------------------
+# FIFO[41]: 045cd47715d783a90219a7d304a7b42f12d66a4307a84292106eb70f0a185d4b0044986f
+# UVM_INFO ../uvc/env/base_scoreboard.sv(96) @ 206000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Feature valid message
+# --------------------
+# Bin_1: 045cd47715d783a90219a7d304a7b42f12d66a4307a84292106eb70f0a185d4b0044986f, Bin_2: 13f3b691063bb0b60d3d9e55014e8904002d2b0b03f1c24b0590aa2107a269fe0c403968, Bin_3: 02a146c203ca661b1e98ee730ff901ec063d926d0b17934a005a38b60b31285901ff9760, Bin_4: 03fee46004ba6988053890910133c578039053522572edcf0201eb420f4f2d8c09e0afc0
+# feature a[0]: 0.028768
+# feature a[1]: 0.176578
+# feature a[2]: 0.225284
+# feature a[3]: 0.153786
+# feature a[4]: 0.241208
+# feature a[5]: 0.119907
+# feature a[6]: 0.080540
+# feature a[7]: 0.259731
+# feature a[8]: 0.116079
+# feature b[0]: 0.194519
+# feature b[1]: 0.153556
+# feature b[2]: 0.131104
+# feature b[3]: 0.110374
+# feature b[4]: 0.023344
+# feature b[5]: 0.063530
+# feature b[6]: 0.202225
+# feature b[7]: 0.138750
+# feature b[8]: 0.248240
+# feature c[0]: 0.078563
+# feature c[1]: 0.185923
+# feature c[2]: 0.032992
+# feature c[3]: 0.185091
+# feature c[4]: 0.138832
+# feature c[5]: 0.222110
+# feature c[6]: 0.307412
+# feature c[7]: 0.108202
+# feature c[8]: 0.090127
+# feature d[0]: 0.174665
+# feature d[1]: 0.217448
+# feature d[2]: 0.078742
+# feature d[3]: 0.340094
+# feature d[4]: 0.104914
+# feature d[5]: 0.060936
+# feature d[6]: 0.126985
+# feature d[7]: 0.120844
+# feature d[8]: 0.111090
+# --------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(107) @ 206000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from mon -----------------------------------------------------------------------------------------------------
 # Name       Type       Size  Value                                                                    
 # -----------------------------------------------------------------------------------------------------
 # base_item  base_item  -     @1258                                                                    
@@ -3655,6 +3816,42 @@ Errors: 0, Warnings: 224
 #   fea_d    integral   288   'h116e4c701f0717f02f804ff01887a87035986df02082eff01c9118f02fd3b5f04399c4f
 # -----------------------------------------------------------------------------------------------------
 # 
+# feature a[0]: 0.140662
+# feature a[1]: 0.176578
+# feature a[2]: 0.225284
+# feature a[3]: 0.153786
+# feature a[4]: 0.241208
+# feature a[5]: 0.119907
+# feature a[6]: 0.080540
+# feature a[7]: 0.259731
+# feature a[8]: 0.116079
+# feature b[0]: 0.116227
+# feature b[1]: 0.153556
+# feature b[2]: 0.131104
+# feature b[3]: 0.110374
+# feature b[4]: 0.023344
+# feature b[5]: 0.063530
+# feature b[6]: 0.202225
+# feature b[7]: 0.138750
+# feature b[8]: 0.248240
+# feature c[0]: 0.160690
+# feature c[1]: 0.185923
+# feature c[2]: 0.032992
+# feature c[3]: 0.185091
+# feature c[4]: 0.138832
+# feature c[5]: 0.222110
+# feature c[6]: 0.307412
+# feature c[7]: 0.108202
+# feature c[8]: 0.090127
+# feature d[0]: 0.264065
+# feature d[1]: 0.217448
+# feature d[2]: 0.078742
+# feature d[3]: 0.340094
+# feature d[4]: 0.104914
+# feature d[5]: 0.060936
+# feature d[6]: 0.126985
+# feature d[7]: 0.120844
+# feature d[8]: 0.111090
 # UVM_INFO ../uvc/env/base_driver.sv(24) @ 206000: uvm_test_top.bus_env.master.driver [run_phase] Start driver: ---------------------------------------------------------------------------------------------------------------------------
 # Name                           Type       Size  Value                                                                      
 # ---------------------------------------------------------------------------------------------------------------------------
@@ -3675,7 +3872,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 210000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 210000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1270                                                                      
@@ -3691,46 +3888,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    206000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(86) @ 210000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Feature valid message
-# --------------------
-# Bin_1: 13f3b691063bb0b60d3d9e55014e8904002d2b0b03f1c24b0590aa2107a269fe0c403968, Bin_2: 0186d55001815db4236e32290438a341055c32dd0811df0d0241a34412f4f06706e98fef, Bin_3: 03fee46004ba6988053890910133c578039053522572edcf0201eb420f4f2d8c09e0afc0, Bin_4: 0320ec1c07aadcf809b6284705a3783d24a5bb3c0434569f04d262930d4cb95601585944
-# feature a[0]: 0.194343
-# feature b[0]: 0.145982
-# feature c[0]: 0.174507
-# feature d[0]: 0.064397
-# feature a[1]: 0.153417
-# feature b[1]: 0.241751
-# feature c[1]: 0.217251
-# feature d[1]: 0.202491
-# feature a[2]: 0.130985
-# feature b[2]: 0.083405
-# feature c[2]: 0.078671
-# feature d[2]: 0.121924
-# feature a[3]: 0.110274
-# feature b[3]: 0.157731
-# feature c[3]: 0.339786
-# feature d[3]: 0.113852
-# feature a[4]: 0.023323
-# feature b[4]: 0.128550
-# feature c[4]: 0.104819
-# feature d[4]: 0.336129
-# feature a[5]: 0.063473
-# feature b[5]: 0.114079
-# feature c[5]: 0.060881
-# feature d[5]: 0.131847
-# feature a[6]: 0.202041
-# feature b[6]: 0.330501
-# feature c[6]: 0.126870
-# feature d[6]: 0.173033
-# feature a[7]: 0.138624
-# feature b[7]: 0.068124
-# feature c[7]: 0.120735
-# feature d[7]: 0.153748
-# feature a[8]: 0.248015
-# feature b[8]: 0.068606
-# feature c[8]: 0.110989
-# feature d[8]: 0.098211
-# --------------------
+# cnt = 42
 # FIFO[0]: 0320ec1c07aadcf809b6284705a3783d24a5bb3c0434569f04d262930d4cb95601585944
 # FIFO[1]: 03fee46004ba6988053890910133c578039053522572edcf0201eb420f4f2d8c09e0afc0
 # FIFO[2]: 02a146c203ca661b1e98ee730ff901ec063d926d0b17934a005a38b60b31285901ff9760
@@ -3772,7 +3930,48 @@ Errors: 0, Warnings: 224
 # FIFO[38]: 10a46bb60655b71007517a7402e4561e1994926a012cf1a3005c7e400ad6c1ab11b07872
 # FIFO[39]: 046dd4570619ad230a57357b0400644e03a999e702bdac9d13065d4c066493c504232a02
 # FIFO[40]: 0186d55001815db4236e32290438a341055c32dd0811df0d0241a34412f4f06706e98fef
-# UVM_INFO ../uvc/env/base_scoreboard.sv(100) @ 210000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from mon -----------------------------------------------------------------------------------------------------
+# FIFO[41]: 13f3b691063bb0b60d3d9e55014e8904002d2b0b03f1c24b0590aa2107a269fe0c403968
+# UVM_INFO ../uvc/env/base_scoreboard.sv(96) @ 210000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Feature valid message
+# --------------------
+# Bin_1: 13f3b691063bb0b60d3d9e55014e8904002d2b0b03f1c24b0590aa2107a269fe0c403968, Bin_2: 0186d55001815db4236e32290438a341055c32dd0811df0d0241a34412f4f06706e98fef, Bin_3: 03fee46004ba6988053890910133c578039053522572edcf0201eb420f4f2d8c09e0afc0, Bin_4: 0320ec1c07aadcf809b6284705a3783d24a5bb3c0434569f04d262930d4cb95601585944
+# feature a[0]: 0.194343
+# feature a[1]: 0.153417
+# feature a[2]: 0.130985
+# feature a[3]: 0.110274
+# feature a[4]: 0.023323
+# feature a[5]: 0.063473
+# feature a[6]: 0.202041
+# feature a[7]: 0.138624
+# feature a[8]: 0.248015
+# feature b[0]: 0.145982
+# feature b[1]: 0.241751
+# feature b[2]: 0.083405
+# feature b[3]: 0.157731
+# feature b[4]: 0.128550
+# feature b[5]: 0.114079
+# feature b[6]: 0.330501
+# feature b[7]: 0.068124
+# feature b[8]: 0.068606
+# feature c[0]: 0.174507
+# feature c[1]: 0.217251
+# feature c[2]: 0.078671
+# feature c[3]: 0.339786
+# feature c[4]: 0.104819
+# feature c[5]: 0.060881
+# feature c[6]: 0.126870
+# feature c[7]: 0.120735
+# feature c[8]: 0.110989
+# feature d[0]: 0.064397
+# feature d[1]: 0.202491
+# feature d[2]: 0.121924
+# feature d[3]: 0.113852
+# feature d[4]: 0.336129
+# feature d[5]: 0.131847
+# feature d[6]: 0.173033
+# feature d[7]: 0.153748
+# feature d[8]: 0.098211
+# --------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(107) @ 210000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from mon -----------------------------------------------------------------------------------------------------
 # Name       Type       Size  Value                                                                    
 # -----------------------------------------------------------------------------------------------------
 # base_item  base_item  -     @1278                                                                    
@@ -3787,6 +3986,42 @@ Errors: 0, Warnings: 224
 #   fea_d    integral   288   'h3620e07043b000d0177df5f04b4af9301e170c701c4d7ff00f2cc5f02392ebb01b9c1ff
 # -----------------------------------------------------------------------------------------------------
 # 
+# feature a[0]: 0.116645
+# feature a[1]: 0.153417
+# feature a[2]: 0.130985
+# feature a[3]: 0.110274
+# feature a[4]: 0.023323
+# feature a[5]: 0.063473
+# feature a[6]: 0.202041
+# feature a[7]: 0.138624
+# feature a[8]: 0.248015
+# feature b[0]: 0.249451
+# feature b[1]: 0.241751
+# feature b[2]: 0.083405
+# feature b[3]: 0.157731
+# feature b[4]: 0.128550
+# feature b[5]: 0.114079
+# feature b[6]: 0.330501
+# feature b[7]: 0.068124
+# feature b[8]: 0.068606
+# feature c[0]: 0.265015
+# feature c[1]: 0.217251
+# feature c[2]: 0.078671
+# feature c[3]: 0.339786
+# feature c[4]: 0.104819
+# feature c[5]: 0.060881
+# feature c[6]: 0.126870
+# feature c[7]: 0.120735
+# feature c[8]: 0.110989
+# feature d[0]: 0.107851
+# feature d[1]: 0.202491
+# feature d[2]: 0.121924
+# feature d[3]: 0.113852
+# feature d[4]: 0.336129
+# feature d[5]: 0.131847
+# feature d[6]: 0.173033
+# feature d[7]: 0.153748
+# feature d[8]: 0.098211
 # UVM_INFO ../uvc/env/base_driver.sv(24) @ 210000: uvm_test_top.bus_env.master.driver [run_phase] Start driver: ---------------------------------------------------------------------------------------------------------------------------
 # Name                           Type       Size  Value                                                                      
 # ---------------------------------------------------------------------------------------------------------------------------
@@ -3807,7 +4042,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 214000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 214000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1290                                                                      
@@ -3823,46 +4058,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    210000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(86) @ 214000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Feature valid message
-# --------------------
-# Bin_1: 0186d55001815db4236e32290438a341055c32dd0811df0d0241a34412f4f06706e98fef, Bin_2: 046dd4570619ad230a57357b0400644e03a999e702bdac9d13065d4c066493c504232a02, Bin_3: 0320ec1c07aadcf809b6284705a3783d24a5bb3c0434569f04d262930d4cb95601585944, Bin_4: 12a5a51905ba52df0e8af91b008353ed13e3ef990329f277066595270832ca1f036dc80c
-# feature a[0]: 0.148835
-# feature b[0]: 0.115147
-# feature c[0]: 0.065656
-# feature d[0]: 0.104825
-# feature a[1]: 0.246476
-# feature b[1]: 0.143133
-# feature c[1]: 0.206450
-# feature d[1]: 0.162090
-# feature a[2]: 0.085036
-# feature b[2]: 0.246918
-# feature c[2]: 0.124308
-# feature d[2]: 0.143177
-# feature a[3]: 0.160814
-# feature b[3]: 0.093722
-# feature c[3]: 0.116077
-# feature d[3]: 0.100693
-# feature a[4]: 0.131063
-# feature b[4]: 0.108338
-# feature c[4]: 0.342700
-# feature d[4]: 0.252473
-# feature a[5]: 0.116309
-# feature b[5]: 0.113242
-# feature c[5]: 0.134424
-# feature d[5]: 0.040546
-# feature a[6]: 0.336962
-# feature b[6]: 0.182040
-# feature c[6]: 0.176416
-# feature d[6]: 0.215883
-# feature a[7]: 0.069456
-# feature b[7]: 0.139820
-# feature c[7]: 0.156754
-# feature d[7]: 0.135484
-# feature a[8]: 0.069947
-# feature b[8]: 0.119137
-# feature c[8]: 0.100131
-# feature d[8]: 0.244454
-# --------------------
+# cnt = 42
 # FIFO[0]: 12a5a51905ba52df0e8af91b008353ed13e3ef990329f277066595270832ca1f036dc80c
 # FIFO[1]: 0320ec1c07aadcf809b6284705a3783d24a5bb3c0434569f04d262930d4cb95601585944
 # FIFO[2]: 03fee46004ba6988053890910133c578039053522572edcf0201eb420f4f2d8c09e0afc0
@@ -3904,7 +4100,48 @@ Errors: 0, Warnings: 224
 # FIFO[38]: 0dd53f481081c4b9052453f1047613dd1250fc9f0135fadc038ffc67035a41be05f66944
 # FIFO[39]: 10a46bb60655b71007517a7402e4561e1994926a012cf1a3005c7e400ad6c1ab11b07872
 # FIFO[40]: 046dd4570619ad230a57357b0400644e03a999e702bdac9d13065d4c066493c504232a02
-# UVM_INFO ../uvc/env/base_scoreboard.sv(100) @ 214000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from mon -----------------------------------------------------------------------------------------------------
+# FIFO[41]: 0186d55001815db4236e32290438a341055c32dd0811df0d0241a34412f4f06706e98fef
+# UVM_INFO ../uvc/env/base_scoreboard.sv(96) @ 214000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Feature valid message
+# --------------------
+# Bin_1: 0186d55001815db4236e32290438a341055c32dd0811df0d0241a34412f4f06706e98fef, Bin_2: 046dd4570619ad230a57357b0400644e03a999e702bdac9d13065d4c066493c504232a02, Bin_3: 0320ec1c07aadcf809b6284705a3783d24a5bb3c0434569f04d262930d4cb95601585944, Bin_4: 12a5a51905ba52df0e8af91b008353ed13e3ef990329f277066595270832ca1f036dc80c
+# feature a[0]: 0.148835
+# feature a[1]: 0.246476
+# feature a[2]: 0.085036
+# feature a[3]: 0.160814
+# feature a[4]: 0.131063
+# feature a[5]: 0.116309
+# feature a[6]: 0.336962
+# feature a[7]: 0.069456
+# feature a[8]: 0.069947
+# feature b[0]: 0.115147
+# feature b[1]: 0.143133
+# feature b[2]: 0.246918
+# feature b[3]: 0.093722
+# feature b[4]: 0.108338
+# feature b[5]: 0.113242
+# feature b[6]: 0.182040
+# feature b[7]: 0.139820
+# feature b[8]: 0.119137
+# feature c[0]: 0.065656
+# feature c[1]: 0.206450
+# feature c[2]: 0.124308
+# feature c[3]: 0.116077
+# feature c[4]: 0.342700
+# feature c[5]: 0.134424
+# feature c[6]: 0.176416
+# feature c[7]: 0.156754
+# feature c[8]: 0.100131
+# feature d[0]: 0.104825
+# feature d[1]: 0.162090
+# feature d[2]: 0.143177
+# feature d[3]: 0.100693
+# feature d[4]: 0.252473
+# feature d[5]: 0.040546
+# feature d[6]: 0.215883
+# feature d[7]: 0.135484
+# feature d[8]: 0.244454
+# --------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(107) @ 214000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from mon -----------------------------------------------------------------------------------------------------
 # Name       Type       Size  Value                                                                    
 # -----------------------------------------------------------------------------------------------------
 # base_item  base_item  -     @1298                                                                    
@@ -3919,6 +4156,42 @@ Errors: 0, Warnings: 224
 #   fea_d    integral   288   'h141313f02f81caf0086e23f02f4b5ff023796af038c0e1f04e8cc4501ba5cef017077f7
 # -----------------------------------------------------------------------------------------------------
 # 
+# feature a[0]: 0.247775
+# feature a[1]: 0.246476
+# feature a[2]: 0.085036
+# feature a[3]: 0.160814
+# feature a[4]: 0.131063
+# feature a[5]: 0.116309
+# feature a[6]: 0.336962
+# feature a[7]: 0.069456
+# feature a[8]: 0.069947
+# feature b[0]: 0.068539
+# feature b[1]: 0.143133
+# feature b[2]: 0.246918
+# feature b[3]: 0.093722
+# feature b[4]: 0.108338
+# feature b[5]: 0.113242
+# feature b[6]: 0.182040
+# feature b[7]: 0.139820
+# feature b[8]: 0.119137
+# feature c[0]: 0.107126
+# feature c[1]: 0.206450
+# feature c[2]: 0.124308
+# feature c[3]: 0.116077
+# feature c[4]: 0.342700
+# feature c[5]: 0.134424
+# feature c[6]: 0.176416
+# feature c[7]: 0.156754
+# feature c[8]: 0.100131
+# feature d[0]: 0.089958
+# feature d[1]: 0.162090
+# feature d[2]: 0.143177
+# feature d[3]: 0.100693
+# feature d[4]: 0.252473
+# feature d[5]: 0.040546
+# feature d[6]: 0.215883
+# feature d[7]: 0.135484
+# feature d[8]: 0.244454
 # UVM_INFO ../uvc/env/base_driver.sv(24) @ 214000: uvm_test_top.bus_env.master.driver [run_phase] Start driver: ---------------------------------------------------------------------------------------------------------------------------
 # Name                           Type       Size  Value                                                                      
 # ---------------------------------------------------------------------------------------------------------------------------
@@ -3939,7 +4212,7 @@ Errors: 0, Warnings: 224
 #   sequencer                    string     37    uvm_test_top.bus_env.master.sequencer                                      
 # ---------------------------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(78) @ 218000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(84) @ 218000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from drv ----------------------------------------------------------------------------------------------------------
 # Name          Type       Size  Value                                                                      
 # ----------------------------------------------------------------------------------------------------------
 # req           base_item  -     @1310                                                                      
@@ -3955,46 +4228,7 @@ Errors: 0, Warnings: 224
 #   begin_time  time       64    214000                                                                     
 # ----------------------------------------------------------------------------------------------------------
 # 
-# UVM_INFO ../uvc/env/base_scoreboard.sv(86) @ 218000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Feature valid message
-# --------------------
-# Bin_1: 046dd4570619ad230a57357b0400644e03a999e702bdac9d13065d4c066493c504232a02, Bin_2: 10a46bb60655b71007517a7402e4561e1994926a012cf1a3005c7e400ad6c1ab11b07872, Bin_3: 12a5a51905ba52df0e8af91b008353ed13e3ef990329f277066595270832ca1f036dc80c, Bin_4: 058909e0034492d102d0092e15ff4e37026b04a20185ccf50ea8c65720893d330402b170
-# feature a[0]: 0.113897
-# feature b[0]: 0.235509
-# feature c[0]: 0.103687
-# feature d[0]: 0.112138
-# feature a[1]: 0.141579
-# feature b[1]: 0.184350
-# feature c[1]: 0.160330
-# feature d[1]: 0.319399
-# feature a[2]: 0.244237
-# feature b[2]: 0.033658
-# feature c[2]: 0.141623
-# feature d[2]: 0.214392
-# feature a[3]: 0.092704
-# feature b[3]: 0.060712
-# feature c[3]: 0.099600
-# feature d[3]: 0.069096
-# feature a[4]: 0.107162
-# feature b[4]: 0.283207
-# feature c[4]: 0.249731
-# feature d[4]: 0.087073
-# feature a[5]: 0.112012
-# feature b[5]: 0.095224
-# feature c[5]: 0.040106
-# feature d[5]: 0.262625
-# feature a[6]: 0.180063
-# feature b[6]: 0.151480
-# feature c[6]: 0.213539
-# feature d[6]: 0.093909
-# feature a[7]: 0.138301
-# feature b[7]: 0.140935
-# feature c[7]: 0.134013
-# feature d[7]: 0.101224
-# feature a[8]: 0.117843
-# feature b[8]: 0.228432
-# feature c[8]: 0.241800
-# feature d[8]: 0.131741
-# --------------------
+# cnt = 42
 # FIFO[0]: 058909e0034492d102d0092e15ff4e37026b04a20185ccf50ea8c65720893d330402b170
 # FIFO[1]: 12a5a51905ba52df0e8af91b008353ed13e3ef990329f277066595270832ca1f036dc80c
 # FIFO[2]: 0320ec1c07aadcf809b6284705a3783d24a5bb3c0434569f04d262930d4cb95601585944
@@ -4036,7 +4270,48 @@ Errors: 0, Warnings: 224
 # FIFO[38]: 056e4c790d1c2b88097dda6b05a33e4705ac6f8201fdad620eac374801379c0201fa70b4
 # FIFO[39]: 0dd53f481081c4b9052453f1047613dd1250fc9f0135fadc038ffc67035a41be05f66944
 # FIFO[40]: 10a46bb60655b71007517a7402e4561e1994926a012cf1a3005c7e400ad6c1ab11b07872
-# UVM_INFO ../uvc/env/base_scoreboard.sv(100) @ 218000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from mon -----------------------------------------------------------------------------------------------------
+# FIFO[41]: 046dd4570619ad230a57357b0400644e03a999e702bdac9d13065d4c066493c504232a02
+# UVM_INFO ../uvc/env/base_scoreboard.sv(96) @ 218000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Feature valid message
+# --------------------
+# Bin_1: 046dd4570619ad230a57357b0400644e03a999e702bdac9d13065d4c066493c504232a02, Bin_2: 10a46bb60655b71007517a7402e4561e1994926a012cf1a3005c7e400ad6c1ab11b07872, Bin_3: 12a5a51905ba52df0e8af91b008353ed13e3ef990329f277066595270832ca1f036dc80c, Bin_4: 058909e0034492d102d0092e15ff4e37026b04a20185ccf50ea8c65720893d330402b170
+# feature a[0]: 0.113897
+# feature a[1]: 0.141579
+# feature a[2]: 0.244237
+# feature a[3]: 0.092704
+# feature a[4]: 0.107162
+# feature a[5]: 0.112012
+# feature a[6]: 0.180063
+# feature a[7]: 0.138301
+# feature a[8]: 0.117843
+# feature b[0]: 0.235509
+# feature b[1]: 0.184350
+# feature b[2]: 0.033658
+# feature b[3]: 0.060712
+# feature b[4]: 0.283207
+# feature b[5]: 0.095224
+# feature b[6]: 0.151480
+# feature b[7]: 0.140935
+# feature b[8]: 0.228432
+# feature c[0]: 0.103687
+# feature c[1]: 0.160330
+# feature c[2]: 0.141623
+# feature c[3]: 0.099600
+# feature c[4]: 0.249731
+# feature c[5]: 0.040106
+# feature c[6]: 0.213539
+# feature c[7]: 0.134013
+# feature c[8]: 0.241800
+# feature d[0]: 0.112138
+# feature d[1]: 0.319399
+# feature d[2]: 0.214392
+# feature d[3]: 0.069096
+# feature d[4]: 0.087073
+# feature d[5]: 0.262625
+# feature d[6]: 0.093909
+# feature d[7]: 0.101224
+# feature d[8]: 0.131741
+# --------------------
+# UVM_INFO ../uvc/env/base_scoreboard.sv(107) @ 218000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Captured packet from mon -----------------------------------------------------------------------------------------------------
 # Name       Type       Size  Value                                                                    
 # -----------------------------------------------------------------------------------------------------
 # base_item  base_item  -     @1318                                                                    
@@ -4051,13 +4326,50 @@ Errors: 0, Warnings: 224
 #   fea_d    integral   288   'h2d87713038ae60f0148677f058a684701b58f0f00fe243f02119c3301f7ff5701cf509f
 # -----------------------------------------------------------------------------------------------------
 # 
+# feature a[0]: 0.069919
+# feature a[1]: 0.141579
+# feature a[2]: 0.244237
+# feature a[3]: 0.092704
+# feature a[4]: 0.107162
+# feature a[5]: 0.112012
+# feature a[6]: 0.180063
+# feature a[7]: 0.138301
+# feature a[8]: 0.117843
+# feature b[0]: 0.119090
+# feature b[1]: 0.184350
+# feature b[2]: 0.033658
+# feature b[3]: 0.060712
+# feature b[4]: 0.283207
+# feature b[5]: 0.095224
+# feature b[6]: 0.151480
+# feature b[7]: 0.140935
+# feature b[8]: 0.228432
+# feature c[0]: 0.091770
+# feature c[1]: 0.160330
+# feature c[2]: 0.141623
+# feature c[3]: 0.099600
+# feature c[4]: 0.249731
+# feature c[5]: 0.040106
+# feature c[6]: 0.213539
+# feature c[7]: 0.134013
+# feature c[8]: 0.241800
+# feature d[0]: 0.113114
+# feature d[1]: 0.319399
+# feature d[2]: 0.214392
+# feature d[3]: 0.069096
+# feature d[4]: 0.087073
+# feature d[5]: 0.262625
+# feature d[6]: 0.093909
+# feature d[7]: 0.101224
+# feature d[8]: 0.131741
 # UVM_INFO C:/questasim64_2024.1/verilog_src/uvm-1.2/src/base/uvm_objection.svh(1270) @ 218000: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+# UVM_INFO ../uvc/env/base_scoreboard.sv(129) @ 218000: uvm_test_top.bus_env.scoreboard0 [base_scoreboard] Extract phase
 # UVM_INFO ../uvc/tests/base_test.sv(47) @ 218000: uvm_test_top [base_test] ** TEST PASSED **
 # UVM_INFO C:/questasim64_2024.1/verilog_src/uvm-1.2/src/base/uvm_report_server.svh(847) @ 218000: reporter [UVM/REPORT/SERVER] 
 # --- UVM Report Summary ---
 # 
 # ** Report counts by severity
-# UVM_INFO :  122
+# UVM_INFO :  123
 # UVM_WARNING :    0
 # UVM_ERROR :    0
 # UVM_FATAL :    0
@@ -4066,7 +4378,7 @@ Errors: 0, Warnings: 224
 # [RNTST]     1
 # [TEST_DONE]     1
 # [UVMTOP]     1
-# [base_scoreboard]    66
+# [base_scoreboard]    67
 # [base_test]     1
 # [run_phase]    50
 # 
@@ -4075,9 +4387,9 @@ Errors: 0, Warnings: 224
 # Saving coverage database on exit...
 # qwavedb_dumpvars : Simulation ending at [0 218000] 0
 # 	 Class Filter File used = C:/questasim64_2024.1/win64/VisualizerRls/bin/../config/uvmclassfilter.txt
-# End time: 16:50:16 on Oct 20,2024, Elapsed time: 0:00:02
+# End time: 20:55:45 on Oct 20,2024, Elapsed time: 0:00:02
 # Errors: 0, Warnings: 6
-End time: 16:50:16 on Oct 20,2024, Elapsed time: 0:00:07
+End time: 20:55:45 on Oct 20,2024, Elapsed time: 0:00:09
 *** Summary *********************************************
     qrun: Errors:   0, Warnings:   0
     vlog: Errors:   0, Warnings:   0

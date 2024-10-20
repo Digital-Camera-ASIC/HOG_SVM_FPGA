@@ -57,8 +57,14 @@ class base_scoreboard extends uvm_scoreboard;
 
     for (int i = 0; i < 9; i++) begin
       $display($sformatf("feature a[%0d]: %f", i, temp_fea_a[i]));
+    end
+    for (int i = 0; i < 9; i++) begin
       $display($sformatf("feature b[%0d]: %f", i, temp_fea_b[i]));
+    end
+    for (int i = 0; i < 9; i++) begin
       $display($sformatf("feature c[%0d]: %f", i, temp_fea_c[i]));
+    end
+    for (int i = 0; i < 9; i++) begin
       $display($sformatf("feature d[%0d]: %f", i, temp_fea_d[i]));
     end
 
@@ -81,6 +87,10 @@ class base_scoreboard extends uvm_scoreboard;
       end
       fifo[0] = item.r_bin;
       cnt = cnt + 1;
+      $display($sformatf("cnt = %0d", cnt));
+      for (int i = 0; i < cnt; i++) begin
+        $display($sformatf("FIFO[%0d]: %h", i, fifo[i]));
+      end
       if (cnt == 42) begin
         // Tinh toan feature de so sanh
         `uvm_info(get_type_name(), "Feature valid message", UVM_LOW)
@@ -91,15 +101,33 @@ class base_scoreboard extends uvm_scoreboard;
         extract_feature(bin_1, bin_2, bin_3, bin_4);
         cnt = cnt - 1;
       end
-      for (int i = 0; i < cnt; i++) begin
-        $display($sformatf("FIFO[%0d]: %h", i, fifo[i]));
-      end
     endfunction
 
     virtual function void write_mon (base_item item);
       `uvm_info(get_type_name(), $sformatf("Captured packet from mon %s", item.sprint()), UVM_LOW)
+      for (int i = 0;i < 288; i = i + 32) begin
+        temp_fea_a[i] = 1.0 * (item.fea_a[i +: 32]) / 2**28;  //1.0*(bin_1[i +: 32]) / 2**16
+        temp_fea_b[i] = 1.0 * (item.fea_b[i +: 32]) / 2**28;
+        temp_fea_c[i] = 1.0 * (item.fea_c[i +: 32]) / 2**28;
+        temp_fea_d[i] = 1.0 * (item.fea_d[i +: 32]) / 2**28;
+      end
+      for (int i = 0; i < 9; i++) begin
+        $display($sformatf("feature a[%0d]: %f", i, temp_fea_a[i]));
+      end
+      for (int i = 0; i < 9; i++) begin
+        $display($sformatf("feature b[%0d]: %f", i, temp_fea_b[i]));
+      end
+      for (int i = 0; i < 9; i++) begin
+        $display($sformatf("feature c[%0d]: %f", i, temp_fea_c[i]));
+      end
+      for (int i = 0; i < 9; i++) begin
+        $display($sformatf("feature d[%0d]: %f", i, temp_fea_d[i]));
+      end
     endfunction
-            
+      
+    virtual function void extract_phase(uvm_phase phase);
+      `uvm_info(get_type_name(), "Extract phase", UVM_LOW)
+    endfunction
             
             
   endclass
