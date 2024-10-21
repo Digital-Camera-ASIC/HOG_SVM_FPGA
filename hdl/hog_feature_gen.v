@@ -50,13 +50,16 @@ module hog_feature_gen #(
     wire oc_valid; // one cell valid output
     wire i_valid_nor;
 
-    wire is_addr_valid;
+    reg is_addr_valid_r;
     wire i_valid_b;
     assign i_valid_nor = oc_valid & ol_valid;
     assign clear = !(|addr_fw); // addr_fw == 0
     
-    assign is_addr_valid = (address % buf_depth) != 0;
-    assign i_valid_b = is_addr_valid & p_valid;
+    always @(posedge clk) begin
+        if(!rst) is_addr_valid_r <= 1'b0;
+        else is_addr_valid_r <= (address % buf_depth) != 0;
+    end
+    assign i_valid_b = is_addr_valid_r & p_valid;
     serial_to_parallel #(
         .DATA_W     (9 * (BIN_I + BIN_F))
     ) u_serial_to_parallel (
