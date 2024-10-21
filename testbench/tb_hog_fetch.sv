@@ -1,13 +1,17 @@
 `timescale 1ns/1ps
-class ;
+class item_f;
     rand bit [7:0] pixel[96];
     bit [8*96 - 1 : 0] data;
+    constraint temp {
+        foreach(pixel[i])
+            pixel[i] == i;
+    };
     function new;
     endfunction
     function void post_randomize();
         data = 0;
-        for(int i = 0; i < 96; i++)
-            data = (data << 8) | pixel;
+        for(int i = 95; i >= 0; i--)
+            data = (data << 8) | pixel[i];
     endfunction
 endclass
 interface hog_fet_if(
@@ -18,7 +22,7 @@ interface hog_fet_if(
 
     clocking cb @(posedge clk);
         default input #1ps output #1ps;
-        output  data, i_valid;
+        output  data, ready;
     endclocking
 endinterface
 `define CLK_GEN(clk, cycle)\
@@ -42,14 +46,14 @@ module tb_hog_fetch;
     ) u_hog_fetch (
         .clk         (clk),
         .rst         (rst),
-        .ready       (ready),
-        .i_data      (i_data),
+        .ready       (vif.ready),
+        .i_data      (vif.data),
         .request     (),
         .o_valid     (),
         .addr_fw     ()
     );
 
-    item obj;
+    item_f obj;
     function void build_phase;
         obj = new;
         obj.randomize();
@@ -62,21 +66,11 @@ module tb_hog_fetch;
     
     task driver;
         for(int i = 0; i < 200; i++) begin
-            vif.cb.i_valid <= 1;
-            vif.cb.addr_fw <= 1;
-            vif.cb.bin <= {
-                obj.data[8],
-                obj.data[7],
-                obj.data[6],
-                obj.data[5],
-                obj.data[4],
-                obj.data[3],
-                obj.data[2],
-                obj.data[1],
-                obj.data[0]
-                };
-            obj.randomize();
             @vif.cb;
+            vif.cb.ready <= 1;
+            vif.cb.data <= obj.data;
+            obj.randomize();
+            
         end
     endtask
     task monitor;

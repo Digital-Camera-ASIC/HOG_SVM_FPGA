@@ -4,7 +4,8 @@ class base_driver extends uvm_driver #(base_item);
   `uvm_component_utils(base_driver)
   virtual dut_if vif;
   base_item b_item;
-    int flag_trans;
+  int cnt;
+
   function new(string name, uvm_component parent);
     super.new(name, parent);
     b_item = new();
@@ -13,7 +14,7 @@ class base_driver extends uvm_driver #(base_item);
 
   function void build_phase(uvm_phase phase);
     super.build_phase(phase);
-        flag_trans = 0;
+    cnt = 0;
     if (!uvm_config_db#(virtual dut_if)::get(this, "", "vif", vif))
       `uvm_fatal("NOVIF", {"virtual interface must be set for: ", get_full_name()})
   endfunction
@@ -35,6 +36,7 @@ class base_driver extends uvm_driver #(base_item);
       @vif.cb;
       vif.cb.i_valid <= 1;
       vif.cb.addr_fw <= 1;
+      vif.cb.addr <= cnt;
       vif.cb.bin <= {
         item.r_bin[8],
         item.r_bin[7],
@@ -46,6 +48,7 @@ class base_driver extends uvm_driver #(base_item);
         item.r_bin[1],
         item.r_bin[0]
       };
+      cnt++;
     endtask
 
 endclass : base_driver

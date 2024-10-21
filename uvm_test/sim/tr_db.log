@@ -65,3 +65,6 @@
   CREATE_STREAM @0 {NAME:sequence0 T:Transactions SCOPE:uvm_test_top.bus_env.master.sequencer STREAM:635}
   CREATE_STREAM @0 {NAME:sequence0 T:Transactions SCOPE:uvm_test_top.bus_env.master.sequencer STREAM:635}
   CREATE_STREAM @0 {NAME:sequence0 T:Transactions SCOPE:uvm_test_top.bus_env.master.sequencer STREAM:635}
+  CREATE_STREAM @0 {NAME:sequence0 T:Transactions SCOPE:uvm_test_top.bus_env.master.sequencer STREAM:635}
+  CREATE_STREAM @0 {NAME:sequence0 T:Transactions SCOPE:uvm_test_top.bus_env.master.sequencer STREAM:635}
+  CREATE_STREAM @0 {NAME:sequence0 T:Transactions SCOPE:uvm_test_top.bus_env.master.sequencer STREAM:635}

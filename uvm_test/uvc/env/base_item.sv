@@ -9,6 +9,7 @@ class base_item extends uvm_sequence_item;
   logic [287:0] fea_b;
   logic [287:0] fea_c;
   logic [287:0] fea_d;
+  logic [12:0]  addr;
 
     constraint limit {
       r_bin[0][31] == 0;
@@ -41,6 +42,7 @@ class base_item extends uvm_sequence_item;
     `uvm_field_int(fea_b, UVM_ALL_ON);
     `uvm_field_int(fea_c, UVM_ALL_ON);
     `uvm_field_int(fea_d, UVM_ALL_ON);
+    `uvm_field_int(addr, UVM_ALL_ON);
   `uvm_object_utils_end
 
   function new(string name = "base_item");

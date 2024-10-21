@@ -53,7 +53,7 @@ hog_feature_gen #(
     .clk        (clk),
     .rst        (rst),
     .addr_fw    (vif.addr_fw),
-    .address    (5),  
+    .address    (vif.addr),  
     .bin        (vif.bin),
     .i_valid    (vif.i_valid),
     .bid        (vif.bid),

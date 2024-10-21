@@ -21,7 +21,7 @@ module hog_feature_gen #(
     output                                  o_valid
 );
     
-    localparam p_data_w = 18 * (BIN_I + BIN_F); // 2 bin 1 bin la 9 * ...
+    localparam p_data_w = 18 * (BIN_I + BIN_F);
     localparam buf_depth = 39;
 
     reg  [BID_W - 1 : 0]                 bid_r;
@@ -55,7 +55,7 @@ module hog_feature_gen #(
     assign i_valid_nor = oc_valid & ol_valid;
     assign clear = !(|addr_fw); // addr_fw == 0
     
-    assign is_addr_valid = (address % (buf_depth + 1)) != 0;
+    assign is_addr_valid = (address % buf_depth) != 0;
     assign i_valid_b = is_addr_valid & p_valid;
     serial_to_parallel #(
         .DATA_W     (9 * (BIN_I + BIN_F))

@@ -63,9 +63,9 @@ module hog_fetch #(
         else addr_r <= addr_n;
     end
 
-    wire [PIX_W * 8 - 1 : 0] pixel[TOP_LEFT : BOT_RIGHT];
+    wire [PIX_W * 4 - 1 : 0] pixel[TOP_LEFT : BOT_RIGHT];
 
-    reg [PIX_W * 8 - 1 : 0] pixel_r[TOP_LEFT : BOT_RIGHT];
+    reg [PIX_W * 4 - 1 : 0] pixel_r[TOP_LEFT : BOT_RIGHT];
     // split data into pixel
     genvar i;
     generate
@@ -137,9 +137,9 @@ module hog_fetch #(
 
     assign pixel[BOT_RIGHT] = {
         i_data[(BOT_RIGHT - CELL + 1) * PIX_W - 1 : (BOT_RIGHT - CELL) * PIX_W], // top
-        i_data[(BOT_B + CELL - 3 + 1) * PIX_W - 1 : (BOT_B + CELL - 3) * PIX_W], // bottom
+        i_data[(BOT_B + CELL - 2 + 1) * PIX_W - 1 : (BOT_B + CELL - 2 + 1) * PIX_W], // bottom
         i_data[(BOT_RIGHT - 1 + 1) * PIX_W - 1 : (BOT_RIGHT - 1) * PIX_W], // left
-        i_data[(RIGHT_B + CELL - 3 + 1) * PIX_W - 1 : (RIGHT_B + CELL - 3 - 1) * PIX_W]  // right
+        i_data[(RIGHT_B + CELL - 2 + 1) * PIX_W - 1 : (RIGHT_B + CELL - 2 + 1) * PIX_W]  // right
     };
     //-------------
     
@@ -151,12 +151,12 @@ module hog_fetch #(
         if(!rst) begin
             addr_fw <= 0;
             valid_r <= 0;
-            for (id = TOP_LEFT; id < BOT_RIGHT; id = id + 1)
+            for (id = TOP_LEFT; id <= BOT_RIGHT; id = id + 1)
                 pixel_r[id] <= 0;
         end else begin
             addr_fw <= addr_r;
             valid_r <= ready;
-            for (id = TOP_LEFT; id < BOT_RIGHT; id = id + 1)
+            for (id = TOP_LEFT; id <= BOT_RIGHT; id = id + 1)
                 pixel_r[id] <= pixel[id];
         end
     end
