@@ -68,18 +68,11 @@ module tb_buffer;
     
     bit is_valid = 0;
     task driver;
-        
         for(int i = 0; i < 100; i++) begin
-            while(1) begin
-                vif.cb.i_valid <= is_valid;
-                if(is_valid)
-                    break;
-                is_valid = 1;
-                @vif.cb;
-            end
-            vif.cb.i_data <= d_array[i];
-            is_valid = 0;
             @vif.cb;
+            vif.cb.i_valid <= 1;
+            vif.cb.i_data <= d_array[i];
+           
         end
     endtask
     int cnt = 0;
