@@ -41,18 +41,18 @@ module hog_feature_gen #(
     wire clear;
     wire [p_data_w - 1 : 0] p_data;// parallel data
     wire p_valid;// parallel valid
-    wire [9 * (BIN_I + BIN_F) - 1 : 0] bin_a; // parallel data output
-    wire [9 * (BIN_I + BIN_F) - 1 : 0] bin_b; // parallel data output
-    wire [9 * (BIN_I + BIN_F) - 1 : 0] bin_c; // one line data output
-    wire [9 * (BIN_I + BIN_F) - 1 : 0] bin_d; // one line data output
+    wire [9 * (BIN_I + BIN_F) - 1 : 0] bin_a; // one line data output
+    wire [9 * (BIN_I + BIN_F) - 1 : 0] bin_b; // one line data output
+    wire [9 * (BIN_I + BIN_F) - 1 : 0] bin_c; // parallel data output
+    wire [9 * (BIN_I + BIN_F) - 1 : 0] bin_d; // parallel data output
     wire ol_valid; // one line valid output
 
-    wire oc_valid; // one cell valid output
     wire i_valid_nor;
 
     reg is_addr_valid_r;
+
     wire i_valid_b;
-    assign i_valid_nor = oc_valid & ol_valid;
+    assign i_valid_nor = i_valid_b & ol_valid;
     assign clear = !(|addr_fw); // addr_fw == 0
     
     always @(posedge clk) begin
@@ -74,7 +74,7 @@ module hog_feature_gen #(
 
     buffer #(
         .DATA_W     (p_data_w),
-        .DEPTH      (buf_depth)
+        .DEPTH      (buf_depth - 1)
     ) one_line_buffer (
         .clk        (clk),
         // the clock
@@ -91,26 +91,7 @@ module hog_feature_gen #(
         // output valid
         .o_valid    (ol_valid)
     );
-
-    buffer #(
-        .DATA_W     (p_data_w),
-        .DEPTH      (1)
-    ) one_cell_buffer (
-        .clk        (clk),
-        // the clock
-        .rst        (rst),
-        // reset signal
-        .i_data     (p_data),
-        // input data
-        .clear      (clear),
-        // clear counter
-        .i_valid    (i_valid_b),
-        // input valid signal
-        .o_data     ({bin_c, bin_d}),
-        // output data
-        // output valid
-        .o_valid    (oc_valid)
-    );
+    assign {bin_c, bin_d} = p_data;
 
     normalize #(
         .BIN_I      (BIN_I),

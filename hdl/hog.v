@@ -7,8 +7,6 @@ module hog #(
     parameter BIN_I =   16, // integer part of bin
     parameter BIN_F =   16, // fractional part of bin
     parameter ADDR_W =  10, // address width of cells
-    parameter BIN_I =   16, // integer part of bin
-    parameter BIN_F =   16, // fractional part of bin
     parameter BID_W =   13, // block id width
     parameter FEA_I =   4, // integer part of hog feature
     parameter FEA_F =   28 // fractional part of hog feature

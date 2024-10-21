@@ -21,10 +21,10 @@ interface hog_fea_if #(
     logic   [DATA_W - 1 : 0]    fea_b = 0;
     logic   [DATA_W - 1 : 0]    fea_c = 0;
     logic   [DATA_W - 1 : 0]    fea_d = 0;
-
+    logic   [13 - 1 : 0]    address = 0;
     clocking cb @(posedge clk);
         default input #1ps output #1ps;
-        output  bin, i_valid, addr_fw;
+        output  bin, i_valid, addr_fw, address;
         input   o_valid, bid, fea_a, fea_b, fea_c, fea_d;
     endclocking
 endinterface
@@ -61,7 +61,7 @@ module tb_hog_feature_gen;
         .clk        (clk),
         .rst        (rst),
         .addr_fw    (vif.addr_fw),
-        .address    (5),  
+        .address    (vif.address),  
         .bin        (vif.bin),
         .i_valid    (vif.i_valid),
         .bid        (vif.bid),
@@ -89,17 +89,8 @@ module tb_hog_feature_gen;
             @vif.cb;
             vif.cb.i_valid <= 1;
             vif.cb.addr_fw <= 1;
-            vif.cb.bin <= {
-                obj.data[8],
-                obj.data[7],
-                obj.data[6],
-                obj.data[5],
-                obj.data[4],
-                obj.data[3],
-                obj.data[2],
-                obj.data[1],
-                obj.data[0]
-                };
+            vif.cb.bin <= i;
+            vif.cb.address <= i;
             obj.randomize();
             @vif.cb;
         end
