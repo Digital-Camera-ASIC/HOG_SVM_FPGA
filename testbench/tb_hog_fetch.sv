@@ -42,7 +42,18 @@ module tb_hog_fetch;
         .ADDR_W      (10),
         .MAX_ADDR    (1199),
         .PIX_W       (8),
-        .PIX_N       (96)
+        // pixel width
+        .PIX_N       (96),
+        .MAG_I       (9),
+        // integer part of magnitude
+        .MAG_F       (16),
+        // fraction part of magnitude
+        .TAN_W       (19),
+        // tan width
+        .BIN_I       (16),
+        // integer part of bin
+        // fractional part of bin
+        .BIN_F       (16)
     ) u_hog_fetch (
         .clk         (clk),
         .rst         (rst),
@@ -50,9 +61,10 @@ module tb_hog_fetch;
         .i_data      (vif.data),
         .request     (),
         .o_valid     (),
-        .addr_fw     ()
+        .addr_fw     (),
+        .address     (),
+        .bin         ()
     );
-
     item_f obj;
     function void build_phase;
         obj = new;
