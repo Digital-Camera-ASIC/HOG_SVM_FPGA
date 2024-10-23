@@ -32,6 +32,7 @@ class base_scoreboard extends uvm_scoreboard;
   real sum;
   int cnt;
   int cnt_compare;
+  int cnt_debug = 0;
 
   function new(string name = "base_scoreboard", uvm_component parent);
     super.new(name, parent);
@@ -45,6 +46,8 @@ class base_scoreboard extends uvm_scoreboard;
       sum = sum + 1.0*(bin_3[i +: 32]) / 2**16;
       sum = sum + 1.0*(bin_4[i +: 32]) / 2**16;
     end
+    $display("index: %0d", cnt_debug++);
+    $display("Sum : %f", sum);
     for (int i = 0; i < 288; i = i + 32) begin
       temp_fea_a[i/32] = $sqrt( (1.0*(bin_1[i +: 32]) / 2**16) / sum );
       temp_fea_b[i/32] = $sqrt( (1.0*(bin_2[i +: 32]) / 2**16) / sum );
@@ -98,12 +101,14 @@ class base_scoreboard extends uvm_scoreboard;
       end
       if (cnt == 42) begin
         // Tinh toan feature de so sanh
-        `uvm_info(get_type_name(), "Feature valid message", UVM_LOW)
-        bin_1 = fifo[41];
-        bin_2 = fifo[40];
-        bin_3 = fifo[1];
-        bin_4 = fifo[0];
-        extract_feature(bin_1, bin_2, bin_3, bin_4);
+        if (item.addr % 40 != 0) begin
+          `uvm_info(get_type_name(), "Feature valid message", UVM_LOW)
+          bin_1 = fifo[41];
+          bin_2 = fifo[40];
+          bin_3 = fifo[1];
+          bin_4 = fifo[0];
+          extract_feature(bin_1, bin_2, bin_3, bin_4);
+        end
         cnt = cnt - 1;
       end
     endfunction
@@ -135,6 +140,7 @@ class base_scoreboard extends uvm_scoreboard;
     endfunction
       
     virtual function void extract_phase(uvm_phase phase);
+      $display("Tinh toan %f", $sqrt(40*1.0/(40+41+80+81)));
       `uvm_info(get_type_name(), "Extract phase", UVM_LOW)
       `uvm_info(get_type_name(), $sformatf("q_fea_a_golden size: %0d", q_fea_a_golden.size()), UVM_LOW)
       `uvm_info(get_type_name(), $sformatf("q_fea_b_golden size: %0d", q_fea_b_golden.size()), UVM_LOW)

@@ -9,7 +9,7 @@ class base_item extends uvm_sequence_item;
   logic [287:0] fea_b;
   logic [287:0] fea_c;
   logic [287:0] fea_d;
-  logic [12:0]  addr;
+  rand bit [12:0]  addr;
 
     constraint limit {
       r_bin[0][31] == 0;

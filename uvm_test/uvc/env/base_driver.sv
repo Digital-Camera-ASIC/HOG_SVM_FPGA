@@ -36,7 +36,7 @@ class base_driver extends uvm_driver #(base_item);
       @vif.cb;
       vif.cb.i_valid <= 1;
       vif.cb.addr_fw <= 1;
-      vif.cb.addr <= cnt;
+      vif.cb.addr <= item.addr;
       vif.cb.bin <= {
         item.r_bin[8],
         item.r_bin[7],
@@ -48,6 +48,8 @@ class base_driver extends uvm_driver #(base_item);
         item.r_bin[1],
         item.r_bin[0]
       };
+      // vif.cb.bin <= cnt;
+      // item.addr = cnt;
       cnt++;
     endtask
 

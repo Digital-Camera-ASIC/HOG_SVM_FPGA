@@ -65,7 +65,6 @@ class base_monitor extends uvm_monitor;
         trans_collected.fea_d = vif.cb.fea_d;
         trans_collected.bid = vif.cb.bid;
         trans_collected.o_valid = vif.o_valid;
-
         $cast(temp_trans, trans_collected.clone());
         temp_trans.set_id_info(trans_collected);
         item_collected_port.write(temp_trans);

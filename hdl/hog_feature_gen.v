@@ -22,7 +22,7 @@ module hog_feature_gen #(
 );
     
     localparam p_data_w = 18 * (BIN_I + BIN_F);
-    localparam buf_depth = 39;
+    localparam buf_depth = 40;
 
     reg  [BID_W - 1 : 0]                 bid_r;
     reg  [9 * (FEA_I + FEA_F) - 1 : 0]   fea_a_r;
