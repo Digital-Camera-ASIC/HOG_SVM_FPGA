@@ -62,7 +62,7 @@ class base_scoreboard extends uvm_scoreboard;
     q_fea_d_golden.push_back(temp_fea_d);
     $display($sformatf("--------------------"));
 
-    $display($sformatf("Bin_1: %h, Bin_2: %h, Bin_3: %h, Bin_4: %h", bin_1, bin_2, bin_3, bin_4));
+    $display($sformatf("Bin_1: %0d, Bin_2: %0d, Bin_3: %0d, Bin_4: %0d", bin_1, bin_2, bin_3, bin_4));
 
     for (int i = 0; i < 9; i++) begin
       $display($sformatf("feature a[%0d]: %f", i, temp_fea_a[i]));
@@ -103,10 +103,10 @@ class base_scoreboard extends uvm_scoreboard;
 
   virtual function void write_drv(base_item item);
     `uvm_info(get_type_name(), $sformatf("Captured packet from drv %s", item.sprint()), UVM_LOW)
-    if (item.addr_fw != now_addr_fw) begin
-      now_addr_fw = item.addr_fw;
-      reset_for_new_frame();
-    end
+    // if (item.addr_fw != now_addr_fw) begin
+    //   now_addr_fw = item.addr_fw;
+    //   reset_for_new_frame();
+    // end
     if (item.i_valid == 1) begin
       for (int j = 41; j > 0; j--) begin
         fifo[j] = fifo[j-1];
@@ -178,22 +178,22 @@ class base_scoreboard extends uvm_scoreboard;
       cnt_compare = cnt_compare + 1;
       $display($sformatf("Compare %0d", cnt_compare));
       for (int i = 0; i < 9; i++) begin
-        if ((q_fea_a_golden[0][i] - q_fea_a[0][i]) > 1e-4 || (q_fea_a_golden[0][i] - q_fea_a[0][i]) < -1e-4) begin
+        if ((q_fea_a_golden[0][i] - q_fea_a[0][i]) > 1e-6 || (q_fea_a_golden[0][i] - q_fea_a[0][i]) < -1e-6) begin
           `uvm_error(get_type_name(), $sformatf("Feature a[%0d] is not match", i))
           `uvm_info(get_type_name(), $sformatf("Golden: %f, Actual: %f", q_fea_a_golden[0][i],
                                                q_fea_a[0][i]), UVM_LOW)
         end
-        if ((q_fea_b_golden[0][i] - q_fea_b[0][i]) > 1e-4 || (q_fea_b_golden[0][i] - q_fea_b[0][i]) < -1e-4) begin
+        if ((q_fea_b_golden[0][i] - q_fea_b[0][i]) > 1e-6 || (q_fea_b_golden[0][i] - q_fea_b[0][i]) < -1e-6) begin
           `uvm_error(get_type_name(), $sformatf("Feature b[%0d] is not match", i))
           `uvm_info(get_type_name(), $sformatf("Golden: %f, Actual: %f", q_fea_b_golden[0][i],
                                                q_fea_b[0][i]), UVM_LOW)
         end
-        if ((q_fea_c_golden[0][i] - q_fea_c[0][i]) > 1e-4 || (q_fea_c_golden[0][i] - q_fea_c[0][i]) < -1e-4) begin
+        if ((q_fea_c_golden[0][i] - q_fea_c[0][i]) > 1e-6 || (q_fea_c_golden[0][i] - q_fea_c[0][i]) < -1e-6) begin
           `uvm_error(get_type_name(), $sformatf("Feature c[%0d] is not match", i))
           `uvm_info(get_type_name(), $sformatf("Golden: %f, Actual: %f", q_fea_c_golden[0][i],
                                                q_fea_c[0][i]), UVM_LOW)
         end
-        if ((q_fea_d_golden[0][i] - q_fea_d[0][i]) > 1e-4 || (q_fea_d_golden[0][i] - q_fea_d[0][i]) < -1e-4) begin
+        if ((q_fea_d_golden[0][i] - q_fea_d[0][i]) > 1e-6 || (q_fea_d_golden[0][i] - q_fea_d[0][i]) < -1e-6) begin
           `uvm_error(get_type_name(), $sformatf("Feature d[%0d] is not match", i))
           `uvm_info(get_type_name(), $sformatf("Golden: %f, Actual: %f", q_fea_d_golden[0][i],
                                                q_fea_d[0][i]), UVM_LOW)

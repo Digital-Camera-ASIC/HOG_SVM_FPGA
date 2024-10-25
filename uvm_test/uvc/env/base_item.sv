@@ -32,12 +32,12 @@ class base_item extends uvm_sequence_item;
     (r_bin[7] >> 16) + 
     (r_bin[8] >> 16) < 23079;
   }
-  constraint prob_ivalid {
-    i_valid dist {
-      1 := 9,
-      0 := 1
-    };
-  }
+  // constraint prob_ivalid {
+  //   i_valid dist {
+  //     1 := 9,
+  //     0 := 1
+  //   };
+  // }
 
   `uvm_object_utils_begin(base_item)
     `uvm_field_int(r_bin, UVM_ALL_ON);
@@ -55,5 +55,5 @@ class base_item extends uvm_sequence_item;
   function new(string name = "base_item");
     super.new(name);
   endfunction
-  
+
 endclass : base_item
