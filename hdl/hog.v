@@ -50,7 +50,7 @@ module hog #(
         .i_data     (i_data),
         .request    (request),
         .o_valid    (o_valid_sig),
-        .addr_fw    (addr_w_sig),
+        .addr_fw    (addr_fw_sig),
         .address    (address_sig),
         .bin        (bin_sig)
     );
