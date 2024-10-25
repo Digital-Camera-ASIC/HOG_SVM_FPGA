@@ -1,0 +1,12 @@
+# VISUALIZERROOT = 'C:/questasim64_2024.1/win64/VisualizerRls'
+# USER = 'datph'
+# Siemens software version 2024.1 (Build on Feb  1 2024)
+# Unpublished work. Copyright 2024 Siemens
+
+# visualizer {+source_file+C:\Users\datph\Downloads\setup_uvm_questasim\uvm_test\top.sv}
+# Window layout 'Default' saved in file: C:/Users/datph/.visualizer/layout.xml
+# Start  : Wed Oct 16 09:47:45 2024
+# End    : Wed Oct 16 09:47:50 2024
+# VMSize : 642174976
+# VMPeak : 642174976
+# MaxRSS : 174104576
