@@ -1,4 +1,4 @@
-vlog: Errors: 0, Warnings: 8
-vopt: Errors: 0, Warnings: 231
-vsim: Errors: 0, Warnings: 7
+vlog: Errors: 0, Warnings: 0
+vopt: Errors: 0, Warnings: 224
+vsim: Errors: 0, Warnings: 1
 qrun: Errors: 0, Warnings: 0

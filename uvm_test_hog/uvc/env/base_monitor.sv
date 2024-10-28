@@ -32,30 +32,6 @@ class base_monitor extends uvm_monitor;
   endfunction
 
   virtual task run_phase(uvm_phase phase);
-    // forever begin
-    //         if(!uvm_config_db #(int)::get(this, "", "test_phase", test_phase))
-    //             `uvm_fatal("NO_TEST_PHASE", {"IN :", get_type_name()})
-    // //        if (test_phase == 4) begin
-    //             if (coverage_enable) perform_transfer_coverage();
-    //             if (checks_enable) perform_transfer_checks();
-    //     //    end
-    //   @(posedge vif.apb_clk);
-    //        if (vif.apb_enable == 1 && vif.apb_ready == 1 && vif.apb_sel == 1) begin
-    //          trans_collected.apb_addr  = vif.apb_addr;
-    //          trans_collected.apb_write = vif.apb_write;
-    //                 trans_collected.apb_rdata = vif.apb_rdata;
-    //                 trans_collected.apb_wdata = vif.apb_wdata;
-    //                 trans_collected.apb_strb = vif.apb_strb;
-    //                 trans_collected.apb_slverr = vif.apb_slverr;
-    //                 $cast(temp_trans, trans_collected.clone());
-    //                 temp_trans.set_id_info(trans_collected);
-    //                 item_collected_port.write(temp_trans);
-    //           end
-    //             if (vif.apb_slverr == 1) begin
-    //                 if(vif.apb_write == 0) `uvm_warning($sformatf("Slave error in phase %0d", test_phase), $sformatf("Read unsuccessfully at Addr: %h",vif.apb_addr))
-    //                 else `uvm_warning($sformatf("Slave error in phase %0d", test_phase), $sformatf("Write unsuccessfully at Addr: %h",vif.apb_addr))
-    //   end
-    //         end
     forever begin
       @vif.cb;
       if (vif.cb.o_valid) begin
@@ -70,7 +46,6 @@ class base_monitor extends uvm_monitor;
         item_collected_port.write(temp_trans);
       end
     end
-
   endtask
 
 

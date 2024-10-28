@@ -14,12 +14,12 @@ import base_uvm_pkg::*;
 `include "fxp_zoom.v"
 `include "hog_feature_gen.v"
 `include "hog_fetch.v"
+`include "hog.v"
 `include "mag_cal_sbs.v"
+`include "mag_cal.v"
 `include "normalize.v"
 `include "serial_to_parallel.v"
 `include "tan_decode.v"
-`include "hog.v"
-`include "hog_fetch.v"
 
 `define CLK_GEN(clk, cycle)\
     initial begin\

@@ -33,30 +33,11 @@ class base_driver extends uvm_driver #(base_item);
 
   task drive_item(base_item item);
     wait (vif.rst);
+    wait (vif.request);
     @vif.cb;
-    // if (cnt == 20) vif.cb.i_valid <= 0;
-    // else vif.cb.i_valid <= 1;
-    vif.cb.i_valid <= item.i_valid;
-    // item.i_valid = vif.cb.i_valid;
-    // vif.cb.addr_fw <= 1;
-    if (cnt >= 100) vif.cb.addr_fw <= 2;
-    else vif.cb.addr_fw <= 1;
-    item.addr_fw = vif.cb.addr_fw;
-    vif.cb.addr <= item.addr;
-    vif.cb.bin <= {
-      item.r_bin[8],
-      item.r_bin[7],
-      item.r_bin[6],
-      item.r_bin[5],
-      item.r_bin[4],
-      item.r_bin[3],
-      item.r_bin[2],
-      item.r_bin[1],
-      item.r_bin[0]
-    };
-    // vif.cb.bin <= cnt;
-    // item.addr = cnt;
-    cnt++;
+    vif.cb.i_data <= item.data;
+    vif.cb.ready <= 1;
+
   endtask
 
 endclass : base_driver
