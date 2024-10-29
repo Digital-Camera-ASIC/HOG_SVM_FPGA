@@ -36,14 +36,14 @@ module mag_cal #(
 
     assign sum_of_square = mag_x**2 + mag_y**2;
 
-    assign negative = negative_x ^ negative_y;
+    assign negative = (negative_x ^ negative_y) & (top != bottom);
 
     fxp_div #(
         .WIIA        (PIX_W + 1),
         .WIFA        (0),
         .WIIB        (PIX_W + 1),
         .WIFB        (0),
-        .WOI         (TAN_W - 16),
+        .WOI         (TAN_W - 16 + 1),
         .WOF         (16)
     ) u_fxp_div (
         .dividend    ({1'b0, mag_y}),

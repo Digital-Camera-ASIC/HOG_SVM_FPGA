@@ -12,9 +12,13 @@ class init_read_seq extends uvm_sequence #(base_item);
     repeat (50) begin
       `uvm_do_with(req,
                    {
-                req.data == cnt;
-            })
-    // `uvm_do(req);
+                   req.data[72+:8] == cnt;
+                   req.data[0+:72] == 0;
+                   req.data[80+:688] == 0;
+                  //  req.data = cnt;
+                })
+
+      // `uvm_do(req);
 
       cnt++;
       // `uvm_do(req);
