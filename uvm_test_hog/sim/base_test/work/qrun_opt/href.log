@@ -1,4 +1,6 @@
 BEGIN 3:dut_if:fast__2:work
+    o_valid :  1:top:fast:work
+    ready :  1:top:fast:work
     request :  1:top:fast:work
     fea_b :  1:top:fast:work
     fea_d :  1:top:fast:work
@@ -6,8 +8,6 @@ BEGIN 3:dut_if:fast__2:work
     i_data :  1:top:fast:work
     bid :  1:top:fast:work
     fea_c :  1:top:fast:work
-    o_valid :  1:top:fast:work
-    ready :  1:top:fast:work
 END 
 BEGIN 3:dut_if:fast__1:work
     o_valid :  1:base_uvm_pkg:fast:work

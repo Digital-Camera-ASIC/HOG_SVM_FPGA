@@ -53,11 +53,11 @@ module mag_cal #(
 
     fxp_sqrt #(
         .WII         (sum_w + 1),
-        .WIF         (0),
+        .WIF         (MAG_F),
         .WOI         (MAG_I + 1),
         .WOF         (MAG_F)
     ) u_fxp_sqrt (
-        .in          ({1'b0, sum_of_square}),
+        .in          ({1'b0, sum_of_square, {16{1'b0}}}),
         .out         (magnitude)
     );
 endmodule

@@ -1,0 +1,72 @@
+import numpy as np
+
+import glob
+
+def sobel_extraction_Gx (matrix):
+    new_matrix = np.zeros((8, 8), dtype=np.float64)
+    matrix = matrix.astype(np.float64)
+    for i in range(8):
+        for j in range(8):
+            new_matrix[i, j] = matrix[i + 2, j + 1] - matrix[i, j + 1]
+    return new_matrix
+
+def sobel_extraction_Gy (matrix):
+    new_matrix = np.zeros((8, 8), dtype=np.float64)
+    matrix = matrix.astype(np.float64)
+    for i in range(8):
+        for j in range(8):
+            new_matrix[i, j] = matrix[i + 1, j + 2] - matrix[i + 1, j]
+    return new_matrix
+
+def compute_gx_gy(gx, gy):
+    magnitude = np.sqrt(gx**2 + gy**2)
+    orientation = np.arctan2(gy, gx) * (180 / np.pi)  #radients to degrees
+    # Convert negative angles
+    orientation = np.where(orientation < 0, orientation + 180, orientation)
+    return magnitude, orientation
+
+def compute_histogram(magnitude, orientation, nbins = 9):
+    bins_width = 180 / nbins
+    histogram = np.zeros(nbins)
+    # print(histogram)
+    for i in range(8):
+        for j in range(8):
+            histogram[int(orientation[i, j] / bins_width) % nbins] += magnitude[i, j]
+    return histogram
+
+count_greater_than_511 = 0
+max_val = 0
+min_val = 100
+
+def l2_normalize(vector, epsilon=0):
+    global max_val
+    global min_val
+    vector = vector / (np.sum(vector) + epsilon)
+    vector = np.sqrt(vector)
+    max_val = max(max_val, np.sum(vector))
+    return vector
+
+matrix = np.zeros((10, 10), dtype=np.float64)
+matrix[2][2] = 1
+matrix[2][3] = 1
+matrix[2][4] = 1
+matrix[2][5] = 1
+matrix[2][6] = 1
+matrix[2][7] = 1
+matrix[3][2] = 1
+# print(matrix)
+gx = sobel_extraction_Gx(matrix)
+gy = sobel_extraction_Gy(matrix)
+
+print(gx)
+print("-------")
+print(gy)
+print("-------")
+magnitude, orientation = compute_gx_gy(gx,gy)
+histogram = compute_histogram(magnitude, orientation)
+print (magnitude)
+print("-------")
+print(orientation)
+print("-------")
+print("------- histogram -------")
+print(histogram)
