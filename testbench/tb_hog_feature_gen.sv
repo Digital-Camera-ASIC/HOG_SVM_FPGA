@@ -92,7 +92,7 @@ module tb_hog_feature_gen;
             vif.cb.bin <= i;
             vif.cb.address <= i;
             obj.randomize();
-            
+            @vif.cb;
         end
     endtask
     task monitor;
@@ -106,7 +106,6 @@ module tb_hog_feature_gen;
     real temp = a*1.0/2**28;
     real gm = $sqrt(temp);
     initial begin
-        $display("gm: %.10f", gm);
         build_phase;
         reset_phase;
         fork
