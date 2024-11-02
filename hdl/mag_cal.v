@@ -43,7 +43,7 @@ module mag_cal #(
         .WIFA        (0),
         .WIIB        (PIX_W + 1),
         .WIFB        (0),
-        .WOI         (TAN_W - 16),
+        .WOI         (TAN_W - 16 + 1),
         .WOF         (16)
     ) u_fxp_div (
         .dividend    ({1'b0, mag_y}),
