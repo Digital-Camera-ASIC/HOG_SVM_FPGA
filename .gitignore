@@ -1,0 +1,8 @@
+*/visualizer*
+
+*.do
+*log*
+
+*.python
+
+.vscode
