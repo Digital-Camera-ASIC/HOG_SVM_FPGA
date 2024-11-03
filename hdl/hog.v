@@ -25,6 +25,7 @@ module hog #(
 );
     wire                                  o_valid_sig;
     wire [ADDR_W - 1 : 0]                 addr_fw_sig;
+    wire                                  valid_fw_sig;
     wire [ADDR_W - 1 : 0]                 address_sig;
     wire [9 * (BIN_I + BIN_F) - 1 : 0]    bin_sig;
 
@@ -51,6 +52,7 @@ module hog #(
         .request    (request),
         .o_valid    (o_valid_sig),
         .addr_fw    (addr_fw_sig),
+        .valid_fw   (valid_fw_sig),
         .address    (address_sig),
         .bin        (bin_sig)
     );
@@ -73,6 +75,7 @@ module hog #(
         .clk        (clk),
         .rst        (rst),
         .addr_fw    (addr_fw_sig),
+        .valid_fw   (valid_fw_sig),
         .address    (address_sig),
         .bin        (bin_sig),
         .i_valid    (o_valid_sig),

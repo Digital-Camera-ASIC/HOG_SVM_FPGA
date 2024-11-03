@@ -16,6 +16,7 @@ module hog_fetch #(
     output                                      request,
     output reg                                  o_valid,
     output reg [ADDR_W - 1 : 0]                 addr_fw,
+    output reg [ADDR_W - 1 : 0]                 valid_fw,
     output reg [ADDR_W - 1 : 0]                 address,
     output reg [9 * (BIN_I + BIN_F) - 1 : 0]    bin
 );
@@ -57,7 +58,6 @@ module hog_fetch #(
 
     wire [ADDR_W - 1 : 0] addr_n;
 
-    reg valid_r;
     reg valid_r1;
     reg [ADDR_W - 1 : 0] address_r;
     assign is_max_addr = (addr_r == MAX_ADDR);
@@ -159,12 +159,12 @@ module hog_fetch #(
     always @(posedge clk) begin
         if(!rst) begin
             addr_fw <= 0;
-            valid_r <= 0;
+            valid_fw <= 0;
             for (id = TOP_LEFT; id <= BOT_RIGHT; id = id + 1)
                 pixel_r[id] <= 0;
         end else begin
             addr_fw <= addr_r;
-            valid_r <= ready;
+            valid_fw <= ready;
             for (id = TOP_LEFT; id <= BOT_RIGHT; id = id + 1)
                 pixel_r[id] <= pixel[id];
         end
@@ -253,7 +253,7 @@ module hog_fetch #(
         end
         else begin
             bin <= {bin160_s, bin140_s, bin120_s, bin100_s, bin80_s, bin60_s, bin40_s, bin20_s, bin0_s};
-            valid_r1 <= valid_r;
+            valid_r1 <= valid_fw;
             o_valid <= valid_r1;
             address_r <= addr_fw;
             address <= address_r;

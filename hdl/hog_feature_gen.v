@@ -10,6 +10,7 @@ module hog_feature_gen #(
     input                                   clk,
     input                                   rst,
     input   [ADDR_W - 1 : 0]                addr_fw,
+    input                                   valid_fw,
     input   [ADDR_W - 1 : 0]                address,
     input   [9 * (BIN_I + BIN_F) - 1 : 0]   bin,
     input                                   i_valid,
@@ -53,7 +54,7 @@ module hog_feature_gen #(
 
     wire i_valid_b;
     assign i_valid_nor = i_valid_b & ol_valid;
-    assign clear = !(|addr_fw); // addr_fw == 0
+    assign clear = !(|addr_fw) & valid_fw; // addr_fw == 0
     
     always @(posedge clk) begin
         if(!rst) is_addr_valid_r <= 1'b0;
