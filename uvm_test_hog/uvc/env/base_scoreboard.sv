@@ -6,6 +6,8 @@ class base_scoreboard extends uvm_scoreboard;
   uvm_analysis_imp_mon #(base_item, base_scoreboard) mon_item_collected_export;
   `uvm_component_utils(base_scoreboard)
 
+  `define DEBUG 1
+
   parameter real pi = 3.141592653589793;
   
   logic [42][767:0] fifo;
@@ -61,6 +63,7 @@ class base_scoreboard extends uvm_scoreboard;
   int cnt;
   int cnt_compare;
   int cnt_debug = 0;
+  int cnt_addr = 0;
 
   function new(string name = "base_scoreboard", uvm_component parent);
     super.new(name, parent);
@@ -68,7 +71,7 @@ class base_scoreboard extends uvm_scoreboard;
 
   function void extract_feature(logic [767:0] data_1, logic [767:0] data_2, logic [767:0] data_3,
                                 logic [767:0] data_4);
-    $display($sformatf("data_1: %h, data_2: %h, data_3: %h, data_4: %h", data_1, data_2, data_3, data_4));
+    // $display($sformatf("data_1: %h, data_2: %h, data_3: %h, data_4: %h", data_1, data_2, data_3, data_4));
 
     //  DEBUG --------------------- 
     // $display($sformatf("x: %h, y: %h, z: %h, t: %h", data_1[8*0+:8], data_2[8*0+:8], data_3[8*0+:8], data_4[8*0+:8]));
@@ -86,7 +89,9 @@ class base_scoreboard extends uvm_scoreboard;
     // $display($sformatf("bieu thuc x - y: %f", data_4[8*2+:8] * 1.0 - data_4[8*0+:8]));
 
 
-      $display($sformatf("atan2(gy,gx) : %f", $atan2(-41, 0.01) * 180/ pi));
+      // $display($sformatf("atan2(gy,gx) : %f", $atan2(-41, 0.01) * 180/ pi));
+      // $display(int'($floor(90.0/20)));
+      // $display(int'(89.0/20));
      //---------------------         
 
 
@@ -148,17 +153,17 @@ class base_scoreboard extends uvm_scoreboard;
     // Gx_1[63] = data_1[95*8+:8] - data_1[62*8+:8];
 
     for (int i = 0; i < 8; i++) begin
-      Gx_1[i*8] = 1.0 * data_1[(i*8 + 1)*8+:8] - 1.0 * data_1[(80 + i)*8+:8];
-      Gx_2[i*8] = 1.0 * data_2[(i*8 + 1)*8+:8] - 1.0 * data_2[(80 + i)*8+:8];
-      Gx_3[i*8] = 1.0 * data_3[(i*8 + 1)*8+:8] - 1.0 * data_3[(80 + i)*8+:8];
-      Gx_4[i*8] = 1.0 * data_4[(i*8 + 1)*8+:8] - 1.0 * data_4[(80 + i)*8+:8];
+      Gx_1[i*8] = 1.0 * data_1[(i*8 + 1)*8+:8] - 1.0 * data_1[(72 + i)*8+:8];
+      Gx_2[i*8] = 1.0 * data_2[(i*8 + 1)*8+:8] - 1.0 * data_2[(72 + i)*8+:8];
+      Gx_3[i*8] = 1.0 * data_3[(i*8 + 1)*8+:8] - 1.0 * data_3[(72 + i)*8+:8];
+      Gx_4[i*8] = 1.0 * data_4[(i*8 + 1)*8+:8] - 1.0 * data_4[(72 + i)*8+:8];
     end
 
     for (int i = 0; i < 8; i++) begin
-      Gx_1[i*8 + 7] = 1.0 * data_1[(88 + i)*8+:8] - 1.0 * data_1[(6 + i*8)*8+:8];
-      Gx_2[i*8 + 7] = 1.0 * data_2[(88 + i)*8+:8] - 1.0 * data_2[(6 + i*8)*8+:8];
-      Gx_3[i*8 + 7] = 1.0 * data_3[(88 + i)*8+:8] - 1.0 * data_3[(6 + i*8)*8+:8];
-      Gx_4[i*8 + 7] = 1.0 * data_4[(88 + i)*8+:8] - 1.0 * data_4[(6 + i*8)*8+:8];
+      Gx_1[i*8 + 7] = 1.0 * data_1[(80 + i)*8+:8] - 1.0 * data_1[(6 + i*8)*8+:8];
+      Gx_2[i*8 + 7] = 1.0 * data_2[(80 + i)*8+:8] - 1.0 * data_2[(6 + i*8)*8+:8];
+      Gx_3[i*8 + 7] = 1.0 * data_3[(80 + i)*8+:8] - 1.0 * data_3[(6 + i*8)*8+:8];
+      Gx_4[i*8 + 7] = 1.0 * data_4[(80 + i)*8+:8] - 1.0 * data_4[(6 + i*8)*8+:8];
     end
 
     for (int i = 0; i < 8; i ++) begin
@@ -197,10 +202,10 @@ class base_scoreboard extends uvm_scoreboard;
     // Gy_1[63] = data_1[79*8+:8] - data_1[63*8+:8];
 
     for (int i = 0; i < 8; i++) begin
-      Gy_1[56 + i] = 1.0 * data_1[(72 + i)*8+:8] - 1.0 * data_1[(56 + i)*8+:8];
-      Gy_2[56 + i] = 1.0 * data_2[(72 + i)*8+:8] - 1.0 * data_2[(56 + i)*8+:8];
-      Gy_3[56 + i] = 1.0 * data_3[(72 + i)*8+:8] - 1.0 * data_3[(56 + i)*8+:8];
-      Gy_4[56 + i] = 1.0 * data_4[(72 + i)*8+:8] - 1.0 * data_4[(56 + i)*8+:8];
+      Gy_1[56 + i] = 1.0 * data_1[(88 + i)*8+:8] - 1.0 * data_1[(48 + i)*8+:8];
+      Gy_2[56 + i] = 1.0 * data_2[(88 + i)*8+:8] - 1.0 * data_2[(48 + i)*8+:8];
+      Gy_3[56 + i] = 1.0 * data_3[(88 + i)*8+:8] - 1.0 * data_3[(48 + i)*8+:8];
+      Gy_4[56 + i] = 1.0 * data_4[(88 + i)*8+:8] - 1.0 * data_4[(48 + i)*8+:8];
     end
 
     for (int i = 1; i < 7; i++) begin
@@ -241,28 +246,29 @@ class base_scoreboard extends uvm_scoreboard;
     end
     
     for (int i = 0; i < 64; i++) begin
-      bin_1[(int'(Orientation_1[i]) / 20) % 9] += Magnitude_1[i];
-      bin_2[(int'(Orientation_2[i]) / 20) % 9] += Magnitude_2[i];
-      bin_3[(int'(Orientation_3[i]) / 20) % 9] += Magnitude_3[i];
-      bin_4[(int'(Orientation_4[i]) / 20) % 9] += Magnitude_4[i];
+      bin_1[(int'($floor(Orientation_1[i] / 20))) % 9] += Magnitude_1[i];
+      bin_2[(int'($floor(Orientation_2[i] / 20))) % 9] += Magnitude_2[i];
+      bin_3[(int'($floor(Orientation_3[i] / 20))) % 9] += Magnitude_3[i];
+      bin_4[(int'($floor(Orientation_4[i] / 20))) % 9] += Magnitude_4[i];
     end
-
-    for (int i = 0; i < 64; i++) begin
-      $display($sformatf("Gx_1[%2d]: %10.6f, Gy_1[%2d]: %10.6f, Magnitude_1[%2d]: %10.6f, Orientation_1[%2d]: %10.6f", i, Gx_1[i], i, Gy_1[i], i, Magnitude_1[i], i, Orientation_1[i]));
-    end
-      $display(" ");
-    for (int i = 0; i < 64; i++) begin
-      $display($sformatf("Gx_2[%2d]: %10.6f, Gy_2[%2d]: %10.6f, Magnitude_2[%2d]: %10.6f, Orientation_2[%2d]: %10.6f", i, Gx_2[i], i, Gy_2[i], i, Magnitude_2[i], i, Orientation_2[i]));
-    end
-      $display(" ");
-    for (int i = 0; i < 64; i++) begin
-      $display($sformatf("Gx_3[%2d]: %10.6f, Gy_3[%2d]: %10.6f, Magnitude_3[%2d]: %10.6f, Orientation_3[%2d]: %10.6f", i, Gx_3[i], i, Gy_3[i], i, Magnitude_3[i], i, Orientation_3[i]));
-    end
-      $display(" ");
-    for (int i = 0; i < 64; i++) begin
-      $display($sformatf("Gx_4[%2d]: %10.6f, Gy_4[%2d]: %10.6f, Magnitude_4[%2d]: %10.6f, Orientation_4[%2d]: %10.6f", i, Gx_4[i], i, Gy_4[i], i, Magnitude_4[i], i, Orientation_4[i]));
-    end
-      $display(" ");
+    `ifdef DEBUG
+      for (int i = 0; i < 64; i++) begin
+        $display($sformatf("Gx_1[%2d]: %10.6f, Gy_1[%2d]: %10.6f, Magnitude_1[%2d]: %10.6f, Orientation_1[%2d]: %10.6f, In bin[%2d]: %10.6f", i, Gx_1[i], i, Gy_1[i], i, Magnitude_1[i], i, Orientation_1[i], i, int'(Orientation_1[i] / 20) % 9));
+      end
+        $display(" ");
+      for (int i = 0; i < 64; i++) begin
+        $display($sformatf("Gx_2[%2d]: %10.6f, Gy_2[%2d]: %10.6f, Magnitude_2[%2d]: %10.6f, Orientation_2[%2d]: %10.6f, In bin[%2d]: %10.6f", i, Gx_2[i], i, Gy_2[i], i, Magnitude_2[i], i, Orientation_2[i], i, int'(Orientation_2[i] / 20) % 9));
+      end
+        $display(" ");
+      for (int i = 0; i < 64; i++) begin
+        $display($sformatf("Gx_3[%2d]: %10.6f, Gy_3[%2d]: %10.6f, Magnitude_3[%2d]: %10.6f, Orientation_3[%2d]: %10.6f, In bin[%2d]: %10.6f", i, Gx_3[i], i, Gy_3[i], i, Magnitude_3[i], i, Orientation_3[i], i, int'(Orientation_3[i] / 20) % 9));
+      end
+        $display(" ");
+      for (int i = 0; i < 64; i++) begin
+        $display($sformatf("Gx_4[%2d]: %10.6f, Gy_4[%2d]: %10.6f, Magnitude_4[%2d]: %10.6f, Orientation_4[%2d]: %10.6f, In bin[%2d]: %10.6f", i, Gx_4[i], i, Gy_4[i], i, Magnitude_4[i], i, Orientation_4[i], i, int'(Orientation_4[i] / 20) % 9));
+      end
+        $display(" ");
+    `endif
 
     sum = 0;
     for (int i = 0; i < 9; i++) begin
@@ -271,21 +277,22 @@ class base_scoreboard extends uvm_scoreboard;
       sum += bin_3[i];
       sum += bin_4[i];
     end
-    for (int i = 0; i < 9; i++) begin
-      $display($sformatf("bin_1[%0d]: %f", i, bin_1[i]));
-    end
-    for (int i = 0; i < 9; i++) begin
-      $display($sformatf("bin_2[%0d]: %f", i, bin_2[i]));
-    end
-    for (int i = 0; i < 9; i++) begin
-      $display($sformatf("bin_3[%0d]: %f", i, bin_3[i]));
-    end
-    for (int i = 0; i < 9; i++) begin
-      $display($sformatf("bin_4[%0d]: %f", i, bin_4[i]));
-    end
+    `ifdef DEBUG
+      for (int i = 0; i < 9; i++) begin
+        $display($sformatf("bin_1[%0d]: %f", i, bin_1[i]));
+      end
+      for (int i = 0; i < 9; i++) begin
+        $display($sformatf("bin_2[%0d]: %f", i, bin_2[i]));
+      end
+      for (int i = 0; i < 9; i++) begin
+        $display($sformatf("bin_3[%0d]: %f", i, bin_3[i]));
+      end
+      for (int i = 0; i < 9; i++) begin
+        $display($sformatf("bin_4[%0d]: %f", i, bin_4[i]));
+      end
 
-    $display($sformatf("sum: %f", sum));
-
+      $display($sformatf("sum: %f", sum));
+    `endif
     for (int i = 0; i < 9; i++) begin
       temp_fea_a[i] = $sqrt(bin_1[i] / sum);
       temp_fea_b[i] = $sqrt(bin_2[i] / sum);
@@ -293,21 +300,23 @@ class base_scoreboard extends uvm_scoreboard;
       temp_fea_d[i] = $sqrt(bin_4[i] / sum);
     end
 
-    for (int i = 0; i < 9; i++) begin
-      $display($sformatf("temp_fea_a[%0d]: %f", i, temp_fea_a[i]));
-    end
-    $display(" ");
-    for (int i = 0; i < 9; i++) begin
-      $display($sformatf("temp_fea_b[%0d]: %f", i, temp_fea_b[i]));
-    end
-    $display(" ");
-    for (int i = 0; i < 9; i++) begin
-      $display($sformatf("temp_fea_c[%0d]: %f", i, temp_fea_c[i]));
-    end
-    $display(" ");
-    for (int i = 0; i < 9; i++) begin
-      $display($sformatf("temp_fea_d[%0d]: %f", i, temp_fea_d[i]));
-    end
+    `ifdef DEBUG
+      for (int i = 0; i < 9; i++) begin
+        $display($sformatf("temp_fea_a[%0d]: %f", i, temp_fea_a[i]));
+      end
+      $display(" ");
+      for (int i = 0; i < 9; i++) begin
+        $display($sformatf("temp_fea_b[%0d]: %f", i, temp_fea_b[i]));
+      end
+      $display(" ");
+      for (int i = 0; i < 9; i++) begin
+        $display($sformatf("temp_fea_c[%0d]: %f", i, temp_fea_c[i]));
+      end
+      $display(" ");
+      for (int i = 0; i < 9; i++) begin
+        $display($sformatf("temp_fea_d[%0d]: %f", i, temp_fea_d[i]));
+      end
+    `endif 
 
     q_fea_a_golden.push_back(temp_fea_a);
     q_fea_b_golden.push_back(temp_fea_b);
@@ -343,16 +352,17 @@ class base_scoreboard extends uvm_scoreboard;
     end
     if (cnt == 42) begin
       // Tinh toan feature de so sanh
-      // if (item.addr % 40 != 0) begin
-      `uvm_info(get_type_name(), "Feature valid message", UVM_LOW)
-      data_1 = fifo[41];
-      data_2 = fifo[40];
-      data_3 = fifo[1];
-      data_4 = fifo[0];
-      extract_feature(data_1, data_2, data_3, data_4);
-      // end
+      if (cnt_addr % 40 != 0) begin
+        `uvm_info(get_type_name(), "Feature valid message", UVM_LOW)
+        data_1 = fifo[41];
+        data_2 = fifo[40];
+        data_3 = fifo[1];
+        data_4 = fifo[0];
+        extract_feature(data_1, data_2, data_3, data_4);
+      end
       cnt = cnt - 1;
     end
+    cnt_addr++;
     // end
   endfunction
 

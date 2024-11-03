@@ -79,7 +79,21 @@ module top;
       .fea_d  (vif.fea_d),
       .o_valid(vif.o_valid)
   );
-
+  always @ (posedge clk) begin
+    // forever
+    #1;
+    if(top.u_hog.u_hog_fetch.valid_r1) begin
+      $display("HEHE %f", 1.0 * top.u_hog.u_hog_fetch.bin0_s / (2**16));
+      $display("HEHE %f", 1.0 * top.u_hog.u_hog_fetch.bin20_s / (2**16));
+      $display("HEHE %f", 1.0 * top.u_hog.u_hog_fetch.bin40_s / (2**16));
+      $display("HEHE %f", 1.0 * top.u_hog.u_hog_fetch.bin60_s / (2**16));
+      $display("HEHE %f", 1.0 * top.u_hog.u_hog_fetch.bin80_s / (2**16));
+      $display("HEHE %f", 1.0 * top.u_hog.u_hog_fetch.bin100_s / (2**16));
+      $display("HEHE %f", 1.0 * top.u_hog.u_hog_fetch.bin120_s / (2**16));
+      $display("HEHE %f", 1.0 * top.u_hog.u_hog_fetch.bin140_s / (2**16));
+      $display("HEHE %f \n", 1.0 *top.u_hog.u_hog_fetch.bin160_s / (2**16));
+    end
+  end
   initial begin
     uvm_config_db#(virtual dut_if)::set(null, "*", "vif", vif);
     run_test();
