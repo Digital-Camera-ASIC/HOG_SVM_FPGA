@@ -140,7 +140,7 @@ module hog_fetch #(
     assign pixel[BOT_LEFT] = {
         i_data[(BOT_LEFT - CELL + 1) * PIX_W - 1 : (BOT_LEFT - CELL) * PIX_W], // top
         i_data[(BOT_B - 1 + 1) * PIX_W - 1 : (BOT_B - 1) * PIX_W], // bottom
-        i_data[(LEFT_B - 1 + 1) * PIX_W - 1 : (LEFT_B - 1) * PIX_W], // left
+        i_data[(LEFT_B + CELL - 2 + 1) * PIX_W - 1 : (LEFT_B + CELL - 2) * PIX_W], // left
         i_data[(BOT_LEFT + 1 + 1) * PIX_W - 1 : (BOT_LEFT + 1) * PIX_W]  // right
     };
 

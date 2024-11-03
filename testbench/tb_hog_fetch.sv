@@ -40,7 +40,6 @@ module tb_hog_fetch;
 
     hog_fetch #(
         .ADDR_W      (10),
-        .MAX_ADDR    (1199),
         .PIX_W       (8),
         // pixel width
         .PIX_N       (96),
