@@ -78,7 +78,11 @@ module tb_hog_fetch;
     task driver;
         for(int i = 0; i < 200; i++) begin
             @vif.cb;
-            vif.cb.ready <= 1;
+            if(i % 3)
+                vif.cb.ready <= 0;
+            else
+                vif.cb.ready <= 1;
+            
             vif.cb.data <= obj.data;
             obj.randomize();
             

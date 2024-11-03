@@ -9,7 +9,7 @@ module serial_to_parallel #(
     input                               i_valid,
     input                               clear,
     output  [DATA_W * 2 - 1 : 0]        o_data,
-    output reg                          o_valid
+    output                          o_valid
 );
     wire    [DATA_W - 1 : 0]            _data [0 : 2];
 
@@ -17,13 +17,12 @@ module serial_to_parallel #(
     reg o_valid_r;
     always @(posedge clk) begin
         if (!rst) begin
-            o_valid <= 0;
             o_valid_r <= 0;
         end else begin
-            o_valid <= o_valid_r | o_valid_ctr;
             o_valid_r <= o_valid_ctr;
         end
     end
+    assign o_valid = o_valid_r | o_valid_ctr;
     assign _data[0] = i_data;
     assign o_data = {_data[2], _data[1]};
 
