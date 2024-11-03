@@ -1,5 +1,5 @@
 module hog_feature_gen #(
-    parameter ADDR_W =  10, // address width of cells
+    parameter ADDR_W =  11, // address width of cells
     parameter BIN_I =   16, // integer part of bin
     parameter BIN_F =   16, // fractional part of bin
     parameter BID_W =   13, // block id width

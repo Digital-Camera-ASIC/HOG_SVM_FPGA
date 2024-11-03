@@ -1,5 +1,5 @@
 module hog_fetch #(
-    parameter ADDR_W = 10,
+    parameter ADDR_W = 11,
     parameter PIX_W = 8, // pixel width
     parameter PIX_N = 96,
     parameter MAG_I = 9, // integer part of magnitude
