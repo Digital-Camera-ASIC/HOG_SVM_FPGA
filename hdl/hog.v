@@ -42,8 +42,8 @@ module hog #(
         // tan width
         .BIN_I      (BIN_I),
         // integer part of bin
-        // fractional part of bin
         .BIN_F      (BIN_F)
+        // fractional part of bin
     ) u_hog_fetch (
         .clk        (clk),
         .rst        (rst),
@@ -68,9 +68,8 @@ module hog #(
         // block id width
         .FEA_I      (FEA_I),
         // integer part of hog feature
-        // fractional part of hog feature
-
         .FEA_F      (FEA_F)
+        // fractional part of hog feature
     ) u_hog_feature_gen (
         .clk        (clk),
         .rst        (rst),

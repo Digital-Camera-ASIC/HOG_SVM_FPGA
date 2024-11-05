@@ -17,7 +17,7 @@ module svm_pe #(
     input                                       i_valid,
     output reg [(FEA_I + FEA_F) - 1 : 0]        o_data
 );
-    localpara FEA_N = FEA_I + FEA_F;
+    localparam FEA_N = FEA_I + FEA_F;
 
     wire [FEA_N - 1 : 0] product [0 : 35];
     reg [FEA_N - 1 : 0] sum_of_product;
@@ -27,14 +27,14 @@ module svm_pe #(
         for(i = 0; i < 9; i = i + 1) begin
             assign product[i] = fea_a[(i + 1) * FEA_N - 1 : i * FEA_N] * coef_a[(i + 1) * FEA_N - 1 : i * FEA_N];
         end
-        for(i = 10; i < 18; i = i + 1) begin
-            assign product[i] = fea_b[(i - 10 + 1) * FEA_N - 1 : i * FEA_N] * coef_b[(i - 10 + 1) * FEA_N - 1 : i * FEA_N];
+        for(i = 9; i < 18; i = i + 1) begin
+            assign product[i] = fea_b[(i - 9 + 1) * FEA_N - 1 : (i - 9) * FEA_N] * coef_b[(i - 9 + 1) * FEA_N - 1 : (i - 9) * FEA_N];
         end
-        for(i = 19; i < 27; i = i + 1) begin
-            assign product[i] = fea_c[(i - 19 + 1) * FEA_N - 1 : i * FEA_N] * coef_c[(i - 19 + 1) * FEA_N - 1 : i * FEA_N];
+        for(i = 18; i < 27; i = i + 1) begin
+            assign product[i] = fea_c[(i - 18 + 1) * FEA_N - 1 : (i - 18) * FEA_N] * coef_c[(i - 18 + 1) * FEA_N - 1 : (i - 18) * FEA_N];
         end
-        for(i = 28; i < 36; i = i + 1) begin
-            assign product[i] = fea_d[(i - 28 + 1) * FEA_N - 1 : i * FEA_N] * coef_d[(i - 28 + 1) * FEA_N - 1 : i * FEA_N];
+        for(i = 27; i < 36; i = i + 1) begin
+            assign product[i] = fea_d[(i - 27 + 1) * FEA_N - 1 : (i - 27) * FEA_N] * coef_d[(i - 27 + 1) * FEA_N - 1 : (i - 27) * FEA_N];
         end
     endgenerate
 
