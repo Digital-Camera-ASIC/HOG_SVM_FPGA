@@ -13,6 +13,7 @@ module svm #(
     input                                       i_valid,
     output                                      is_person,
     output                                      o_valid,
+    output [(FEA_I + FEA_F) - 1 : 0]            result,
     output [SW_W - 1 : 0]                       sw_id // slide window index
 );
     localparam COE_I = FEA_I; // integer part of svm coefficent
@@ -161,4 +162,5 @@ module svm #(
         .sw_id      (sw_id)
     );
     assign is_person = ~o_data[7 * 15 - 1][COE_W - 1];
+    assign result = o_data[7 * 15 - 1];
 endmodule
