@@ -46,7 +46,7 @@ module detect_person#(
         .ready      (ready),
         .i_data     (i_data),
         .request    (request),
-        .bid        (sw_id),
+        .bid        (),
         .fea_a      (fea_a_sig),
         .fea_b      (fea_b_sig),
         .fea_c      (fea_c_sig),
