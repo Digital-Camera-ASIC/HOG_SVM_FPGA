@@ -29,7 +29,7 @@ module tb_svm;
         wait(i_valid);
         for(int i = 0; i < 4000; i++) begin
             foreach (fea[j]) begin
-                fea[j] = {9{i[31:0]}}; 
+                fea[j] = {9{i[31:0] << 8}}; 
             end
             @(posedge clk);
         end

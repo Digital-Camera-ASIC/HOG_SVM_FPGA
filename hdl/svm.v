@@ -21,7 +21,7 @@ module svm #(
     localparam COE_W = COE_I + COE_F;
     localparam COE_N = 7 * 15 * 4; // the number of svm coefficent
 
-    localparam BUF_DEPTH = 32;
+    localparam BUF_DEPTH = 33;
     reg [COE_W * 9 - 1 : 0] svm_coef [0 : COE_N - 1];
     
     wire [COE_W - 1 : 0] o_data [0 : 7 * 15 - 1];
@@ -30,7 +30,7 @@ module svm #(
     initial begin
         //$read_mem();
         for(id = 0; id < COE_N; id = id + 1)
-            svm_coef[id] <= {9{id[31:0]}};
+            svm_coef[id] <= {9{id[31:0]<<8}};
     end
     wire [COE_W - 1 : 0] o_data_b [0:13];
     genvar i;
