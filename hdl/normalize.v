@@ -1,7 +1,6 @@
 module normalize #(
     parameter BIN_I =   16, // integer part of bin
     parameter BIN_F =   16, // fractional part of bin
-    parameter BID_W =   13, // block id width
     parameter FEA_I =   4, // integer part of hog feature
     parameter FEA_F =   28 // fractional part of hog feature
 ) (
@@ -17,12 +16,8 @@ module normalize #(
     output  [9 * (FEA_I + FEA_F) - 1 : 0]   fea_b,
     output  [9 * (FEA_I + FEA_F) - 1 : 0]   fea_c,
     output  [9 * (FEA_I + FEA_F) - 1 : 0]   fea_d,
-    output  [BID_W - 1 : 0]                 bid,
     output                                  o_valid
 );
-    localparam max_bid = 4660;
-    reg     [BID_W - 1 : 0] cnt;
-    wire    [BID_W - 1 : 0] n_cnt;
     // bin mapping
     // bin_a: 8 to 0
     // bin b: 17 to 9
@@ -104,15 +99,6 @@ module normalize #(
         sqrt_out[29], sqrt_out[28], sqrt_out[27]};
 
     assign o_valid = i_valid;
-    assign bid = cnt;
     //---------------------
 
-    assign n_cnt =
-        (cnt == 4660 || clear) ? {BID_W{1'b0}} :
-        (i_valid) ? cnt + 1'b1 : cnt;
-
-    always @(posedge clk) begin
-        if(!rst) cnt <= {BID_W{1'b0}};
-        else cnt <= n_cnt;
-    end
 endmodule
