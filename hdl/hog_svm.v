@@ -1,4 +1,4 @@
-module detect_person#(
+module hog_svm#(
     parameter PIX_W = 8, // pixel width
     parameter PIX_N = 96, // the number of pixels
     parameter MAG_I = 9, // integer part of magnitude
@@ -7,7 +7,6 @@ module detect_person#(
     parameter BIN_I =   16, // integer part of bin
     parameter BIN_F =   16, // fractional part of bin
     parameter ADDR_W =  11, // address width of cells
-    parameter BID_W =   13, // block id width
     parameter FEA_I =   4, // integer part of hog feature
     parameter FEA_F =   28, // fractional part of hog feature
     parameter SW_W  = 11 // slide window width
@@ -37,7 +36,6 @@ module detect_person#(
         .BIN_I      (BIN_I),
         .BIN_F      (BIN_F),
         .ADDR_W     (ADDR_W),
-        .BID_W      (BID_W),
         .FEA_I      (FEA_I),
         .FEA_F      (FEA_F)
     ) u_hog (
@@ -46,7 +44,6 @@ module detect_person#(
         .ready      (ready),
         .i_data     (i_data),
         .request    (request),
-        .bid        (),
         .fea_a      (fea_a_sig),
         .fea_b      (fea_b_sig),
         .fea_c      (fea_c_sig),
