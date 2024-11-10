@@ -7,7 +7,6 @@ module hog #(
     parameter BIN_I =   16, // integer part of bin
     parameter BIN_F =   16, // fractional part of bin
     parameter ADDR_W =  11, // address width of cells
-    parameter BID_W =   13, // block id width
     parameter FEA_I =   4, // integer part of hog feature
     parameter FEA_F =   28 // fractional part of hog feature
 ) (
@@ -16,7 +15,6 @@ module hog #(
     input                                       ready,
     input   [PIX_W * PIX_N - 1 : 0]             i_data,
     output                                      request,
-    output  [BID_W - 1 : 0]                     bid,
     output  [9 * (FEA_I + FEA_F) - 1 : 0]       fea_a,
     output  [9 * (FEA_I + FEA_F) - 1 : 0]       fea_b,
     output  [9 * (FEA_I + FEA_F) - 1 : 0]       fea_c,
@@ -64,8 +62,6 @@ module hog #(
         // integer part of bin
         .BIN_F      (BIN_F),
         // fractional part of bin
-        .BID_W      (BID_W),
-        // block id width
         .FEA_I      (FEA_I),
         // integer part of hog feature
         .FEA_F      (FEA_F)
@@ -78,7 +74,6 @@ module hog #(
         .address    (address_sig),
         .bin        (bin_sig),
         .i_valid    (o_valid_sig),
-        .bid        (bid),
         .fea_a      (fea_a),
         .fea_b      (fea_b),
         .fea_c      (fea_c),
