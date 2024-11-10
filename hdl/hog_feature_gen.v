@@ -100,14 +100,11 @@ module hog_feature_gen #(
         // fractional part of hog feature
         .FEA_F      (FEA_F)
     ) u_normalize (
-        .clk        (clk),
-        .rst        (rst),
         .bin_a      (bin_a),
         .bin_b      (bin_b),
         .bin_c      (bin_c),
         .bin_d      (bin_d),
         .i_valid    (i_valid_nor),
-        .clear      (clear),
         .fea_a      (fea_a_w),
         .fea_b      (fea_b_w),
         .fea_c      (fea_c_w),

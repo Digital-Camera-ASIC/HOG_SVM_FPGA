@@ -4,14 +4,11 @@ module normalize #(
     parameter FEA_I =   4, // integer part of hog feature
     parameter FEA_F =   28 // fractional part of hog feature
 ) (
-    input                                   clk,
-    input                                   rst,
     input   [9 * (BIN_I + BIN_F) - 1 : 0]   bin_a,
     input   [9 * (BIN_I + BIN_F) - 1 : 0]   bin_b,
     input   [9 * (BIN_I + BIN_F) - 1 : 0]   bin_c,
     input   [9 * (BIN_I + BIN_F) - 1 : 0]   bin_d,
     input                                   i_valid,
-    input                                   clear,
     output  [9 * (FEA_I + FEA_F) - 1 : 0]   fea_a,
     output  [9 * (FEA_I + FEA_F) - 1 : 0]   fea_b,
     output  [9 * (FEA_I + FEA_F) - 1 : 0]   fea_c,
