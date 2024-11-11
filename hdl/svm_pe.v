@@ -37,22 +37,22 @@ module svm_pe #(
     generate
         for(i = 0; i < 9; i = i + 1) begin
             assign uns_fea_a[(i + 1) * FEA_N - 1 : i * FEA_N] = 
-                (fea_a[(i + 1) * FEA_N - 1]) ? ~fea_a + 1'b1 : fea_a;
+                (fea_a[(i + 1) * FEA_N - 1]) ? ~fea_a[(i + 1) * FEA_N - 1 : i * FEA_N] + 1'b1 : fea_a;
             assign uns_fea_b[(i + 1) * FEA_N - 1 : i * FEA_N] = 
-                (fea_b[(i + 1) * FEA_N - 1]) ? ~fea_b + 1'b1 : fea_b;
+                (fea_b[(i + 1) * FEA_N - 1]) ? ~fea_b[(i + 1) * FEA_N - 1 : i * FEA_N] + 1'b1 : fea_b;
             assign uns_fea_c[(i + 1) * FEA_N - 1 : i * FEA_N] = 
-                (fea_c[(i + 1) * FEA_N - 1]) ? ~fea_c + 1'b1 : fea_c;
+                (fea_c[(i + 1) * FEA_N - 1]) ? ~fea_c[(i + 1) * FEA_N - 1 : i * FEA_N] + 1'b1 : fea_c;
             assign uns_fea_d[(i + 1) * FEA_N - 1 : i * FEA_N] = 
-                (fea_d[(i + 1) * FEA_N - 1]) ? ~fea_d + 1'b1 : fea_d;
+                (fea_d[(i + 1) * FEA_N - 1]) ? ~fea_d[(i + 1) * FEA_N - 1 : i * FEA_N] + 1'b1 : fea_d;
 
             assign uns_coef_a[(i + 1) * FEA_N - 1 : i * FEA_N] = 
-                (coef_a[(i + 1) * FEA_N - 1]) ? ~coef_a + 1'b1 : coef_a;
+                (coef_a[(i + 1) * FEA_N - 1]) ? ~coef_a[(i + 1) * FEA_N - 1 : i * FEA_N] + 1'b1 : coef_a;
             assign uns_coef_b[(i + 1) * FEA_N - 1 : i * FEA_N] = 
-                (coef_b[(i + 1) * FEA_N - 1]) ? ~coef_b + 1'b1 : coef_b;
+                (coef_b[(i + 1) * FEA_N - 1]) ? ~coef_b[(i + 1) * FEA_N - 1 : i * FEA_N] + 1'b1 : coef_b;
             assign uns_coef_c[(i + 1) * FEA_N - 1 : i * FEA_N] = 
-                (coef_c[(i + 1) * FEA_N - 1]) ? ~coef_c + 1'b1 : coef_c;
+                (coef_c[(i + 1) * FEA_N - 1]) ? ~coef_c[(i + 1) * FEA_N - 1 : i * FEA_N] + 1'b1 : coef_c;
             assign uns_coef_d[(i + 1) * FEA_N - 1 : i * FEA_N] = 
-                (coef_d[(i + 1) * FEA_N - 1]) ? ~coef_d + 1'b1 : coef_d;
+                (coef_d[(i + 1) * FEA_N - 1]) ? ~coef_d[(i + 1) * FEA_N - 1 : i * FEA_N] + 1'b1 : coef_d;
             // signed of product
             assign negative[i] = fea_a[(i + 1) * FEA_N - 1] ^ coef_a[(i + 1) * FEA_N - 1];
             assign negative[i + 9] = fea_b[(i + 1) * FEA_N - 1] ^ coef_b[(i + 1) * FEA_N - 1];
