@@ -1,3 +1,5 @@
+`define SYNTHESIZE
+
 module hog_feature_gen #(
     parameter ADDR_W =  11, // address width of cells
     parameter BIN_I =   16, // integer part of bin
@@ -8,11 +10,19 @@ module hog_feature_gen #(
 ) (
     input                                   clk,
     input                                   rst,
+    `ifndef SYNTHESIZE
     input   [ADDR_W - 1 : 0]                addr_fw,
     input                                   valid_fw,
     input   [ADDR_W - 1 : 0]                address,
     input   [9 * (BIN_I + BIN_F) - 1 : 0]   bin,
     input                                   i_valid,
+    `else
+    input   [ADDR_W - 1 : 0]                addr_fw_syn,
+    input                                   valid_fw_syn,
+    input   [ADDR_W - 1 : 0]                address_syn,
+    input   [9 * (BIN_I + BIN_F) - 1 : 0]   bin_syn,
+    input                                   i_valid_syn,
+    `endif
     output  [9 * (FEA_I + FEA_F) - 1 : 0]   fea_a,
     output  [9 * (FEA_I + FEA_F) - 1 : 0]   fea_b,
     output  [9 * (FEA_I + FEA_F) - 1 : 0]   fea_c,
@@ -22,7 +32,28 @@ module hog_feature_gen #(
     
     localparam p_data_w = 18 * (BIN_I + BIN_F);
     localparam buf_depth = 40;
-
+`ifdef SYNTHESIZE
+    reg   [ADDR_W - 1 : 0]                addr_fw;
+    reg                                   valid_fw;
+    reg   [ADDR_W - 1 : 0]                address;
+    reg   [9 * (BIN_I + BIN_F) - 1 : 0]   bin;
+    reg                                   i_valid;
+    always @(posedge clk) begin
+        if(!rst) begin
+            addr_fw <= 0;
+            valid_fw <= 0;
+            address <= 0;
+            bin <= 0;
+            i_valid <= 0;
+        end else begin
+            addr_fw <= addr_fw_syn;
+            valid_fw <= valid_fw_syn;
+            address <= address_syn;
+            bin <= bin_syn;
+            i_valid <= i_valid_syn;
+        end
+    end
+`endif
     reg  [9 * (FEA_I + FEA_F) - 1 : 0]   fea_a_r;
     reg  [9 * (FEA_I + FEA_F) - 1 : 0]   fea_b_r;
     reg  [9 * (FEA_I + FEA_F) - 1 : 0]   fea_c_r;
@@ -100,10 +131,12 @@ module hog_feature_gen #(
         // fractional part of hog feature
         .FEA_F      (FEA_F)
     ) u_normalize (
-        .bin_a      (bin_a),
-        .bin_b      (bin_b),
-        .bin_c      (bin_c),
-        .bin_d      (bin_d),
+        .clk        (clk),
+        .rst        (rst),
+        .i_bin_a    (bin_a),
+        .i_bin_b    (bin_b),
+        .i_bin_c    (bin_c),
+        .i_bin_d    (bin_d),
         .i_valid    (i_valid_nor),
         .fea_a      (fea_a_w),
         .fea_b      (fea_b_w),
