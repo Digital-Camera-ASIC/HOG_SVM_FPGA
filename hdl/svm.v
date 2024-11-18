@@ -21,7 +21,7 @@ module svm #(
     localparam COE_W = COE_I + COE_F;
     localparam COE_N = 7 * 15 * 4; // the number of svm coefficent
 
-    localparam BUF_DEPTH = 33;
+    localparam BUF_DEPTH = 32;
     reg [COE_W * 9 - 1 : 0] svm_coef [0 : COE_N - 1];
     
     wire [COE_W - 1 : 0] o_data [0 : 7 * 15 - 1];

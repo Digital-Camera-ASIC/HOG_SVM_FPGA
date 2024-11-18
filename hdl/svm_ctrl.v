@@ -13,6 +13,8 @@ module svm_ctrl #(
     localparam TH_ROW_SW = 14 * COL_N; // threshold row of slide window
     localparam TH_COL_SW = 6; // threshold columm of slide window
 
+    reg i_valid_r;
+    
     reg [SW_W - 1 : 0] cnt;
     wire [SW_W - 1 : 0] cnt_n;
     
@@ -20,17 +22,21 @@ module svm_ctrl #(
     wire col_valid;
 
     always @(posedge clk) begin
+        if(!rst) i_valid_r <= 0;
+        else i_valid_r <= i_valid;
+    end
+    always @(posedge clk) begin
         if(!rst) cnt <= 0;
         else cnt <= cnt_n;
     end
     
     assign cnt_n = 
-        (!i_valid) ? cnt :
+        (!i_valid_r) ? cnt :
         (cnt == MAX_SW) ? 0 : cnt + 1'b1;
     
 
     assign row_valid = cnt >= TH_ROW_SW;
     assign col_valid = (cnt % COL_N) >= TH_COL_SW;
-    assign o_valid = row_valid & col_valid & i_valid;
+    assign o_valid = row_valid & col_valid & i_valid_r;
     assign sw_id = cnt;
 endmodule
