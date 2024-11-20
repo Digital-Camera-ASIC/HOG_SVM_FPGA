@@ -38,7 +38,16 @@ class base_driver extends uvm_driver #(base_item);
     vif.cb.i_data <= item.data;
     `uvm_info("DEBUG-DRIVER", $sformatf("data: %h", item.data), UVM_LOW)
     vif.cb.ready <= 1;
+    
+    cnt++;
 
+    if (cnt == 1200) begin
+      repeat(5) begin
+        @vif.cb;
+        vif.cb.ready <= 0;
+      end
+      cnt = 0;
+    end
   endtask
 
 endclass : base_driver

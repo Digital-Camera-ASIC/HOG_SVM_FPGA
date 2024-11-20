@@ -9,7 +9,7 @@ class init_read_seq extends uvm_sequence #(base_item);
     endfunction : new
   
     virtual task body();
-        repeat(200) begin
+        repeat(1200) begin
             `uvm_do_with(req, {
                 req.addr == cnt;
                 foreach (req.r_bin[i]) {

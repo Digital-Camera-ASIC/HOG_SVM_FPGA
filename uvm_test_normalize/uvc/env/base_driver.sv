@@ -34,17 +34,17 @@ class base_driver extends uvm_driver #(base_item);
   task drive_item(base_item item);
     wait (vif.rst);
     @vif.cb;
-    if (cnt == 42 || cnt == 60) begin
-       vif.cb.i_valid <= 0;
-      //  @vif.cb;
-      //  vif.cb.i_valid <= 1;
-      //  item.i_valid = 1;
-       item.i_valid = 0;
-    end
-    else begin
+    // if (cnt == 42 || cnt == 60) begin
+    //    vif.cb.i_valid <= 0;
+    //   //  @vif.cb;
+    //   //  vif.cb.i_valid <= 1;
+    //   //  item.i_valid = 1;
+    //    item.i_valid = 0;
+    // end
+    // else begin
       vif.cb.i_valid <= 1;
       item.i_valid = 1;
-    end
+    // end
     // vif.cb.i_valid <= item.i_valid;
     // vif.cb.i_valid <= 1;
     // item.i_valid = 1;

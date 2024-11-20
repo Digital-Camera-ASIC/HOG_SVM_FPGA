@@ -58,9 +58,9 @@ module top;
       // integer part of bin
       .BIN_F (16),
       // fractional part of bin
-      .ADDR_W(10),
+      .ADDR_W(11),
       // address width of cells
-      .BID_W (13),
+      // .BID_W (13),
       // block id width
       .FEA_I (4),
       // integer part of hog feature
@@ -72,7 +72,7 @@ module top;
       .ready  (vif.ready),
       .i_data (vif.i_data),
       .request(vif.request),
-      .bid    (vif.bid),
+      // .bid    (vif.bid),
       .fea_a  (vif.fea_a),
       .fea_b  (vif.fea_b),
       .fea_c  (vif.fea_c),

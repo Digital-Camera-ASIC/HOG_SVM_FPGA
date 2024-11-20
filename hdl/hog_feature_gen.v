@@ -1,4 +1,4 @@
-`define SYNTHESIZE
+// `define SYNTHESIZE
 
 module hog_feature_gen #(
     parameter ADDR_W =  11, // address width of cells

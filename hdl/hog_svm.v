@@ -26,7 +26,6 @@ module hog_svm#(
     wire [9 * (FEA_I + FEA_F) - 1 : 0]          fea_c_sig;
     wire [9 * (FEA_I + FEA_F) - 1 : 0]          fea_d_sig;
     wire     i_valid_sig;
-    
     hog #(
         .PIX_W      (PIX_W),
         .PIX_N      (PIX_N),

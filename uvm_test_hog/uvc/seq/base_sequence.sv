@@ -16,7 +16,7 @@ class init_read_seq extends uvm_sequence #(base_item);
   endtask
 
   virtual task body();
-    repeat (100) begin // toi 82 la no van k co error
+    repeat (3600) begin // toi 82 la no van k co error
       // `uvm_do_with(req,
       //              {
       //             foreach (data_temp[i]) {
@@ -32,16 +32,15 @@ class init_read_seq extends uvm_sequence #(base_item);
       `uvm_do_with(req,
                    {
 
-                    foreach (data_temp[i]) {
-                      // if (i < 49|| i > 62 || i % 8 == 0 || i % 8 == 7) {
-                      if (i < 72 || i > 79) {
-                        data_temp[i] == 0;
-                      }
-                      else {
-                        data_temp[i] == cnt + i;
-                      }
-
-                    }
+                    // foreach (data_temp[i]) {
+                    //   // if (i < 9 || i > 54 || i % 8 == 0 || i % 8 == 7) {
+                    //   if (i != 0) {
+                    //     data_temp[i] == 0;
+                    //   }
+                    //   else {
+                    //     data_temp[i] == cnt % 256;
+                    //   }
+                    // }
 
                     // data_temp[64] == fifo[39][56*8+:8];
                     // data_temp[65] == fifo[39][57*8+:8];

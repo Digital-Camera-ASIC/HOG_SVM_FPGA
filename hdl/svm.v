@@ -28,9 +28,10 @@ module svm #(
     integer id;
     // for sim
     initial begin
-        //$read_mem();
-        for(id = 0; id < COE_N; id = id + 1)
-            svm_coef[id] <= {9{id[31:0]<<8}};
+        string file_path = "C:/Users/datph/Desktop/Thesis/Testing/Hog_gen/Smart_camera_ASIC/uvm_test_svm_pe/uvc/seq/coef.txt";
+        $readmemh(file_path, svm_coef);
+        // for(id = 0; id < COE_N; id = id + 1)
+        //     svm_coef[id] <= {9{id[31:0]<<8}};
     end
     wire [COE_W - 1 : 0] o_data_b [0:13];
     genvar i;

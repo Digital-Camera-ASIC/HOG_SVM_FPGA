@@ -6,10 +6,11 @@ class base_scoreboard extends uvm_scoreboard;
   uvm_analysis_imp_mon #(base_item, base_scoreboard) mon_item_collected_export;
   `uvm_component_utils(base_scoreboard)
 
-  `define DEBUG 1
+  // `define DEBUG 1
 
   parameter real pi = 3.141592653589793;
-  
+  parameter real epsilon = 1e-6;
+
   logic [42][767:0] fifo;
 
   logic [767:0] data_1;
@@ -293,6 +294,9 @@ class base_scoreboard extends uvm_scoreboard;
 
       $display($sformatf("sum: %f", sum));
     `endif
+
+    // sum += epsilon;
+
     for (int i = 0; i < 9; i++) begin
       temp_fea_a[i] = $sqrt(bin_1[i] / sum);
       temp_fea_b[i] = $sqrt(bin_2[i] / sum);
@@ -346,10 +350,12 @@ class base_scoreboard extends uvm_scoreboard;
     end
     fifo[0] = item.data;
     cnt = cnt + 1;
-    $display($sformatf("cnt = %0d", cnt));
-    for (int i = 0; i < cnt; i++) begin
-      $display($sformatf("FIFO[%0d]: %h", i, fifo[i]));
-    end
+    `ifdef DEBUG
+      $display($sformatf("cnt = %0d", cnt));
+      for (int i = 0; i < cnt; i++) begin
+        $display($sformatf("FIFO[%0d]: %h", i, fifo[i]));
+      end
+    `endif
     if (cnt == 42) begin
       // Tinh toan feature de so sanh
       if (cnt_addr % 40 != 0) begin
@@ -363,6 +369,14 @@ class base_scoreboard extends uvm_scoreboard;
       cnt = cnt - 1;
     end
     cnt_addr++;
+
+    if (cnt_addr == 1200) begin
+      cnt = 0;
+      cnt_addr = 0;
+      for (int i = 0; i < 42; i++) begin
+        fifo[i] = 0;
+      end
+    end
     // end
   endfunction
 
