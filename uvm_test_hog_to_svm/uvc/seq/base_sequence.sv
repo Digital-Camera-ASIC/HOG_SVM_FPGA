@@ -16,7 +16,7 @@ class init_read_seq extends uvm_sequence #(base_item);
   endtask
 
   virtual task body();
-    repeat (1200) begin // toi 82 la no van k co error
+    repeat (3600) begin // toi 82 la no van k co error
       // `uvm_do_with(req,
       //              {
       //             foreach (data_temp[i]) {

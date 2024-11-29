@@ -399,6 +399,18 @@ class base_scoreboard extends uvm_scoreboard;
       for (int i = 0; i < 42; i++) begin
         fifo[i] = 0;
       end
+      for (int i = 0; i < 29; i++) begin
+        for (int j = 0; j < 39; j++) begin
+          for (int k = 0; k < 9; k++) begin
+            drv_fea_a[i][j][k] = 0;
+            drv_fea_b[i][j][k] = 0;
+            drv_fea_c[i][j][k] = 0;
+            drv_fea_d[i][j][k] = 0;
+          end
+        end
+      end
+      col = 0;
+      row = 0;
     end
   endfunction
 
