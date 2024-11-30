@@ -1,7 +1,7 @@
 */visualizer*
 *.do
 *log*
-
+*/sim*
 *.python
 
 .vscode

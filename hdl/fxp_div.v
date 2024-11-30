@@ -109,5 +109,3 @@ always @ (*) begin
 end
 
 endmodule
-
-

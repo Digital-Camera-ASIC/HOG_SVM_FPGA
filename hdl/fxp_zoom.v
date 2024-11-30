@@ -80,6 +80,3 @@ end endgenerate
 assign out = {outi, outf};
 
 endmodule
-
-
-

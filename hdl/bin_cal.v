@@ -31,4 +31,3 @@ module bin_cal #(
     assign bin140 = (negative && code[1]) ? magnitude : 0;
     assign bin160 = (negative && code[0]) ? magnitude : 0;
 endmodule
-

@@ -46,5 +46,4 @@ module buffer #(
             );
         end
     endgenerate
-
 endmodule

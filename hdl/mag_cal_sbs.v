@@ -71,6 +71,5 @@ module mag_cal_sbs #(
         .bin120       (bin120),
         .bin140       (bin140),
         .bin160       (bin160)
-    );
-    
+    );    
 endmodule
