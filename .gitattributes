@@ -1,5 +1,0 @@
-uvm_test_svm/sim/base_test/base_test.db filter=lfs diff=lfs merge=lfs -text
-uvm_test_hog/sim/base_test/base_test.db filter=lfs diff=lfs merge=lfs -text
-uvm_test_svm_pe/sim/base_test/work/qrun_opt/_lib6_0.qpg filter=lfs diff=lfs merge=lfs -text
-uvm_test_hog/sim/base_test/work/qrun_opt/_lib6_0.qpg filter=lfs diff=lfs merge=lfs -text
-uvm_test_normalize/sim/base_test/work/qrun_opt/_lib6_0.qpg filter=lfs diff=lfs merge=lfs -text

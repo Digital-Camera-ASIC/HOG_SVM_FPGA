@@ -1,1 +1,0 @@
-C:/questasim64_2024.1/win64/VisualizerRls/bin/viscom.exe -nolock -quiet -jmem_size 99041568 -lint=default +cover=sbteft -access=rw+/. +designfile+base_test/base_test.bin top -work base_test/work -csessiondir base_test/sessions -o qrun_opt +__design_bin_path+C:/Users/datph/Desktop/Thesis/Testing/Hog_gen/Smart_camera_ASIC/uvm_test_normalize/sim/base_test -genidl +__betafsm
