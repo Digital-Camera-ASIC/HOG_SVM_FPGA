@@ -10,11 +10,11 @@ module tb_sqrt;
     
     `CLK_GEN(clk, 2)
 
-    logic [17:0] in;
-    logic [14:0] out;
+    logic [16:0] in;
+    logic [12:0] out;
     sqrt #(
-        .IN_W     (18),
-        .OUT_F    (6)
+        .IN_W     (17),
+        .OUT_F    (4)
     ) u_sqrt (
         .clk      (clk),
         .in       (in),
@@ -39,12 +39,12 @@ module tb_sqrt;
     real actual;
     task monitor;
         real gm;
-        repeat(15) @(posedge clk);
+        repeat(13) @(posedge clk);
 
         for(int i = 0; i < 100; i++) begin
             #0.1;
             actual = out;
-            actual = actual / 2**6;
+            actual = actual / 2**4;
             gm = $sqrt(temp.pop_front());
             $display("actual - gm - q (%f, %f, %f)", actual, gm, actual - gm);
             @(posedge clk);

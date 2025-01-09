@@ -1,8 +1,9 @@
-
+// pipeline sqrt
+// cycle for pipeline = width of output
 module sqrt #(
     parameter IN_W      = 18,
     parameter OUT_F     = 4,
-    localparam OUT_I    = ((IN_W / 2)),
+    integer OUT_I       = $ceil(IN_W * 1.0 / 2),
     localparam OUT_W    = OUT_I + OUT_F
 ) (
     input                       clk,
@@ -19,7 +20,7 @@ module sqrt #(
     
     wire [IN_ALI_W - 1 : 0] in_ali; // aligned input, depend on output width 
 
-    assign in_ali = in << (IN_ALI_W - IN_W);
+    assign in_ali = in << (IN_ALI_W - OUT_I * 2);
 
     wire [IN_ALI_W - 1 : 0] d_o [0 : OUT_W - 1];
     wire [OUT_W - 1 : 0] q_o [0 : OUT_W - 1];
