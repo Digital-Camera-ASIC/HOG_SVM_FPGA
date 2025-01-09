@@ -1,6 +1,13 @@
 `timescale 1ns/1ps
 class mag_item;
-    rand bit [31:0] pixel;
+    rand bit [7:0] top;
+    rand bit [7:0] bottom;
+    rand bit [7:0] left;
+    rand bit [7:0] right;
+    bit [31:0] pixel;
+    function void post_randomize;
+        pixel = {top, bottom, left, right};
+    endfunction
     function new;
     endfunction
 endclass
@@ -11,11 +18,12 @@ interface mag_cal_if(
     logic               i_valid = 0;
     logic   [26 : 0]    bin[9];
     logic               o_valid;
-
+    logic [12 : 0] magnitude;
+    logic signed [11 : 0] tan;
     clocking cb @(posedge clk);
         default input #1ps output #1ps;
         output  pixel, i_valid;
-        input   bin, o_valid;
+        input   bin, o_valid, magnitude, tan;
     endclocking
 endinterface
 `define CLK_GEN(clk, cycle)\
@@ -34,22 +42,27 @@ module tb_mag_cal_sbs;
 
     mag_cal_if vif(clk);
 
-    mag_cal_sbs u_mag_cal_sbs (
-        .clk        (clk),
-        .rst        (rst),
-        .pixel      (vif.pixel),
-        .bin0       (vif.bin[0]),
-        .bin20      (vif.bin[1]),
-        .bin40      (vif.bin[2]),
-        .bin60      (vif.bin[3]),
-        .bin80      (vif.bin[4]),
-        .bin100     (vif.bin[5]),
-        .bin120     (vif.bin[6]),
-        .bin140     (vif.bin[7]),
-        .bin160     (vif.bin[8])
-    );
+    mag_cal #(
+    .PIX_W        (8),
+    // pixel width
+    .MAG_F        (4),
+    // fraction part of magnitude
+    .TAN_I        (4),
+    // tan integer (signed number)
+    .TAN_F        (8)
+) u_mag_cal (
+    .clk          (clk),
+    .rst          (rst),
+    .i_valid      (vif.i_valid),
+    .pixel        (vif.pixel),
+    .magnitude    (vif.magnitude),
+    .tan          (vif.tan),
+    .o_valid      (vif.o_valid)
+);
     
     mag_item obj;
+    mag_item myInput [$];
+    
     function void build_phase;
         obj = new;
         obj.randomize();
@@ -62,8 +75,10 @@ module tb_mag_cal_sbs;
     
     task driver;
         for(int i = 0; i < 10; i++) begin
+            myInput.push_back(obj);
             vif.cb.i_valid <= 1;
             vif.cb.pixel <= obj.pixel;
+            obj = new;
             obj.randomize();
             @vif.cb;
         end
@@ -78,11 +93,76 @@ module tb_mag_cal_sbs;
             @vif.cb;
         end
     endtask
+
+    real magnitude;
+    real tan;
+    real act_magnitude;
+    real act_tan;
+    function real abs(input real a);
+        if(a < 0)
+            return -a;
+        else
+            return a;
+    endfunction
+    int top, bot, left, right;
+    function void predictor;
+        top = myInput[0].top;
+        bot = myInput[0].bottom;
+        left = myInput[0].left;
+        right = myInput[0].right;
+        magnitude = $sqrt((bot - top) ** 2 + (left - right) ** 2);
+        tan = (right - left) * 1.0 / (bot - top);
+        
+        myInput.pop_front();
+        while(tan >= 8)
+           tan = tan - 8;
+        while(tan <= -8)
+           tan = tan + 8;
+        act_magnitude = act_magnitude / 2**4;
+        act_tan = act_tan / 2**8;
+        
+    endfunction
+    function bit compare;
+        if(abs(act_magnitude - magnitude) > 0.1)
+            return 0;
+        if(abs(act_tan - tan) > 0.1)
+            return 0;
+        return 1;
+    endfunction
+    int cnt_pass = 0;
+    int cnt_fail = 0;
     task monitor;
+        bit valid;
         forever begin
             @vif.cb;
+            valid = vif.cb.o_valid;
+            if(valid)begin
+                if(myInput.size) begin
+                    act_magnitude = vif.cb.magnitude;
+                    act_tan = vif.cb.tan;
+                    
+                    predictor;
+                    if(compare()) cnt_pass++;
+                    else begin
+                        cnt_fail++;
+                        // for debugging
+                        $display("time: %t", $time);
+                        $display("top: %0d", top);
+                        $display("bot: %0d", bot);
+                        $display("left: %0d", left);
+                        $display("right: %0d", right);
+                        $display("magnitude: %0f", magnitude);
+                        $display("tan: %0f", tan);
+                        $display("act_magnitude: %0f", act_magnitude);
+                        $display("act_tan: %0f", act_tan);
+                    end
+                end
+            end
         end
     endtask
+    function void report_phase;
+        $display("TEST PASS:%0d\nTEST FAIL:%0d",cnt_pass, cnt_fail);
+    endfunction
     initial begin
         build_phase;
         reset_phase;
@@ -90,6 +170,8 @@ module tb_mag_cal_sbs;
             driver;
             monitor;
         join_any
+        #100;
+        report_phase;
         $finish;
     end
 endmodule

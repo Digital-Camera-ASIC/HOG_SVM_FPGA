@@ -21,8 +21,8 @@ module buffer_ctr #(
     
     always @(posedge clk) begin
         if(!rst)
-            cnt = 32'b0;
+            cnt <= 32'b0;
         else
-            cnt = n_cnt;
+            cnt <= n_cnt;
     end
 endmodule
