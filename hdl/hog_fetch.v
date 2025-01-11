@@ -1,12 +1,12 @@
 module hog_fetch #(
-    parameter ADDR_W = 11,
-    parameter PIX_W = 8, // pixel width
-    parameter PIX_N = 96,
-    parameter MAG_I = 9, // integer part of magnitude
-    parameter MAG_F = 16,// fraction part of magnitude
-    parameter TAN_W = 19, // tan width
-    parameter BIN_I =   16, // integer part of bin
-    parameter BIN_F =   16 // fractional part of bin
+    parameter ADDR_W    = 11,
+    parameter PIX_W     = 8, // pixel width
+    parameter PIX_N     = 96,
+    parameter MAG_I     = 9, // integer part of magnitude
+    parameter MAG_F     = 16,// fraction part of magnitude
+    parameter TAN_W     = 19, // tan width
+    parameter BIN_I     =   16, // integer part of bin
+    parameter BIN_F     =   16 // fractional part of bin
     
 ) (
     input                                       clk,
@@ -16,7 +16,7 @@ module hog_fetch #(
     output                                      request,
     output reg                                  o_valid,
     output reg [ADDR_W - 1 : 0]                 addr_fw,
-    output reg [ADDR_W - 1 : 0]                 valid_fw,
+    output reg                                  valid_fw,
     output reg [ADDR_W - 1 : 0]                 address,
     output reg [9 * (BIN_I + BIN_F) - 1 : 0]    bin
 );
