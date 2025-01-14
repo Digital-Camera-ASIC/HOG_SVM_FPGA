@@ -12,6 +12,7 @@ module bin_ctr #(
     output reg      [CNT_W - 1  : 0]    cnt,
     output reg                          o_valid
 );
+    localparam signed tan0 = 12'h0;
     localparam signed tan20 = 12'h5d;
     localparam signed tan40 = 12'hd7;
     localparam signed tan60 = 12'h1bb;
@@ -43,12 +44,12 @@ module bin_ctr #(
         end else
             o_valid <= 0;
     end
-    assign code = (0 <= tan < tan20) ? 0 :
-        (tan20 <= tan < tan40) ? 1 :
-        (tan40 <= tan < tan60) ? 2 :
-        (tan60 <= tan < tan80) ? 3 :
+    assign code = (tan0 <= tan  && tan < tan20) ? 0 :
+        (tan20 <= tan && tan < tan40) ? 1 :
+        (tan40 <= tan && tan < tan60) ? 2 :
+        (tan60 <= tan && tan < tan80) ? 3 :
         (tan80 <= tan || tan < tan100) ? 4 :
-        (tan100 <= tan < tan120) ? 5 :
-        (tan120 <= tan < tan140) ? 6 :
-        (tan140 <= tan < tan160) ? 7 : 8;
+        (tan100 <= tan && tan < tan120) ? 5 :
+        (tan120 <= tan && tan < tan140) ? 6 :
+        (tan140 <= tan && tan < tan160) ? 7 : 8;
 endmodule

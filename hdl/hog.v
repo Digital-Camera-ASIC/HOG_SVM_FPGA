@@ -1,63 +1,67 @@
 module hog #(
-    parameter PIX_W = 8, // pixel width
-    parameter PIX_N = 96, // the number of pixels
-    parameter MAG_I = 9, // integer part of magnitude
-    parameter MAG_F = 16,// fraction part of magnitude
-    parameter TAN_W = 19, // tan width
-    parameter BIN_I =   16, // integer part of bin
-    parameter BIN_F =   16, // fractional part of bin
-    parameter ADDR_W =  11, // address width of cells
-    parameter FEA_I =   4, // integer part of hog feature
-    parameter FEA_F =   28 // fractional part of hog feature
+    parameter   PIX_W   = 8, // pixel width
+    parameter   MAG_F   = 4,// fraction part of magnitude
+    parameter   TAN_I   = 4, // tan width
+    parameter   TAN_F   = 8, // tan width
+    parameter   BIN_I   = 16, // integer part of bin
+    parameter   FEA_I   = 4, // integer part of hog feature
+    parameter   FEA_F   = 8, // fractional part of hog feature
+    localparam  FEA_W   = FEA_I + FEA_F,
+    localparam  IN_W    = PIX_W * 4
 ) (
-    input                                       clk,
-    input                                       rst,
-    input                                       ready,
-    input   [PIX_W * PIX_N - 1 : 0]             i_data,
-    output                                      request,
-    output  [9 * (FEA_I + FEA_F) - 1 : 0]       fea_a,
-    output  [9 * (FEA_I + FEA_F) - 1 : 0]       fea_b,
-    output  [9 * (FEA_I + FEA_F) - 1 : 0]       fea_c,
-    output  [9 * (FEA_I + FEA_F) - 1 : 0]       fea_d,
-    output                                      o_valid
+    input                       clk,
+    input                       rst,
+    input                       ready,
+    input   [IN_W - 1   : 0]    i_data,
+    output                      request,
+    output  [FEA_W - 1  : 0]    fea,
+    output                      o_valid
 );
-    wire                                  o_valid_sig;
-    wire [ADDR_W - 1 : 0]                 addr_fw_sig;
-    wire                                  valid_fw_sig;
-    wire [ADDR_W - 1 : 0]                 address_sig;
-    wire [9 * (BIN_I + BIN_F) - 1 : 0]    bin_sig;
-
-    hog_fetch #(
-        .ADDR_W     (ADDR_W),
-        .PIX_W      (PIX_W),
+    localparam TAN_W = TAN_I + TAN_F;
+    localparam MAG_I = PIX_W + 1;
+    localparam BIN_F = MAG_F;
+    localparam MAG_W = MAG_I + MAG_F;
+    localparam BIN_W = BIN_I + BIN_F;
+    assign request = 1'b1;
+    wire [MAG_W - 1 : 0] magnitude;
+    wire [TAN_W - 1 : 0] tan;
+    wire [BIN_W * 9 - 1 : 0] bin;
+    wire mag_cal_valid;
+    wire bin_cal_valid;
+    mag_cal #(
+        .PIX_W        (PIX_W),
         // pixel width
-        .PIX_N      (PIX_N),
-        .MAG_I      (MAG_I),
-        // integer part of magnitude
-        .MAG_F      (MAG_F),
+        .MAG_F        (MAG_F),
         // fraction part of magnitude
-        .TAN_W      (TAN_W),
-        // tan width
-        .BIN_I      (BIN_I),
-        // integer part of bin
-        .BIN_F      (BIN_F)
-        // fractional part of bin
-    ) u_hog_fetch (
-        .clk        (clk),
-        .rst        (rst),
-        .ready      (ready),
-        .i_data     (i_data),
-        .request    (request),
-        .o_valid    (o_valid_sig),
-        .addr_fw    (addr_fw_sig),
-        .valid_fw   (valid_fw_sig),
-        .address    (address_sig),
-        .bin        (bin_sig)
+        .TAN_I        (TAN_I),
+        // tan integer (signed number)
+        .TAN_F        (TAN_F)
+        // tan fraction
+    ) u_mag_cal (
+        .clk          (clk),
+        .rst          (rst),
+        .i_valid      (ready),
+        .pixel        (i_data),
+        .magnitude    (magnitude),
+        .tan          (tan),
+        .o_valid      (mag_cal_valid)
     );
-
-    hog_feature_gen #(
-        .ADDR_W     (ADDR_W),
-        // address width of cells
+    bin_cal #(
+        .TAN_W        (TAN_W),
+        .MAG_I        (MAG_I),
+        .MAG_F        (MAG_F),
+        .BIN_I        (BIN_I)
+        // integer part of bin
+    ) u_bin_cal (
+        .clk          (clk),
+        .rst          (rst),
+        .i_valid      (mag_cal_valid),
+        .magnitude    (magnitude),
+        .tan          (tan),
+        .o_valid      (bin_cal_valid),
+        .bin          (bin)
+    );
+    normalize #(
         .BIN_I      (BIN_I),
         // integer part of bin
         .BIN_F      (BIN_F),
@@ -66,18 +70,12 @@ module hog #(
         // integer part of hog feature
         .FEA_F      (FEA_F)
         // fractional part of hog feature
-    ) u_hog_feature_gen (
+    ) u_normalize (
         .clk        (clk),
         .rst        (rst),
-        .addr_fw    (addr_fw_sig),
-        .valid_fw   (valid_fw_sig),
-        .address    (address_sig),
-        .bin        (bin_sig),
-        .i_valid    (o_valid_sig),
-        .fea_a      (fea_a),
-        .fea_b      (fea_b),
-        .fea_c      (fea_c),
-        .fea_d      (fea_d),
+        .bin        (bin),
+        .i_valid    (bin_cal_valid),
+        .fea        (fea),
         .o_valid    (o_valid)
     );
 endmodule

@@ -1,138 +1,163 @@
 module normalize #(
-    parameter BIN_I =   16, // integer part of bin
-    parameter BIN_F =   16, // fractional part of bin
-    parameter FEA_I =   4, // integer part of hog feature
-    parameter FEA_F =   28 // fractional part of hog feature
+    parameter BIN_I     = 16, // integer part of bin
+    parameter BIN_F     = 4, // fractional part of bin
+    parameter FEA_I     = 4, // integer part of hog feature
+    parameter FEA_F     = 8, // fractional part of hog feature
+    localparam BIN_W    = BIN_I + BIN_F, // fractional part of hog feature
+    localparam FEA_W    = FEA_I + FEA_F // fractional part of hog feature
 ) (
-    input clk,
-    input rst,
-    input   [9 * (BIN_I + BIN_F) - 1 : 0]   i_bin_a,
-    input   [9 * (BIN_I + BIN_F) - 1 : 0]   i_bin_b,
-    input   [9 * (BIN_I + BIN_F) - 1 : 0]   i_bin_c,
-    input   [9 * (BIN_I + BIN_F) - 1 : 0]   i_bin_d,
-    input                                   i_valid,
-    output  [9 * (FEA_I + FEA_F) - 1 : 0]   fea_a,
-    output  [9 * (FEA_I + FEA_F) - 1 : 0]   fea_b,
-    output  [9 * (FEA_I + FEA_F) - 1 : 0]   fea_c,
-    output  [9 * (FEA_I + FEA_F) - 1 : 0]   fea_d,
-    output                                  o_valid
+    input                           clk,
+    input                           rst,
+    input   [9 * BIN_W - 1  : 0]    bin,
+    input                           i_valid,
+    output  [FEA_W - 1      : 0]    fea,
+    output                          o_valid
 );
-    reg [9 * (BIN_I + BIN_F) - 1 : 0] bin_a;
-    reg [9 * (BIN_I + BIN_F) - 1 : 0] bin_b;
-    reg [9 * (BIN_I + BIN_F) - 1 : 0] bin_c;
-    reg [9 * (BIN_I + BIN_F) - 1 : 0] bin_d;
-    reg i_valid_r[0 : 1];
-    integer i;
+    localparam SUM_W = BIN_W + 2;
+    localparam ADDR_W = 6;
+    localparam MAX_ADDR = 42;
+    localparam CELL_NUM = 1200;
+    localparam CNT_W = 11; // ceil log2(CELL_NUM)
+    localparam SQRT_W = SUM_W / 2 + 1;
+    localparam LINE = 40;
+    // shared mem for rd and wr
+    reg [CNT_W - 1 : 0] cnt;
     always @(posedge clk) begin
-        if(!rst) begin
-            for(i = 0; i < 2; i = i + 1)begin
-                i_valid_r[i] <= 0;
-            end
-            bin_a <= {9 * (BIN_I + BIN_F){1'b1}};
-            bin_b <= {9 * (BIN_I + BIN_F){1'b1}};
-            bin_c <= {9 * (BIN_I + BIN_F){1'b1}};
-            bin_d <= {9 * (BIN_I + BIN_F){1'b1}};
-        end else begin
-            bin_a <= i_bin_a;
-            bin_b <= i_bin_b;
-            bin_c <= i_bin_c;
-            bin_d <= i_bin_d;
-             for(i = 1; i < 2; i = i + 1)begin
-                i_valid_r[i] <= i_valid_r[i - 1];
-            end
-            i_valid_r[0] <= i_valid;
+        if(!rst)
+            cnt <= 0;
+        else if(i_valid) begin
+            if(cnt == CELL_NUM)
+                cnt <= 0;
+            else
+                cnt <= cnt + 1;
         end
     end
-    // bin mapping
-    // bin_a: 8 to 0
-    // bin b: 17 to 9
-    // bin c: 26 to 18
-    // bin d: 35 to 27
-    wire    [BIN_I + BIN_F - 1 : 0] bin[0 : 35];
-    wire    [FEA_I + FEA_F - 1 : 0] quotient[0 : 35];
-    reg    [FEA_I + FEA_F - 1 : 0] quotient_r[0 : 35];
-    wire    [FEA_I + FEA_F - 1 : 0] sqrt_out[0 : 35];
-    reg     [BIN_I + BIN_F + 2 - 1 : 0] sum;
-    genvar j;
+    
+    // controller for write into ram (every 80 cycles)
+    wire [ADDR_W - 1 : 0] addr_a;
+    
+    assign addr_a = cnt % MAX_ADDR;
 
-    generate
-        for(j = 0; j < 9; j = j + 1) begin
-            assign bin[j] = bin_a[(j + 1) * (BIN_I + BIN_F) - 1 : j * (BIN_I + BIN_F)];
-            assign bin[j + 9] = bin_b[(j + 1) * (BIN_I + BIN_F) - 1 : j * (BIN_I + BIN_F)];
-            assign bin[j + 18] = bin_c[(j + 1) * (BIN_I + BIN_F) - 1 : j * (BIN_I + BIN_F)];
-            assign bin[j + 27] = bin_d[(j + 1) * (BIN_I + BIN_F) - 1 : j * (BIN_I + BIN_F)];
-        end
-    endgenerate
-    
-    // sum all bins
-    // pipeline this (if need)
-    
+    // controller for read ram
+    reg [6 : 0] cnt_after_valid;
+    reg [ADDR_W - 1 : 0] addr_b;
+    wire [9 * BIN_W - 1 : 0] o_data;
+    always @(posedge clk) begin
+        if(!rst)
+            cnt_after_valid <= 0;
+        else if(i_valid)
+            cnt_after_valid <= 1;
+        else
+            cnt_after_valid <= cnt_after_valid + 1;
+    end
+    localparam wait_cycle_for_div = 20;
+
+    localparam div_with_fea_a = 6 + wait_cycle_for_div;
+    localparam div_with_fea_b = div_with_fea_a + 9;
+    localparam div_with_fea_c = div_with_fea_b + 9;
+    localparam div_with_fea_d = div_with_fea_c + 9;
     always @(*) begin
-        for(i = 0; i < 36; i = i+1) begin
-            if(i == 0) sum = bin[0];
-            else sum = sum + bin[i];
-        end
+        // control addr b
+        if(cnt_after_valid == 1 || (div_with_fea_a <= cnt_after_valid && cnt_after_valid < div_with_fea_b)) begin
+            addr_b = addr_a;
+        end else if(cnt_after_valid == 2 || (div_with_fea_b <= cnt_after_valid && cnt_after_valid < div_with_fea_c)) begin
+            if(addr_a == MAX_ADDR - 1)
+                addr_b = 0;
+            else
+                addr_b = addr_a + 1;
+        end else if(cnt_after_valid == 3 || (div_with_fea_c <= cnt_after_valid && cnt_after_valid < div_with_fea_d)) begin
+            if (addr_a == 0)
+                addr_b = MAX_ADDR - 2;
+            else if (addr_a == 1)
+                addr_b = MAX_ADDR - 1;
+            else
+                addr_b = addr_a - 2;
+        end else if(cnt_after_valid == 4 || div_with_fea_d <= cnt_after_valid) begin
+            if (addr_a == 0)
+                addr_b = MAX_ADDR - 1;
+            else
+                addr_b = addr_a - 1;
+        end else
+            addr_b = 1;
     end
+    wire accumulate;
+    assign accumulate = (2 < cnt_after_valid && cnt_after_valid < 6);
+    wire save;
+    assign save = cnt_after_valid >= 6;
+    dp_ram #(
+        .DATA_W      (9 * BIN_W),
+        .ADDR_W      (ADDR_W)
+    ) u_dp_ram (
+        .clk         (clk),
+        .write_en    (i_valid),
+        .addr_a      (addr_a),
+        .addr_b      (addr_b),
+        .i_data      (bin),
+        .o_data      (o_data)
+    );
 
-    // divide bin with sum and then sqrt
-    
-    generate
-        for(j = 0; j < 36; j = j + 1) begin
-            fxp_div #(
-                .WIIA        (BIN_I + 1),
-                .WIFA        (BIN_F),
-                .WIIB        (BIN_I + 2 + 1),
-                .WIFB        (BIN_F),
-                .WOI         (FEA_I + 1),
-                .WOF         (FEA_F)
-            ) u_fxp_div (
-                .dividend    ({1'b0, bin[j]}),
-                .divisor     ({1'b0, sum}),
-                .out         (quotient[j])
-            );
-            fxp_sqrt #(
-                .WII         (FEA_I + 1),
-                .WIF         (FEA_F),
-                .WOI         (FEA_I + 1),
-                .WOF         (FEA_F)
-            ) u_fxp_sqrt (
-                .in          ({1'b0,quotient_r[j]}),
-                .out         (sqrt_out[j])
-            );
-        end
-    endgenerate
+    wire [SUM_W - 1 : 0] b_sum;
+    reg [SUM_W - 1 : 0] sum;
+
+    assign b_sum = bin_sum(o_data);
     always @(posedge clk) begin
-        if(!rst) begin
-            for(i = 0; i < 36; i = i + 1)
-                quotient_r[i] <= 0;
-        end else begin
-            for(i = 0; i < 36; i = i + 1)
-                quotient_r[i] <= quotient[i];
-        end
+        if(save)
+            sum <= sum;
+        else if(accumulate)
+            sum <= sum + b_sum;
+        else
+            sum <= b_sum;
     end
+    
+    // sqare root of sum (output): width 13 (int-9, frac-4)
+    wire [SQRT_W - 1 : 0] sqrt_sum; 
+    sqrt #(
+        .IN_W     (SUM_W),
+        .OUT_F    (2)
+    ) u_sqrt (
+        .clk      (clk),
+        .in       (sum),
+        .out      (sqrt_sum)
+    );
+    wire [BIN_W - 1 : 0] dividend;
+    assign dividend = (!(cnt_after_valid % 9)) ? o_data[0 +: 20] :
+        (cnt_after_valid % 9 == 1) ? o_data[20 +: 20] :
+        (cnt_after_valid % 9 == 2) ? o_data[40 +: 20] :
+        (cnt_after_valid % 9 == 3) ? o_data[60 +: 20] :
+        (cnt_after_valid % 9 == 4) ? o_data[80 +: 20] :
+        (cnt_after_valid % 9 == 5) ? o_data[100 +: 20] :
+        (cnt_after_valid % 9 == 6) ? o_data[120 +: 20] :
+        (cnt_after_valid % 9 == 7) ? o_data[140 +: 20] : o_data[160 +: 20];
 
-    // output
-    assign fea_a = {
-        sqrt_out[8], sqrt_out[7], sqrt_out[6], 
-        sqrt_out[5], sqrt_out[4], sqrt_out[3], 
-        sqrt_out[2], sqrt_out[1], sqrt_out[0]
-        };
-    assign fea_b = {
-        sqrt_out[17], sqrt_out[16], sqrt_out[15], 
-        sqrt_out[14], sqrt_out[13], sqrt_out[12], 
-        sqrt_out[11], sqrt_out[10], sqrt_out[9]
-        };
-    assign fea_c = {
-        sqrt_out[26], sqrt_out[25], sqrt_out[24], 
-        sqrt_out[23], sqrt_out[22], sqrt_out[21],
-        sqrt_out[20], sqrt_out[19], sqrt_out[18]
-        };
-    assign fea_d = {
-        sqrt_out[35], sqrt_out[34], sqrt_out[33], 
-        sqrt_out[32], sqrt_out[31], sqrt_out[30], 
-        sqrt_out[29], sqrt_out[28], sqrt_out[27]};
-
-    assign o_valid = i_valid_r[1];
-    //---------------------
-
+    div #(
+        .A_W      (BIN_W),
+        .B_W      (SQRT_W),
+        .O_I_W    (FEA_I),
+        // output integer width
+        .O_F_W    (FEA_F)
+        // output integer width
+    ) u_div (
+        .clk      (clk),
+        .a        (dividend),
+        .b        (sqrt_sum),
+        .o        (fea)
+    );
+    localparam s_valid_time = div_with_fea_a + 2;
+    localparam e_valid_time = s_valid_time + 36;
+    assign o_valid = (cnt >= MAX_ADDR && s_valid_time <= cnt_after_valid && cnt_after_valid < e_valid_time && cnt % LINE != 1);
+    // function lists
+    // bin_sum: sum of 9 bins
+    function [21 : 0] bin_sum(input [179 : 0] bin);
+        begin
+            bin_sum = bin[0 +: 20] 
+                + bin[20 +: 20]
+                + bin[40 +: 20]
+                + bin[60 +: 20]
+                + bin[80 +: 20]
+                + bin[100 +: 20]
+                + bin[120 +: 20]
+                + bin[140 +: 20]
+                + bin[160 +: 20];
+        end
+    endfunction
 endmodule

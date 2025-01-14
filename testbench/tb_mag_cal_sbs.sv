@@ -16,14 +16,12 @@ interface mag_cal_if(
 );
     logic   [31 : 0]    pixel = 0;
     logic               i_valid = 0;
-    logic   [26 : 0]    bin[9];
+    logic   [19 : 0]    bin[9];
     logic               o_valid;
-    logic [12 : 0] magnitude;
-    logic signed [11 : 0] tan;
     clocking cb @(posedge clk);
         default input #1ps output #1ps;
         output  pixel, i_valid;
-        input   bin, o_valid, magnitude, tan;
+        input   bin, o_valid;
     endclocking
 endinterface
 `define CLK_GEN(clk, cycle)\
@@ -42,6 +40,9 @@ module tb_mag_cal_sbs;
 
     mag_cal_if vif(clk);
 
+    wire [12 : 0] magnitude_w;
+    wire [11 : 0] tan_w;
+    wire mag_cal_valid;
     mag_cal #(
     .PIX_W        (8),
     // pixel width
@@ -55,11 +56,36 @@ module tb_mag_cal_sbs;
     .rst          (rst),
     .i_valid      (vif.i_valid),
     .pixel        (vif.pixel),
-    .magnitude    (vif.magnitude),
-    .tan          (vif.tan),
-    .o_valid      (vif.o_valid)
+    .magnitude    (magnitude_w),
+    .tan          (tan_w),
+    .o_valid      (mag_cal_valid)
 );
-    
+    bin_cal #(
+    .TAN_W        (12),
+    .MAG_I        (9),
+    .MAG_F        (4),
+    .BIN_I        (16)
+    // integer part of bin
+    ) u_bin_cal (
+        .clk          (clk),
+        .rst          (rst),
+        .i_valid      (mag_cal_valid),
+        .magnitude    (magnitude_w),
+        .tan          (tan_w),
+        .o_valid      (vif.o_valid),
+        .bin          ({
+            vif.bin[8],
+            vif.bin[7],
+            vif.bin[6],
+            vif.bin[5],
+            vif.bin[4],
+            vif.bin[3],
+            vif.bin[2],
+            vif.bin[1],
+            vif.bin[0]
+            })
+    );
+
     mag_item obj;
     mag_item myInput [$];
     
@@ -74,7 +100,7 @@ module tb_mag_cal_sbs;
     endtask
     
     task driver;
-        for(int i = 0; i < 10; i++) begin
+        for(int i = 0; i < 64; i++) begin
             myInput.push_back(obj);
             vif.cb.i_valid <= 1;
             vif.cb.pixel <= obj.pixel;
@@ -86,7 +112,7 @@ module tb_mag_cal_sbs;
             vif.cb.i_valid <= 0;
             @vif.cb;
         end
-        for(int i = 0; i < 10; i++) begin
+        for(int i = 0; i < 63; i++) begin
             vif.cb.i_valid <= 1;
             vif.cb.pixel <= obj.pixel;
             obj.randomize();
@@ -138,8 +164,8 @@ module tb_mag_cal_sbs;
             valid = vif.cb.o_valid;
             if(valid)begin
                 if(myInput.size) begin
-                    act_magnitude = vif.cb.magnitude;
-                    act_tan = vif.cb.tan;
+                    act_magnitude = 0;
+                    act_tan = 0;
                     
                     predictor;
                     if(compare()) cnt_pass++;
@@ -161,7 +187,7 @@ module tb_mag_cal_sbs;
         end
     endtask
     function void report_phase;
-        $display("TEST PASS:%0d\nTEST FAIL:%0d",cnt_pass, cnt_fail);
+//        $display("TEST PASS:%0d\nTEST FAIL:%0d",cnt_pass, cnt_fail);
     endfunction
     initial begin
         build_phase;

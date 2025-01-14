@@ -1,7 +1,7 @@
 // dual port ram
-// port a: only write data
+// port a: write - read data
 // port b: only read data
-module dp_ram #(
+module dp_ram2 #(
   parameter   DATA_W  = 180,
   parameter   ADDR_W  = 6
 ) (

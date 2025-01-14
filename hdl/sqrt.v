@@ -1,10 +1,10 @@
 // pipeline sqrt
 // cycle for pipeline = width of output
 module sqrt #(
-    parameter IN_W      = 18,
-    parameter OUT_F     = 4,
-    integer OUT_I       = $ceil(IN_W * 1.0 / 2),
-    localparam OUT_W    = OUT_I + OUT_F
+    parameter   IN_W    = 18,
+    parameter   OUT_F   = 4,
+    integer     OUT_I   = $ceil(IN_W * 1.0 / 2),
+    localparam  OUT_W   = OUT_I + OUT_F
 ) (
     input                       clk,
     input  [IN_W - 1    : 0]    in,
@@ -12,7 +12,7 @@ module sqrt #(
 );
     localparam IN_ALI_W = 2 * OUT_W;
     // checker for parameters
-    generate
+    generate    
         if(IN_W > IN_ALI_W)
             initial $error("in sqrt: IN_W > IN_ALI_W (%d, %d)", IN_W, IN_ALI_W);
     endgenerate

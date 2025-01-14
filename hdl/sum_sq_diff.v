@@ -3,14 +3,14 @@
 module sum_sq_diff # (
     parameter PIX_W = 8
 )(  
-    input                               clk, 
-    input     [PIX_W - 1  : 0]    top, 
-    input     [PIX_W - 1  : 0]    bot,  
-    input     [PIX_W - 1  : 0]    left,  
-    input     [PIX_W - 1  : 0]    right,
-    output reg signed [PIX_W : 0]       ver_diff, // the difference of vertical (bot - top)
-    output reg signed [PIX_W : 0]       hor_diff, // the difference of horizon (right - left)
-    output          [2 * PIX_W  : 0]    result
+    input                                   clk, 
+    input               [PIX_W - 1  : 0]    top, 
+    input               [PIX_W - 1  : 0]    bot,  
+    input               [PIX_W - 1  : 0]    left,  
+    input               [PIX_W - 1  : 0]    right,
+    output reg signed   [PIX_W      : 0]    ver_diff, // the difference of vertical (bot - top)
+    output reg signed   [PIX_W      : 0]    hor_diff, // the difference of horizon (right - left)
+    output              [2 * PIX_W  : 0]    result
 );
     // 
     reg [2 * PIX_W : 0]        ver_sq; // the square of ver_diff
