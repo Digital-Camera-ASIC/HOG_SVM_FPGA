@@ -18,7 +18,7 @@ module normalize #(
     localparam MAX_ADDR = 42;
     localparam CELL_NUM = 1200;
     localparam CNT_W = 11; // ceil log2(CELL_NUM)
-    localparam SQRT_W = SUM_W / 2 + 1;
+    localparam SQRT_W = SUM_W / 2 + 2;
     localparam LINE = 40;
     // shared mem for rd and wr
     reg [CNT_W - 1 : 0] cnt;

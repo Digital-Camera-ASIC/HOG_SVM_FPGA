@@ -1,10 +1,10 @@
 // pipeline sqrt
 // cycle for pipeline = width of output
 module sqrt #(
-    parameter   IN_W    = 18,
-    parameter   OUT_F   = 4,
-    integer     OUT_I   = $ceil(IN_W * 1.0 / 2),
-    localparam  OUT_W   = OUT_I + OUT_F
+    parameter           IN_W    = 18,
+    parameter           OUT_F   = 4,
+    localparam integer  OUT_I   = $ceil(IN_W * 1.0 / 2),
+    localparam          OUT_W   = OUT_I + OUT_F
 ) (
     input                       clk,
     input  [IN_W - 1    : 0]    in,

@@ -72,23 +72,30 @@ module mag_cal #(
         .b        (ver_diff),
         .o        (tan_w)
     );
-    integer i;
-    always @(posedge clk) begin
-        tan_r[0] <= tan_w;
-        for(i = 1; i <= pi_remain - 1; i = i + 1)
-            tan_r[i] <= tan_r[i - 1];
-    end
-
-    always @(posedge clk) begin
-        if(!rst) begin
-            for(i = 0; i <= pi_cycles - 1; i = i + 1)
-                valid_r[i] <= 0;
-        end else begin
-            valid_r[0] <= i_valid;
-            for(i = 1; i <= pi_cycles - 1; i = i + 1)
-                valid_r[i] <= valid_r[i - 1];
+    genvar i;
+    generate
+        always @(posedge clk) begin
+            tan_r[0] <= tan_w;
         end
-    end
+        for(i = 1; i <= pi_remain - 1; i = i + 1) begin
+            always @(posedge clk) begin
+                tan_r[i] <= tan_r[i - 1];
+            end
+        end
+    endgenerate
+    
+    generate;
+        always @(posedge clk) begin
+            if(!rst)  valid_r[0] <= 0;
+            else valid_r[0] <= i_valid;
+        end
+        for(i = 1; i <= pi_cycles - 1; i = i + 1) begin
+            always @(posedge clk) begin
+                if(!rst)  valid_r[i] <= 0;
+                else valid_r[i] <= valid_r[i - 1];
+            end
+        end
+    endgenerate
     assign o_valid = valid_r[pi_cycles - 1];
     assign tan = tan_r[pi_remain - 1];
 endmodule
