@@ -40,14 +40,14 @@ class base_driver extends uvm_driver #(base_item);
     vif.cb.ready <= 1;
     
     cnt++;
-
-    if (cnt == 1200) begin
+    if (cnt == 76800) begin
       repeat(5) begin
         @vif.cb;
         vif.cb.ready <= 0;
       end
       cnt = 0;
     end
+
   endtask
 
 endclass : base_driver

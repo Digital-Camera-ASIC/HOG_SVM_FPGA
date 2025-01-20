@@ -35,11 +35,7 @@ class base_monitor extends uvm_monitor;
     forever begin
       @vif.cb;
       if (vif.cb.o_valid) begin
-        trans_collected.fea_a = vif.cb.fea_a;
-        trans_collected.fea_b = vif.cb.fea_b;
-        trans_collected.fea_c = vif.cb.fea_c;
-        trans_collected.fea_d = vif.cb.fea_d;
-        trans_collected.bid = vif.cb.bid;
+        trans_collected.fea = vif.cb.fea;
         trans_collected.o_valid = vif.o_valid;
         $cast(temp_trans, trans_collected.clone());
         temp_trans.set_id_info(trans_collected);
