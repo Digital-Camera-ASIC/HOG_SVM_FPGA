@@ -43,6 +43,7 @@ class base_scoreboard extends uvm_scoreboard;
   real q_fea_d_golden[$][9];
   real q_fea_golden[$];
   real q_fea[$];
+  real q_fea_print[$];
 
   real temp;
   real sum;
@@ -58,7 +59,20 @@ class base_scoreboard extends uvm_scoreboard;
 
   function void extract_feature(real Gx_1[64], real Gx_2[64], real Gx_3[64], real Gx_4[64],
                                 real Gy_1[64], real Gy_2[64], real Gy_3[64], real Gy_4[64]);
-
+                              
+    $display("My debug");
+    for (int i = 0; i < 64; i++) begin
+      $display($sformatf("Gx_1[%0d]: %f, Gy_1[%0d]: %f", i, Gx_1[i], i, Gy_1[i]));
+    end
+    for (int i = 0; i < 64; i++) begin
+      $display($sformatf("Gx_2[%0d]: %f, Gy_2[%0d]: %f", i, Gx_2[i], i, Gy_2[i]));
+    end
+    for (int i = 0; i < 64; i++) begin
+      $display($sformatf("Gx_3[%0d]: %f, Gy_3[%0d]: %f", i, Gx_3[i], i, Gy_3[i]));
+    end
+    for (int i = 0; i < 64; i++) begin
+      $display($sformatf("Gx_4[%0d]: %f, Gy_4[%0d]: %f", i, Gx_4[i], i, Gy_4[i]));
+    end
     for(int i = 0; i < 64; i++) begin
       Magnitude_1[i] = $sqrt(Gx_1[i] ** 2 + Gy_1[i] ** 2);
       Magnitude_2[i] = $sqrt(Gx_2[i] ** 2 + Gy_2[i] ** 2);
@@ -169,19 +183,11 @@ class base_scoreboard extends uvm_scoreboard;
     right = item.data[7:0];
     $display("Count: %0d, Count pixel: %0d, Count_addr: %0d", cnt, cnt_pixel, cnt_addr);
     `uvm_info(get_type_name(), $sformatf("Top: %f, Bot: %f, Left: %f, Right: %f", top, bot, left, right), UVM_LOW)
-    Gx[cnt][cnt_pixel] = right - left;
-    Gy[cnt][cnt_pixel] = bot - top;
+    Gx[0][cnt_pixel] = right - left;
+    Gy[0][cnt_pixel] = bot - top;
 
     cnt_pixel = cnt_pixel + 1;
     if (cnt_pixel == 64) begin
-
-      for (int i = 41; i > 0; i--) begin
-        for (int j = 0; j < 64; j++) begin
-          Gx[i][j] = Gx[i-1][j];
-          Gy[i][j] = Gy[i-1][j];
-        end
-      end
-
       cnt_pixel = 0;
       cnt = cnt + 1;
       if (cnt == 42) begin
@@ -191,6 +197,10 @@ class base_scoreboard extends uvm_scoreboard;
           extract_feature(Gx[41], Gx[40], Gx[1], Gx[0], Gy[41], Gy[40], Gy[1], Gy[0]);
           cnt = cnt - 1;
         end
+      end
+      for (int i = 41; i > 0; i--) begin
+        Gx[i] = Gx[i-1];
+        Gy[i] = Gy[i-1];
       end
       cnt_addr = cnt_addr + 1;
     end
@@ -243,8 +253,18 @@ class base_scoreboard extends uvm_scoreboard;
   endfunction
 
   virtual function void extract_phase(uvm_phase phase);
+    q_fea_print = q_fea;
+    cnt_compare = q_fea_print.size();
+    $display("Size of queue: %0d", q_fea_print.size());
+    for (int i = 0; i < cnt_compare; i++) begin
+      $display($sformatf("Feature[%0d]: %f", i % 36, q_fea_print[0]));
+      q_fea_print.pop_front();
+      if (i % 36 == 35) begin
+        $display(" ");
+      end
+    end
+    cnt_compare = 0;
 
-    // $display("Tinh toan %f", $sqrt(40 * 1.0 / (40 + 41 + 80 + 81)));
     `uvm_info(get_type_name(), "Extract phase", UVM_LOW)
     `uvm_info(get_type_name(), $sformatf("queue drv size: %0d", q_fea_golden.size()), UVM_LOW)
     `uvm_info(get_type_name(), $sformatf("queue mon size: %0d", q_fea.size()), UVM_LOW)
@@ -258,77 +278,11 @@ class base_scoreboard extends uvm_scoreboard;
       end
       else begin
         `uvm_info(get_type_name(), $sformatf("PASS"), UVM_LOW)
+        `uvm_info(get_type_name(), $sformatf("Golden: %f, Actual: %f", q_fea_golden[0], q_fea[0]), UVM_LOW)
       end
       q_fea.pop_front();
       q_fea_golden.pop_front();
     end
-    // `uvm_info(get_type_name(), $sformatf("q_fea_a_golden size: %0d", q_fea_a_golden.size()),
-    //           UVM_LOW)
-    // `uvm_info(get_type_name(), $sformatf("q_fea_b_golden size: %0d", q_fea_b_golden.size()),
-    //           UVM_LOW)
-    // `uvm_info(get_type_name(), $sformatf("q_fea_c_golden size: %0d", q_fea_c_golden.size()),
-    //           UVM_LOW)
-    // `uvm_info(get_type_name(), $sformatf("q_fea_d_golden size: %0d", q_fea_d_golden.size()),
-    //           UVM_LOW)
-    // `uvm_info(get_type_name(), $sformatf("q_fea_a size: %0d", q_fea_a.size()), UVM_LOW)
-    // `uvm_info(get_type_name(), $sformatf("q_fea_b size: %0d", q_fea_b.size()), UVM_LOW)
-    // `uvm_info(get_type_name(), $sformatf("q_fea_c size: %0d", q_fea_c.size()), UVM_LOW)
-    // `uvm_info(get_type_name(), $sformatf("q_fea_d size: %0d", q_fea_d.size()), UVM_LOW)
-
-    // while (q_fea_a_golden.size() > 0 && q_fea_a.size() > 0) begin
-    //   cnt_compare = cnt_compare + 1;
-    //   $display($sformatf("Compare %0d", cnt_compare));
-    //   for (int i = 0; i < 9; i++) begin
-    //     if ((q_fea_a_golden[0][i] - q_fea_a[0][i]) > 1e-6 || (q_fea_a_golden[0][i] - q_fea_a[0][i]) < -1e-6) begin
-    //       `uvm_error(get_type_name(), $sformatf("Feature a[%0d] is not match", i))
-    //       `uvm_info(get_type_name(), $sformatf("Golden: %f, Actual: %f", q_fea_a_golden[0][i],
-    //                                            q_fea_a[0][i]), UVM_LOW)
-    //     end
-    //     else begin
-    //       `uvm_info(get_type_name(), $sformatf("Feature a[%0d] PASS", i), UVM_LOW)
-    //     end
-    //     if ((q_fea_b_golden[0][i] - q_fea_b[0][i]) > 1e-6 || (q_fea_b_golden[0][i] - q_fea_b[0][i]) < -1e-6) begin
-    //       `uvm_error(get_type_name(), $sformatf("Feature b[%0d] is not match", i))
-    //       `uvm_info(get_type_name(), $sformatf("Golden: %f, Actual: %f", q_fea_b_golden[0][i],
-    //                                            q_fea_b[0][i]), UVM_LOW)
-    //     end
-    //     else begin
-    //       `uvm_info(get_type_name(), $sformatf("Feature b[%0d] PASS", i), UVM_LOW)
-    //     end
-    //     if ((q_fea_c_golden[0][i] - q_fea_c[0][i]) > 1e-6 || (q_fea_c_golden[0][i] - q_fea_c[0][i]) < -1e-6) begin
-    //       `uvm_error(get_type_name(), $sformatf("Feature c[%0d] is not match", i))
-    //       `uvm_info(get_type_name(), $sformatf("Golden: %f, Actual: %f", q_fea_c_golden[0][i],
-    //                                            q_fea_c[0][i]), UVM_LOW)
-    //     end
-    //     else begin
-    //       `uvm_info(get_type_name(), $sformatf("Feature c[%0d] PASS", i), UVM_LOW)
-    //     end
-    //     if ((q_fea_d_golden[0][i] - q_fea_d[0][i]) > 1e-6 || (q_fea_d_golden[0][i] - q_fea_d[0][i]) < -1e-6) begin
-    //       `uvm_error(get_type_name(), $sformatf("Feature d[%0d] is not match", i))
-    //       `uvm_info(get_type_name(), $sformatf("Golden: %f, Actual: %f", q_fea_d_golden[0][i],
-    //                                            q_fea_d[0][i]), UVM_LOW)
-    //     end
-    //     else begin
-    //       `uvm_info(get_type_name(), $sformatf("Feature d[%0d] PASS", i), UVM_LOW)
-    //     end
-    //   end
-    //   q_fea_a.pop_front();
-    //   q_fea_b.pop_front();
-    //   q_fea_c.pop_front();
-    //   q_fea_d.pop_front();
-    //   q_fea_a_golden.pop_front();
-    //   q_fea_b_golden.pop_front();
-    //   q_fea_c_golden.pop_front();
-    //   q_fea_d_golden.pop_front();
-    // end
-
-
-
-    // TEST 
-
-
-
-
   endfunction
 
 
