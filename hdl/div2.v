@@ -1,7 +1,7 @@
 // module div: o = a / b
 // a signed, b signed, o signed
 
-module div #(
+module div2 #(
     parameter   A_W     = 9,
     parameter   B_W     = 9,
     parameter   O_I_W   = 4, // output integer width
@@ -9,13 +9,13 @@ module div #(
     localparam  O_W     = O_I_W + O_F_W // output width
 ) (
     input clk,
-    input signed    [A_W - 1 : 0] a,
-    input signed    [B_W - 1 : 0] b,
+    input     [A_W - 1 : 0] a,
+    input     [B_W - 1 : 0] b,
     output          [O_W - 1 : 0] o
 );
     reg [O_W - 1 : 0] o_r;
-    wire signed [A_W + O_F_W - 1 : 0] a_w;
-    wire signed [A_W + O_F_W - 1 : 0] temp;
+    wire  [A_W + O_F_W - 1 : 0] a_w;
+    wire  [A_W + O_F_W - 1 : 0] temp;
     assign a_w = a << O_F_W;
     assign temp = a_w / b;
     always @(posedge clk) begin
