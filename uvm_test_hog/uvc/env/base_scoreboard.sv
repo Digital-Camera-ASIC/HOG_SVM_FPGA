@@ -9,7 +9,7 @@ class base_scoreboard extends uvm_scoreboard;
   `define DEBUG 1
 
   parameter real pi = 3.141592653589793;
-  parameter real epsilon = 1e-6;
+  parameter real epsilon = 0.00390625;
 
   real Gx[42][64];
   real Gy[42][64];
@@ -246,6 +246,22 @@ class base_scoreboard extends uvm_scoreboard;
 
     // $display("Tinh toan %f", $sqrt(40 * 1.0 / (40 + 41 + 80 + 81)));
     `uvm_info(get_type_name(), "Extract phase", UVM_LOW)
+    `uvm_info(get_type_name(), $sformatf("queue drv size: %0d", q_fea_golden.size()), UVM_LOW)
+    `uvm_info(get_type_name(), $sformatf("queue mon size: %0d", q_fea.size()), UVM_LOW)
+
+    while (q_fea_golden.size() > 0 && q_fea.size() > 0) begin
+      cnt_compare = cnt_compare + 1;
+      $display($sformatf("Compare %0d", cnt_compare));
+      if ((q_fea_golden[0] - q_fea[0]) > 1e-2 || (q_fea_golden[0] - q_fea[0]) < -1e-2) begin
+        `uvm_error(get_type_name(), $sformatf("Feature is not match"))
+        `uvm_info(get_type_name(), $sformatf("Golden: %f, Actual: %f", q_fea_golden[0], q_fea[0]), UVM_LOW)
+      end
+      else begin
+        `uvm_info(get_type_name(), $sformatf("PASS"), UVM_LOW)
+      end
+      q_fea.pop_front();
+      q_fea_golden.pop_front();
+    end
     // `uvm_info(get_type_name(), $sformatf("q_fea_a_golden size: %0d", q_fea_a_golden.size()),
     //           UVM_LOW)
     // `uvm_info(get_type_name(), $sformatf("q_fea_b_golden size: %0d", q_fea_b_golden.size()),
