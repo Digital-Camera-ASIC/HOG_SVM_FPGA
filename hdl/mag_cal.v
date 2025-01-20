@@ -68,8 +68,8 @@ module mag_cal #(
         // output fraction width
     ) u_div (
         .clk      (clk),
-        .a        (hor_diff),
-        .b        (ver_diff),
+        .a        (ver_diff),
+        .b        (hor_diff),
         .o        (tan_w)
     );
     genvar i;
