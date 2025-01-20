@@ -18,8 +18,11 @@ module normalize #(
     localparam MAX_ADDR = 42;
     localparam CELL_NUM = 1200;
     localparam CNT_W = 11; // ceil log2(CELL_NUM)
-    localparam SQRT_W = SUM_W / 2 + 2;
+    localparam QUO_I = 0;
+    localparam QUO_F = FEA_F * 2;
+    localparam QUO_W = QUO_I + QUO_F;
     localparam LINE = 40;
+    localparam epsilon = 12'h1;
     // shared mem for rd and wr
     reg [CNT_W - 1 : 0] cnt;
     always @(posedge clk) begin
@@ -50,9 +53,8 @@ module normalize #(
         else
             cnt_after_valid <= cnt_after_valid + 1;
     end
-    localparam wait_cycle_for_div = 20;
 
-    localparam div_with_fea_a = 6 + wait_cycle_for_div;
+    localparam div_with_fea_a = 8;
     localparam div_with_fea_b = div_with_fea_a + 9;
     localparam div_with_fea_c = div_with_fea_b + 9;
     localparam div_with_fea_d = div_with_fea_c + 9;
@@ -106,19 +108,9 @@ module normalize #(
         else if(accumulate)
             sum <= sum + b_sum;
         else
-            sum <= b_sum;
+            sum <= b_sum + epsilon;
     end
     
-    // sqare root of sum (output): width 13 (int-9, frac-4)
-    wire [SQRT_W - 1 : 0] sqrt_sum; 
-    sqrt #(
-        .IN_W     (SUM_W),
-        .OUT_F    (2)
-    ) u_sqrt (
-        .clk      (clk),
-        .in       (sum),
-        .out      (sqrt_sum)
-    );
     wire [BIN_W - 1 : 0] dividend;
     assign dividend = (!(cnt_after_valid % 9)) ? o_data[0 +: 20] :
         (cnt_after_valid % 9 == 1) ? o_data[20 +: 20] :
@@ -128,21 +120,36 @@ module normalize #(
         (cnt_after_valid % 9 == 5) ? o_data[100 +: 20] :
         (cnt_after_valid % 9 == 6) ? o_data[120 +: 20] :
         (cnt_after_valid % 9 == 7) ? o_data[140 +: 20] : o_data[160 +: 20];
+    wire [QUO_W - 1 : 0] quotient; 
 
     div2 #(
         .A_W      (BIN_W),
-        .B_W      (SQRT_W),
-        .O_I_W    (FEA_I),
+        .B_W      (SUM_W),
+        .O_I_W    (QUO_I),
         // output integer width
-        .O_F_W    (FEA_F)
+        .O_F_W    (QUO_F)
         // output integer width
     ) u_div2 (
         .clk      (clk),
         .a        (dividend),
-        .b        (sqrt_sum),
-        .o        (fea)
+        .b        (sum),
+        .o        (quotient)
     );
-    localparam s_valid_time = div_with_fea_a + 2;
+
+    // sqare root of quotient (output): width 8 (int-0, frac-8)
+    wire [QUO_W / 2 - 1 : 0] sqrt_q;
+    sqrt #(
+        .IN_W     (QUO_W),
+        .OUT_F    (0)
+    ) u_sqrt (
+        .clk      (clk),
+        .in       (quotient),
+        .out      (sqrt_q)
+    );
+    
+    assign fea = {4'b0, sqrt_q};
+    
+    localparam s_valid_time = div_with_fea_a + 11;
     localparam e_valid_time = s_valid_time + 36;
     assign o_valid = (cnt >= MAX_ADDR && s_valid_time <= cnt_after_valid && cnt_after_valid < e_valid_time && cnt % LINE != 1);
     // function lists
