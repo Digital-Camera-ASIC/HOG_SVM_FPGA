@@ -129,14 +129,14 @@ module normalize #(
         (cnt_after_valid % 9 == 6) ? o_data[120 +: 20] :
         (cnt_after_valid % 9 == 7) ? o_data[140 +: 20] : o_data[160 +: 20];
 
-    div #(
+    div2 #(
         .A_W      (BIN_W),
         .B_W      (SQRT_W),
         .O_I_W    (FEA_I),
         // output integer width
         .O_F_W    (FEA_F)
         // output integer width
-    ) u_div (
+    ) u_div2 (
         .clk      (clk),
         .a        (dividend),
         .b        (sqrt_sum),
