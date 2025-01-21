@@ -16,8 +16,9 @@ module bin_cal #(
     output  [BIN_W * 9 - 1  : 0]    bin
 
 );
+    localparam  CODE_W  = 4;
     reg [BIN_W - 1 : 0] bin_r [0 : 8]; // bin[0] for 0-20, 1 for 20-40,...
-    wire [2 : 0] code;
+    wire [CODE_W - 1 : 0] code;
     wire [5 : 0] cnt;
 
     bin_ctr u_bin_ctr (

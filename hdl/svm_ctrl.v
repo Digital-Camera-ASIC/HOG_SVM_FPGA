@@ -1,42 +1,29 @@
 // svm controller
 module svm_ctrl #(
-    parameter SW_W = 11 // slide window width
+    parameter   SW_W    = 11, // slide window width
+    localparam  ADDR_W  = 6 // ceil of log2(36)
 ) (
-    input                   clk,
-    input                   rst,
-    input                   i_valid,
-    output                  o_valid,
-    output [SW_W - 1 : 0]   sw_id // slide window index
+    input                           clk,
+    input                           rst,
+    input                           i_valid,
+    // control ram
+    output reg  [ADDR_W - 1 : 0]    addr_b,  
+    // control PE
+    output                          init,
+    output                          accumulate,
+    // output info
+    output      [SW_W - 1   : 0]    sw_id, // slide window index
+    output                          o_valid // slide window index
 );
-    localparam MAX_SW = 1130;
-    localparam COL_N = 39;
-    localparam TH_ROW_SW = 14 * COL_N; // threshold row of slide window
-    localparam TH_COL_SW = 6; // threshold columm of slide window
-
-    reg i_valid_r;
-    
-    reg [SW_W - 1 : 0] cnt;
-    wire [SW_W - 1 : 0] cnt_n;
-    
-    wire row_valid;
-    wire col_valid;
-
+    localparam MAX_ADDR = 36;
     always @(posedge clk) begin
-        if(!rst) i_valid_r <= 0;
-        else i_valid_r <= i_valid;
+        if (~rst) begin
+            addr_b <= 0;
+        end else if (i_valid) begin
+            if(addr_b == MAX_ADDR)
+                addr_b <= 0;
+            else
+                addr_b <= addr_b + 1'b1;
+        end
     end
-    always @(posedge clk) begin
-        if(!rst) cnt <= 0;
-        else cnt <= cnt_n;
-    end
-    
-    assign cnt_n = 
-        (!i_valid_r) ? cnt :
-        (cnt == MAX_SW) ? 0 : cnt + 1'b1;
-    
-
-    assign row_valid = cnt >= TH_ROW_SW;
-    assign col_valid = (cnt % COL_N) >= TH_COL_SW;
-    assign o_valid = row_valid & col_valid & i_valid_r;
-    assign sw_id = cnt;
 endmodule
