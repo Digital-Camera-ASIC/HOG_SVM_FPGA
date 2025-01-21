@@ -3,7 +3,7 @@ module mag_cal #(
     parameter   PIX_W = 8, // pixel width
     parameter   MAG_F = 4,// fraction part of magnitude
     parameter   TAN_I = 4, // tan integer (signed number)
-    parameter   TAN_F = 8, // tan fraction
+    parameter   TAN_F = 16, // tan fraction
     localparam  MAG_I = PIX_W + 1, // integer part of magnitude
     localparam  MAG_W = MAG_I + MAG_F,
     localparam  TAN_W = TAN_I + TAN_F

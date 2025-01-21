@@ -2,7 +2,7 @@ module hog #(
     parameter   PIX_W   = 8, // pixel width
     parameter   MAG_F   = 4,// fraction part of magnitude
     parameter   TAN_I   = 4, // tan width
-    parameter   TAN_F   = 8, // tan width
+    parameter   TAN_F   = 16, // tan width
     parameter   BIN_I   = 16, // integer part of bin
     parameter   FEA_I   = 4, // integer part of hog feature
     parameter   FEA_F   = 8, // fractional part of hog feature
