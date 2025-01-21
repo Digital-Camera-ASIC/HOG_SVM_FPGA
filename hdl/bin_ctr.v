@@ -1,6 +1,6 @@
 module bin_ctr #(
     localparam  TAN_W   = 12,
-    localparam  CODE_W  = 3,
+    localparam  CODE_W  = 4,
     localparam  CNT_W   = 6,
     localparam  MAX_CNT = 64
 )(

@@ -2,15 +2,16 @@
 // port a: write - read data
 // port b: only read data
 module dp_ram2 #(
-  parameter   DATA_W  = 180,
+  parameter   DATA_W  = 12 * 105,
   parameter   ADDR_W  = 6
 ) (
   input                         clk,
-  input                         write_en,
   input       [ADDR_W - 1 : 0]  addr_a,
-  input       [ADDR_W - 1 : 0]  addr_b,
+  input                         write_en,
   input       [DATA_W - 1 : 0]  i_data,
-  output reg  [DATA_W - 1 : 0]  o_data
+  output reg  [DATA_W - 1 : 0]  o_data_a,
+  input       [ADDR_W - 1 : 0]  addr_b,
+  output reg  [DATA_W - 1 : 0]  o_data_b
 );
   localparam MEM_S = 2 ** ADDR_W;
   reg [DATA_W - 1 : 0] ram [MEM_S - 1 : 0];
@@ -21,11 +22,15 @@ module dp_ram2 #(
   end  
   // input port
   always @(posedge clk) begin 
-    if (write_en)   
+    if (write_en) begin
       ram[addr_a] <= i_data;
+      o_data_a <= i_data;
+    end else begin
+      o_data_a <= ram[addr_a];
+    end
   end
   // output port
   always @(posedge clk) begin 
-    o_data <= ram[addr_b];
+    o_data_b <= ram[addr_b];
   end
 endmodule

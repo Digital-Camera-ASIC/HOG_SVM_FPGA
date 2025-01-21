@@ -50,10 +50,55 @@ module tb_hog;
         rst = 1;
     endtask
     task driver;
-        top = $urandom();
-        bot = $urandom();
-        left = $urandom();
-        right = $urandom();
+        top = 'h83;
+        bot = 'h78;
+        left = 'h26;
+        right = 'h57;
+        repeat (64) begin
+            @(posedge clk);
+            #0.01;
+            i_data <= {top, bot, left, right};
+            ready <= 1;
+        end
+        //
+        top = 0;
+        bot = 9;
+        left = 0;
+        right = 6;
+        repeat (64) begin
+            @(posedge clk);
+            #0.01;
+            i_data <= {top, bot, left, right};
+            ready <= 1;
+        end
+        repeat (64*38) begin
+            @(posedge clk);
+            #0.01;
+            i_data <= {top, bot, left, right};
+            ready <= 1;
+        end
+        
+        top = 0;
+        bot = 48;
+        left = 0;
+        right = 45;
+        repeat (64) begin
+            @(posedge clk);
+            #0.01;
+            i_data <= {top, bot, left, right};
+            ready <= 1;
+        end
+        //
+        top = 0;
+        bot = 49;
+        left = 0;
+        right = 46;
+        repeat (64) begin
+            @(posedge clk);
+            #0.01;
+            i_data <= {top, bot, left, right};
+            ready <= 1;
+        end
         forever begin
             @(posedge clk);
             #0.01;
