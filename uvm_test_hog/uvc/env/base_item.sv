@@ -16,10 +16,18 @@ class base_item extends uvm_sequence_item;
     `uvm_field_int(fea, UVM_ALL_ON);
   `uvm_object_utils_end
 
+  // constraint data_range{
+  //   data_temp[0] < 7;
+  //   data_temp[1] < 7;
+  //   data_temp[2] < 7;
+  //   data_temp[3] < 7;
+  // }
+
   function new(string name = "base_item");
     super.new(name);
   endfunction
   
+
   function void post_randomize();
     $display("Enter post_randomize");
     for (int i = 0; i < 4; i++) begin

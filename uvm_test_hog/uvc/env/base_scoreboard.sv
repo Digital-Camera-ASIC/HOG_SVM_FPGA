@@ -60,19 +60,19 @@ class base_scoreboard extends uvm_scoreboard;
   function void extract_feature(real Gx_1[64], real Gx_2[64], real Gx_3[64], real Gx_4[64],
                                 real Gy_1[64], real Gy_2[64], real Gy_3[64], real Gy_4[64]);
                               
-    $display("My debug");
-    for (int i = 0; i < 64; i++) begin
-      $display($sformatf("Gx_1[%0d]: %f, Gy_1[%0d]: %f", i, Gx_1[i], i, Gy_1[i]));
-    end
-    for (int i = 0; i < 64; i++) begin
-      $display($sformatf("Gx_2[%0d]: %f, Gy_2[%0d]: %f", i, Gx_2[i], i, Gy_2[i]));
-    end
-    for (int i = 0; i < 64; i++) begin
-      $display($sformatf("Gx_3[%0d]: %f, Gy_3[%0d]: %f", i, Gx_3[i], i, Gy_3[i]));
-    end
-    for (int i = 0; i < 64; i++) begin
-      $display($sformatf("Gx_4[%0d]: %f, Gy_4[%0d]: %f", i, Gx_4[i], i, Gy_4[i]));
-    end
+    // $display("My debug");
+    // for (int i = 0; i < 64; i++) begin
+    //   $display($sformatf("Gx_1[%0d]: %f, Gy_1[%0d]: %f", i, Gx_1[i], i, Gy_1[i]));
+    // end
+    // for (int i = 0; i < 64; i++) begin
+    //   $display($sformatf("Gx_2[%0d]: %f, Gy_2[%0d]: %f", i, Gx_2[i], i, Gy_2[i]));
+    // end
+    // for (int i = 0; i < 64; i++) begin
+    //   $display($sformatf("Gx_3[%0d]: %f, Gy_3[%0d]: %f", i, Gx_3[i], i, Gy_3[i]));
+    // end
+    // for (int i = 0; i < 64; i++) begin
+    //   $display($sformatf("Gx_4[%0d]: %f, Gy_4[%0d]: %f", i, Gx_4[i], i, Gy_4[i]));
+    // end
     for(int i = 0; i < 64; i++) begin
       Magnitude_1[i] = $sqrt(Gx_1[i] ** 2 + Gy_1[i] ** 2);
       Magnitude_2[i] = $sqrt(Gx_2[i] ** 2 + Gy_2[i] ** 2);
@@ -102,19 +102,19 @@ class base_scoreboard extends uvm_scoreboard;
     end
     `ifdef DEBUG
       for (int i = 0; i < 64; i++) begin
-        $display($sformatf("Gx_1[%2d]: %10.6f, Gy_1[%2d]: %10.6f, Magnitude_1[%2d]: %10.6f, Orientation_1[%2d]: %10.6f, In bin[%2d]: %10.6f", i, Gx_1[i], i, Gy_1[i], i, Magnitude_1[i], i, Orientation_1[i], i, int'(Orientation_1[i] / 20) % 9));
+        $display($sformatf("Gx_1[%2d]: %10.6f, Gy_1[%2d]: %10.6f, Magnitude_1[%2d]: %10.6f, Orientation_1[%2d]: %10.6f, In bin[%2d]: %10.6f", i, Gx_1[i], i, Gy_1[i], i, Magnitude_1[i], i, Orientation_1[i], i, int'($floor(Orientation_1[i] / 20)) % 9));
       end
         $display(" ");
       for (int i = 0; i < 64; i++) begin
-        $display($sformatf("Gx_2[%2d]: %10.6f, Gy_2[%2d]: %10.6f, Magnitude_2[%2d]: %10.6f, Orientation_2[%2d]: %10.6f, In bin[%2d]: %10.6f", i, Gx_2[i], i, Gy_2[i], i, Magnitude_2[i], i, Orientation_2[i], i, int'(Orientation_2[i] / 20) % 9));
+        $display($sformatf("Gx_2[%2d]: %10.6f, Gy_2[%2d]: %10.6f, Magnitude_2[%2d]: %10.6f, Orientation_2[%2d]: %10.6f, In bin[%2d]: %10.6f", i, Gx_2[i], i, Gy_2[i], i, Magnitude_2[i], i, Orientation_2[i], i, int'($floor(Orientation_2[i] / 20)) % 9));
       end
         $display(" ");
       for (int i = 0; i < 64; i++) begin
-        $display($sformatf("Gx_3[%2d]: %10.6f, Gy_3[%2d]: %10.6f, Magnitude_3[%2d]: %10.6f, Orientation_3[%2d]: %10.6f, In bin[%2d]: %10.6f", i, Gx_3[i], i, Gy_3[i], i, Magnitude_3[i], i, Orientation_3[i], i, int'(Orientation_3[i] / 20) % 9));
+        $display($sformatf("Gx_3[%2d]: %10.6f, Gy_3[%2d]: %10.6f, Magnitude_3[%2d]: %10.6f, Orientation_3[%2d]: %10.6f, In bin[%2d]: %10.6f", i, Gx_3[i], i, Gy_3[i], i, Magnitude_3[i], i, Orientation_3[i], i, int'($floor(Orientation_3[i] / 20)) % 9));
       end
         $display(" ");
       for (int i = 0; i < 64; i++) begin
-        $display($sformatf("Gx_4[%2d]: %10.6f, Gy_4[%2d]: %10.6f, Magnitude_4[%2d]: %10.6f, Orientation_4[%2d]: %10.6f, In bin[%2d]: %10.6f", i, Gx_4[i], i, Gy_4[i], i, Magnitude_4[i], i, Orientation_4[i], i, int'(Orientation_4[i] / 20) % 9));
+        $display($sformatf("Gx_4[%2d]: %10.6f, Gy_4[%2d]: %10.6f, Magnitude_4[%2d]: %10.6f, Orientation_4[%2d]: %10.6f, In bin[%2d]: %10.6f", i, Gx_4[i], i, Gy_4[i], i, Magnitude_4[i], i, Orientation_4[i], i, int'($floor(Orientation_4[i] / 20)) % 9));
       end
         $display(" ");
     `endif
