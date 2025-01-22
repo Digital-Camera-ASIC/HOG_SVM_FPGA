@@ -46,7 +46,7 @@ module mag_cal #(
 
     // magnitude valid after 13 cycles --> from pixel to mag costs 16 cycles
     localparam pi_cycles = 16; // total pipeline cycles
-    localparam pi_remain = pi_cycles - 2;
+    localparam pi_remain = pi_cycles - 4;
     wire [TAN_W - 1 : 0] tan_w;
     reg [TAN_W - 1 : 0] tan_r [0 : pi_remain - 1];
     reg valid_r [0 : pi_cycles - 1];
