@@ -17,17 +17,20 @@ module div #(
     wire signed [A_W + O_F_W - 1 : 0] a_w;
     reg signed [A_W + O_F_W - 1 : 0] temp;
     assign a_w = a << O_F_W;
-    reg [O_I_W - 1 : 0] int_part;
+    reg [O_I_W - 1 : 0] temp2;
 
+    localparam signed tan80 = 20'h5ABD9;
+    localparam signed tan100 = 20'hA5427;
     always @(posedge clk) begin
         temp <= a_w / b;
-        int_part <= (temp[O_F_W +: (A_W - 1)] > 7) ? 7 : temp[O_F_W +: (A_W - 1)];
+        temp2 <= (temp > tan80) ? tan80 :
+            (temp < tan100) ? tan100 : temp;
         if(b == 0 && a[A_W - 1] == 0)
             o_r <= {1'b0, {(O_W - 1){1'b1}}};
         else if (b == 0 && a[A_W - 1] == 1)
             o_r <= {1'b1, {(O_W - 2){1'b0}}, 1'b1};
         else 
-            o_r <= {temp[A_W + O_F_W - 1], int_part, temp[O_F_W - 1 : 0]};
+            o_r <= temp2;
     end
 
     assign o = o_r;
