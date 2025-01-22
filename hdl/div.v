@@ -20,7 +20,7 @@ module div #(
     reg [O_W - 1 : 0] temp2;
 
     localparam signed tan80 = 20'h5ABD9;
-    localparam signed tan100 = 20'hA5427;
+    localparam signed tan100 = 20'hA5426;
     always @(posedge clk) begin
         temp <= a_w / b;
         temp2 <= (temp > tan80) ? tan80 :
