@@ -17,7 +17,7 @@ module div #(
     wire signed [A_W + O_F_W - 1 : 0] a_w;
     reg signed [A_W + O_F_W - 1 : 0] temp;
     assign a_w = a << O_F_W;
-    reg [O_I_W - 1 : 0] temp2;
+    reg [O_W - 1 : 0] temp2;
 
     localparam signed tan80 = 20'h5ABD9;
     localparam signed tan100 = 20'hA5427;
