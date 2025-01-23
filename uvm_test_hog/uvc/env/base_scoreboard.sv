@@ -6,7 +6,7 @@ class base_scoreboard extends uvm_scoreboard;
   uvm_analysis_imp_mon #(base_item, base_scoreboard) mon_item_collected_export;
   `uvm_component_utils(base_scoreboard)
 
-  `define DEBUG 1
+  // `define DEBUG 1
 
   parameter real pi = 3.141592653589793;
   parameter real epsilon = 0.00390625;
@@ -18,6 +18,7 @@ class base_scoreboard extends uvm_scoreboard;
   real bot;
   real left;
   real right;
+  real orientation;
 
   real Magnitude_1[64];
   real Magnitude_2[64];
@@ -155,7 +156,7 @@ class base_scoreboard extends uvm_scoreboard;
     // `ifdef DEBUG
       for (int i = 0; i < 36; i++) begin
         q_fea_golden.push_back(temp_fea[i]);
-        $display($sformatf("temp_fea[%0d]: %f", i, temp_fea[i]));
+        // $display($sformatf("temp_fea[%0d]: %f", i, temp_fea[i]));
       end
     // `endif 
 
@@ -174,18 +175,21 @@ class base_scoreboard extends uvm_scoreboard;
 
 
   virtual function void write_drv(base_item item);
-    `uvm_info(get_type_name(), $sformatf("Captured packet from drv %s", item.sprint()), UVM_LOW)
+    // `uvm_info(get_type_name(), $sformatf("Captured packet from drv %s", item.sprint()), UVM_LOW)
 
     // if (item.i_valid == 1) begin
     top = item.data[31:24];
     bot = item. data [23:16];
     left = item.data [15:8];
     right = item.data[7:0];
-    $display("Count: %0d, Count pixel: %0d, Count_addr: %0d", cnt, cnt_pixel, cnt_addr);
+
+    orientation = ($atan2(bot - top, right - left) * 180 / pi >= 0) ? $atan2(bot - top, right - left) * 180 / pi : $atan2(bot - top, right - left) * 180 / pi + 180;
+
+    // $display("Count: %0d, Count pixel: %0d, Count_addr: %0d", cnt, cnt_pixel, cnt_addr);
     `uvm_info(get_type_name(), $sformatf("Top: %f, Bot: %f, Left: %f, Right: %f", top, bot, left, right), UVM_LOW)
     Gx[0][cnt_pixel] = right - left;
     Gy[0][cnt_pixel] = bot - top;
-
+    // $display($sformatf("Gx: %f, Gy: %f, In bin[%d]: %f", right - left, bot - top, cnt_pixel, int'($floor(orientation / 20)) % 9));
     cnt_pixel = cnt_pixel + 1;
     if (cnt_pixel == 64) begin
       cnt_pixel = 0;
@@ -194,9 +198,10 @@ class base_scoreboard extends uvm_scoreboard;
         // Do extraction
         if (cnt_addr % 40 != 0) begin
           `uvm_info(get_type_name(), "Feature valid message", UVM_LOW)
+          $display("Count_addr: %0d", cnt_addr);
           extract_feature(Gx[41], Gx[40], Gx[1], Gx[0], Gy[41], Gy[40], Gy[1], Gy[0]);
-          cnt = cnt - 1;
         end
+        cnt = cnt - 1;
       end
       for (int i = 41; i > 0; i--) begin
         Gx[i] = Gx[i-1];
@@ -204,65 +209,27 @@ class base_scoreboard extends uvm_scoreboard;
       end
       cnt_addr = cnt_addr + 1;
     end
-    // end
-
-
-
-
-    // $display($sformatf("item.data[9]: %h", item.data_temp[9]));
-    // // if (item.i_valid == 1) begin
-    // for (int j = 41; j > 0; j--) begin
-    //   fifo[j] = fifo[j-1];
-    // end
-    // fifo[0] = item.data;
-    // cnt = cnt + 1;
-    // `ifdef DEBUG
-    //   $display($sformatf("cnt = %0d", cnt));
-    //   for (int i = 0; i < cnt; i++) begin
-    //     $display($sformatf("FIFO[%0d]: %h", i, fifo[i]));
-    //   end
-    // `endif
-    // if (cnt == 42) begin
-    //   // Tinh toan feature de so sanh
-    //   if (cnt_addr % 40 != 0) begin
-    //     `uvm_info(get_type_name(), "Feature valid message", UVM_LOW)
-    //     data_1 = fifo[41];
-    //     data_2 = fifo[40];
-    //     data_3 = fifo[1];
-    //     data_4 = fifo[0];
-    //     extract_feature(data_1, data_2, data_3, data_4);
-    //   end
-    //   cnt = cnt - 1;
-    // end
-    // cnt_addr++;
-
-    // if (cnt_addr == 1200) begin
-    //   cnt = 0;
-    //   cnt_addr = 0;
-    //   for (int i = 0; i < 42; i++) begin
-    //     fifo[i] = 0;
-    //   end
-    // end
-    // end
+    
   endfunction
 
   virtual function void write_mon(base_item item);
-    `uvm_info(get_type_name(), $sformatf("Captured packet from mon %s", item.sprint()), UVM_LOW)
+    // `uvm_info(get_type_name(), $sformatf("Captured packet from mon %s", item.sprint()), UVM_LOW)
     q_fea.push_back(1.0 * (item.fea) / 2**8);
-    $display($sformatf("Feature_mon: %f", 1.0 * (item.fea) / 2**8));
+    // $display($sformatf("Feature_mon: %f", 1.0 * (item.fea) / 2**8));
   endfunction
 
   virtual function void extract_phase(uvm_phase phase);
     q_fea_print = q_fea;
     cnt_compare = q_fea_print.size();
     $display("Size of queue: %0d", q_fea_print.size());
-    for (int i = 0; i < cnt_compare; i++) begin
-      $display($sformatf("Feature[%0d]: %f", i % 36, q_fea_print[0]));
-      q_fea_print.pop_front();
-      if (i % 36 == 35) begin
-        $display(" ");
-      end
-    end
+    // $display("Size of queue_mon: %0d", q_fea.size());
+    // for (int i = 0; i < cnt_compare; i++) begin
+    //   $display($sformatf("Feature[%0d]: %f", i % 36, q_fea_print[0]));
+    //   q_fea_print.pop_front();
+    //   if (i % 36 == 35) begin
+    //     $display(" ");
+    //   end
+    // end
     cnt_compare = 0;
 
     `uvm_info(get_type_name(), "Extract phase", UVM_LOW)

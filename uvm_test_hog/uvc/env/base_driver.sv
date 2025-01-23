@@ -22,7 +22,7 @@ class base_driver extends uvm_driver #(base_item);
   task run_phase(uvm_phase phase);
     forever begin
       seq_item_port.get_next_item(b_item);
-      `uvm_info("run_phase", $sformatf("Start driver: %s", b_item.sprint()), UVM_LOW)
+      // `uvm_info("run_phase", $sformatf("Start driver: %s", b_item.sprint()), UVM_LOW)
       $cast(rsp, b_item.clone());
       rsp.set_id_info(b_item);
       drive_item(rsp);
@@ -36,7 +36,7 @@ class base_driver extends uvm_driver #(base_item);
     wait (vif.request);
     @vif.cb;
     vif.cb.i_data <= item.data;
-    `uvm_info("DEBUG-DRIVER", $sformatf("data: %h", item.data), UVM_LOW)
+    // `uvm_info("DEBUG-DRIVER", $sformatf("data: %h", item.data), UVM_LOW)
     vif.cb.ready <= 1;
     
     cnt++;
