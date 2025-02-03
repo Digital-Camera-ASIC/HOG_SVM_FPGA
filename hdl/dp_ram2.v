@@ -2,8 +2,8 @@
 // port a: write - read data
 // port b: only read data
 module dp_ram2 #(
-  parameter   DATA_W  = 12 * 105,
-  parameter   ADDR_W  = 6
+  parameter   DATA_W  = 12,
+  parameter   ADDR_W  = 5
 ) (
   input                         clk,
   input       [ADDR_W - 1 : 0]  addr_a,
