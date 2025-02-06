@@ -12,13 +12,13 @@ module tb_div;
 
     logic [8:0] a;
     logic [8:0] b;
-    logic signed [11:0] o;
+    logic signed [19:0] o;
     div #(
         .A_W      (9),
         .B_W      (9),
         .O_I_W    (4),
         // output integer width
-        .O_F_W    (8)
+        .O_F_W    (16)
         // output integer width
     ) u_div (
         .clk      (clk),

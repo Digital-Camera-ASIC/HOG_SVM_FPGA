@@ -15,11 +15,7 @@ module dp_ram2 #(
 );
   localparam MEM_S = 2 ** ADDR_W;
   reg [DATA_W - 1 : 0] ram [MEM_S - 1 : 0];
-  integer i;
-  initial begin
-    for(i = 0; i < MEM_S; i = i + 1)
-      ram[i] = 0;
-  end  
+
   // input port
   always @(posedge clk) begin 
     if (write_en) begin

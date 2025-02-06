@@ -13,12 +13,15 @@ module svm_pe #(
     input signed    [FEA_W - 1  : 0]    i_data,
     output reg      [FEA_W - 1  : 0]    o_data
 );
-    reg [FEA_W * 2 - 1  : 0] acc_mult;
+    reg signed    [FEA_W - 1  : 0]    fea_r;
+    reg signed [FEA_W * 2 - 1  : 0] acc_mult;
+
     always @(posedge clk) begin
+        fea_r <= fea;
         if(init)
-            acc_mult <= fea * coef;
+            acc_mult <= fea_r * coef;
         else
-            acc_mult <= fea * coef + acc_mult;
+            acc_mult <= fea_r * coef + acc_mult;
     end
     wire signed [FEA_W - 1  : 0] acc_mult_w;
     assign acc_mult_w = acc_mult[FEA_F +: FEA_W];

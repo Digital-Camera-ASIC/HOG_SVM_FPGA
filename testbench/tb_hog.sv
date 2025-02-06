@@ -1,45 +1,114 @@
 `timescale 1ns/1ps
+
 `define CLK_GEN(clk, cycle)\
     initial begin\
         clk = 0;\
         forever clk = #(cycle/2.0)  ~clk;\
     end
 module tb_hog;
-    reg clk;
-    reg rst;
-    reg [31 : 0] i_data;
-    reg ready;
+    parameter   PIX_W   = 8; // pixel width
+    parameter   MAG_F   = 4;// fraction part of magnitude
+    parameter   TAN_I   = 4; // tan width
+    parameter   TAN_F   = 16; // tan width
+    parameter   BIN_I   = 16; // integer part of bin
+    parameter   FEA_I   = 4; // integer part of hog feature
+    parameter   FEA_F   = 8; // fractional part of hog feature
+    parameter   SW_W    = 11; // slide window width
+    localparam  IN_W    = PIX_W * 4;
+    localparam  FEA_W   = FEA_I + FEA_F;
+    localparam  COEF_W  = FEA_W;
+    localparam  ROW     = 15;
+    localparam  COL     = 7;
+    localparam  N_COEF  = ROW * COL; // number of coef in a fetch instruction
+    localparam  RAM_DW  = COEF_W * N_COEF;
+    localparam  ADDR_W  = 6; // ceil of log2(36)
+    localparam MEM_S = 2 ** ADDR_W;
+    reg                       clk;
+    reg                       rst;
+    reg                       ready;
+    wire                      request;
+    reg   [IN_W - 1   : 0]    i_data_hog;
+    //// svm if
+    // ram interface
+    reg   [ADDR_W - 1 : 0]    addr_a;
+    reg                       write_en;
+    reg   [RAM_DW - 1 : 0]    i_data_a;
+    wire  [RAM_DW - 1 : 0]    o_data_a;
+    // bias
+    reg   [COEF_W - 1 : 0]    bias;
+    reg                       b_load;
+    // wire info
+    wire                      o_valid;
+    wire                      is_person;
+    wire  [FEA_W - 1  : 0]    result;
+    wire  [SW_W - 1   : 0]    sw_id; // slide window index
     initial begin
-        i_data = 0;
+        addr_a = 0;
+        write_en = 0;
+        i_data_a = 0;
+        bias = 0;
+        b_load = 0;
+        i_data_hog = 0;
         ready = 0;
+        
     end
-    wire [11 : 0] fea;
-    wire o_valid;
+    
     `CLK_GEN(clk, 4)
-    hog #(
-    .PIX_W      (8),
-    // pixel width
-    .MAG_F      (4),
-    // fraction part of magnitude
-    .TAN_I      (4),
-    // tan width
-    .TAN_F      (8),
-    // tan width
-    .BIN_I      (16),
-    // integer part of bin
-    .FEA_I      (4),
-    // integer part of hog feature
-    .FEA_F      (8)
-    // fractional part of hog feature
-) u_hog (
-    .clk        (clk),
-    .rst        (rst),
-    .ready      (ready),
-    .i_data     (i_data),
-    .request    (request),
-    .fea        (fea),
-    .o_valid    (o_valid)
-);
+    hog_svm #(
+        .PIX_W         (8),
+        // pixel width
+        .MAG_F         (4),
+        // fraction part of magnitude
+        .TAN_I         (4),
+        // tan width
+        .TAN_F         (16),
+        // tan width
+        .BIN_I         (16),
+        // integer part of bin
+        .FEA_I         (4),
+        // integer part of hog feature
+        .FEA_F         (8),
+        // fractional part of hog feature
+        .SW_W          (11)
+    ) u_hog_svm (
+        //// hog if
+        .clk           (clk),
+        .rst           (rst),
+        .ready         (ready),
+        .request       (request),
+        .i_data_hog    (i_data_hog),
+        //// svm if
+        // ram interface
+        .addr_a        (addr_a),
+        .write_en      (write_en),
+        .i_data_a      (i_data_a),
+        .o_data_a      (o_data_a),
+        // bias
+        .bias          (bias),
+        .b_load        (b_load),
+        // output info
+        .o_valid       (o_valid),
+        .is_person     (is_person),
+        .result        (result),
+        // slide window index
+        .sw_id         (sw_id)
+    );
+    generate;
+        genvar i;
+        integer j;
+
+        for(i = 0; i < 3780; i = i + 1) begin
+            initial j = i % 36;
+            initial u_hog_svm.u_svm.u_dp_ram2.ram[j][(i / 36)*COEF_W +: COEF_W] = 3780 - i - 1;
+        end
+    endgenerate
+    // initial begin
+    //     for(integer i = 0; i < MEM_S; i = i + 1) begin
+    //         for(integer i = 0; i < MEM_S; i = i + 1) begin
+    //         end
+    //     end
+    //         u_hog_svm.u_svm.u_dp_ram2.ram[i] = $urandom();
+    // end  
     bit [7:0] top;
     bit [7:0] bot;
     bit [7:0] left;
@@ -50,59 +119,15 @@ module tb_hog;
         rst = 1;
     endtask
     task driver;
-        top = 'h83;
-        bot = 'h78;
-        left = 'h26;
-        right = 'h57;
-        repeat (64) begin
-            @(posedge clk);
-            #0.01;
-            i_data <= {top, bot, left, right};
-            ready <= 1;
-        end
-        //
-        top = 0;
-        bot = 9;
-        left = 0;
-        right = 6;
-        repeat (64) begin
-            @(posedge clk);
-            #0.01;
-            i_data <= {top, bot, left, right};
-            ready <= 1;
-        end
-        repeat (64*38) begin
-            @(posedge clk);
-            #0.01;
-            i_data <= {top, bot, left, right};
-            ready <= 1;
-        end
-        
-        top = 0;
-        bot = 48;
-        left = 0;
-        right = 45;
-        repeat (64) begin
-            @(posedge clk);
-            #0.01;
-            i_data <= {top, bot, left, right};
-            ready <= 1;
-        end
-        //
-        top = 0;
-        bot = 49;
-        left = 0;
-        right = 46;
-        repeat (64) begin
-            @(posedge clk);
-            #0.01;
-            i_data <= {top, bot, left, right};
-            ready <= 1;
-        end
+
         forever begin
+            top = $urandom();
+            bot = $urandom();
+            left = $urandom();
+            right = $urandom();
             @(posedge clk);
             #0.01;
-            i_data <= {top, bot, left, right};
+            i_data_hog <= {top, bot, left, right};
             ready <= 1;
         end
     endtask
@@ -119,5 +144,10 @@ module tb_hog;
             monitor;
         join_any
         $finish;
+    end
+    
+    
+    initial begin
+    
     end
 endmodule

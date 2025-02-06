@@ -83,7 +83,7 @@ module hog_svm#(
     .b_load       (b_load),
     // hog interface
     .i_valid      (i_valid_sig),
-    .fea          (fea),
+    .fea          (fea_sig),
     // output info
     .o_valid      (o_valid),
     .is_person    (is_person),

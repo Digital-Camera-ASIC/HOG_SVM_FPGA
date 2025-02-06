@@ -37,6 +37,7 @@ module svm #(
     localparam BUF_DEPTH = 32;
 
     wire [RAM_DW - 1 : 0] o_data_b;
+    wire [ADDR_W - 1 : 0] addr_b;
     wire [COEF_W - 1 : 0] coef [0 : N_COEF - 1];
     reg [COEF_W - 1 : 0] bias_r;
     always @(posedge clk) begin
