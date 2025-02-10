@@ -6,25 +6,23 @@ import uvm_pkg::*;
 import base_uvm_pkg::*;
 `include "base_test.sv"
 `include "bin_cal.v"
+`include "bin_ctr.v"
 `include "buffer_ctr.v"
 `include "buffer_element.v"
 `include "buffer.v"
-`include "fxp_div.v"
-`include "fxp_sqrt.v"
-`include "fxp_zoom.v"
-`include "hog_feature_gen.v"
-`include "hog_fetch.v"
+`include "div.v"
+`include "div2.v"
+`include "dp_ram.v"
+`include "dp_ram2.v"
 `include "hog_svm.v"
 `include "hog.v"
-`include "mag_cal_sbs.v"
 `include "mag_cal.v"
 `include "normalize.v"
-`include "serial_to_parallel.v"
+`include "sqrt.v"
+`include "sum_sq_diff.v"
 `include "svm_ctrl.v"
 `include "svm_pe.v"
 `include "svm.v"
-`include "tan_decode.v"
-
 
 `define CLK_GEN(clk, cycle)\
     initial begin\
@@ -34,73 +32,92 @@ import base_uvm_pkg::*;
 
 module top;
 
-  logic [287:0] coef_temp [420];
+  logic [107:0] coef_temp[420];
   string coef_name;
+  string file_path_ram, file_path_bias, file_path;
 
   bit clk = 0;
   bit rst = 0;
-  
+
+  parameter PIX_W = 8;
+  parameter MAG_F = 4;
+  parameter TAN_I = 4;
+  parameter TAN_F = 16;
+  parameter BIN_I = 16;
   parameter FEA_I = 4;
-  parameter FEA_F = 28;
-  parameter SW_W  = 11;
-  parameter DATA_W = 768;
+  parameter FEA_F = 8;
+  parameter SW_W = 11;
 
   parameter cycle = 4;
   `CLK_GEN(clk, cycle);
 
   dut_if #(
-      .FEA_I (FEA_I),
-      .FEA_F (FEA_F),
-      .SW_W  (SW_W),
-      .DATA_W(DATA_W)
+      .PIX_W(PIX_W),
+      .MAG_F(MAG_F),
+      .TAN_I(TAN_I),
+      .TAN_F(TAN_F),
+      .BIN_I(BIN_I),
+      .FEA_I(FEA_I),
+      .FEA_F(FEA_F),
+      .SW_W (SW_W)
   ) vif (
       .clk(clk),
       .rst(rst)
   );
 
-hog_svm #(
-    .PIX_W        (8),
-    // pixel width
-    .PIX_N        (96),
-    // the number of pixels
-    .MAG_I        (9),
-    // integer part of magnitude
-    .MAG_F        (16),
-    // fraction part of magnitude
-    .TAN_W        (19),
-    // tan width
-    .BIN_I        (16),
-    // integer part of bin
-    .BIN_F        (16),
-    // fractional part of bin
-    .ADDR_W       (11),
-    // address width of cells
-    .FEA_I        (4),
-    // integer part of hog feature
-    .FEA_F        (28),
-    // fractional part of hog feature
-    // slide window width
-    .SW_W         (11)
-) u_hog_svm (
-    .clk          (vif.clk),
-    .rst          (vif.rst),
-    .ready        (vif.ready),
-    .i_data       (vif.i_data),
-    .request      (vif.request),
-    .is_person    (vif.is_person),
-    .o_valid      (vif.o_valid),
-    .result       (vif.result),
-    // slide window index
-    .sw_id        (vif.sw_id)
-);
+
+  hog_svm #(
+      .PIX_W (8),
+      // pixel width
+      .MAG_F (4),
+      // fraction part of magnitude
+      .TAN_I (4),
+      // tan width
+      .TAN_F (16),
+      // tan width
+      .BIN_I (16),
+      // integer part of bin
+      .FEA_I (4),
+      // integer part of hog feature
+      .FEA_F (8),
+      // fractional part of hog feature
+      .SW_W  (11)
+  ) u_hog_svm (
+      //// hog if
+      .clk       (clk),
+      .rst       (rst),
+      .ready     (vif.ready),
+      .request   (vif.request),
+      .i_data_hog(vif.i_data),
+      //// svm if
+      // ram interface
+      .addr_a    (vif.addr_a),
+      .write_en  (vif.write_en),
+      .i_data_a  (vif.i_data_a),
+      .o_data_a  (vif.o_data_a),
+      // bias
+      .bias      (vif.bias),
+      .b_load    (vif.b_load),
+      // output info
+      .o_valid   (vif.o_valid),
+      .is_person (vif.is_person),
+      .result    (vif.result),
+      // slide window index
+      .sw_id     (vif.sw_id)
+  );
 
   initial begin
-
-    string file_path = "C:/Users/datph/Desktop/Thesis/Testing/Hog_gen/Smart_camera_ASIC/uvm_test_svm/uvc/env/coef.txt";
+    file_path_ram = "C:/Users/datph/Desktop/Thesis/Testing/phase_2/HOG_SVM_FPGA/uvm_test_svm/uvc/env/coef_2.txt";
+    $readmemh(file_path_ram, u_hog_svm.u_svm.u_dp_ram2.ram);
+    // file_path_bias = "C:/Users/datph/Desktop/Thesis/Testing/phase_2/HOG_SVM_FPGA/uvm_test_svm/uvc/env/bias.txt";
+    // $readmemh(file_path_bias, u_hog_svm.u_svm.bias_r);
+    file_path = "C:/Users/datph/Desktop/Thesis/Testing/phase_2/HOG_SVM_FPGA/uvm_test_svm/uvc/env/coef.txt";
+    // $display("DEBUG --- TOP");
     $readmemh(file_path, coef_temp);
     for (int i = 0; i < 420; i++) begin
+      // $display("coef_temp[%0d]: %h", i, coef_temp[i]);
       coef_name = {"coef_", $sformatf("%0d", i)};
-      uvm_config_db#(logic [287:0])::set(null, "*", coef_name, coef_temp[i]);
+      uvm_config_db#(logic [107:0])::set(null, "*", coef_name, coef_temp[i]);
     end
 
     uvm_config_db#(virtual dut_if)::set(null, "*", "vif", vif);

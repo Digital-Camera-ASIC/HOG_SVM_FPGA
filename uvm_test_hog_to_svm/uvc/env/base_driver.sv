@@ -5,7 +5,7 @@ class base_driver extends uvm_driver #(base_item);
   virtual dut_if vif;
   base_item b_item;
   int cnt;
-
+  int cnt_2 = 1;
   function new(string name, uvm_component parent);
     super.new(name, parent);
     b_item = new();
@@ -22,7 +22,9 @@ class base_driver extends uvm_driver #(base_item);
   task run_phase(uvm_phase phase);
     forever begin
       seq_item_port.get_next_item(b_item);
-      `uvm_info("run_phase", $sformatf("Start driver: %s", b_item.sprint()), UVM_LOW)
+      // `uvm_info("run_phase", $sformatf("Start driver: %s", b_item.sprint()), UVM_LOW)
+      // $display("Start item number: %d", cnt_2);
+      // cnt_2++;
       $cast(rsp, b_item.clone());
       rsp.set_id_info(b_item);
       drive_item(rsp);
