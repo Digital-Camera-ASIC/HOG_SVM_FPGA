@@ -20,7 +20,7 @@ interface dut_if #(
     input bit rst
 );
 
-  logic [IN_W - 1 : 0] i_data = 0;
+  logic [  IN_W - 1 : 0] i_data = 0;
   logic                  ready = 0;
   logic                  request = 0;
 
@@ -28,13 +28,13 @@ interface dut_if #(
   logic                  write_en = 0;
   logic [RAM_DW - 1 : 0] i_data_a = 0;
   logic [RAM_DW - 1 : 0] o_data_a = 0;
-  logic                  bias = 0;
+  logic [COEF_W - 1 : 0] bias = 0;
   logic                  b_load = 0;
-  
-  logic                  is_person;
-  logic                  o_valid;
-  logic [ FEA_W - 1 : 0] result;
-  logic [  SW_W - 1 : 0] sw_id;
+
+  logic                  is_person = 0;
+  logic                  o_valid = 0;
+  logic [ FEA_W - 1 : 0] result = 0;
+  logic [  SW_W - 1 : 0] sw_id = 0;
 
 
   clocking cb @(posedge clk);

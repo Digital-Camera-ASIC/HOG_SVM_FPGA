@@ -43,7 +43,7 @@ class base_driver extends uvm_driver #(base_item);
     
     cnt++;
 
-    if (cnt == 1200) begin
+    if (cnt == 76800) begin
       repeat(5) begin
         @vif.cb;
         vif.cb.ready <= 0;

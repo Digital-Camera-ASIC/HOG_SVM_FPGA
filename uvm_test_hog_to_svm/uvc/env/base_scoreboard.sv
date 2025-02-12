@@ -50,6 +50,8 @@ class base_scoreboard extends uvm_scoreboard;
   int cnt_debug = 0;
   int cnt_addr = 0;
   int cnt_pixel = 0;
+  int cnt_2 = 1;
+  int count = 0;
 
 
   // NEW PARAMETER
@@ -94,19 +96,6 @@ class base_scoreboard extends uvm_scoreboard;
   function void extract_feature(real Gx_1[64], real Gx_2[64], real Gx_3[64], real Gx_4[64],
                                 real Gy_1[64], real Gy_2[64], real Gy_3[64], real Gy_4[64]);
                               
-    // $display("My debug");
-    // for (int i = 0; i < 64; i++) begin
-    //   $display($sformatf("Gx_1[%0d]: %f, Gy_1[%0d]: %f", i, Gx_1[i], i, Gy_1[i]));
-    // end
-    // for (int i = 0; i < 64; i++) begin
-    //   $display($sformatf("Gx_2[%0d]: %f, Gy_2[%0d]: %f", i, Gx_2[i], i, Gy_2[i]));
-    // end
-    // for (int i = 0; i < 64; i++) begin
-    //   $display($sformatf("Gx_3[%0d]: %f, Gy_3[%0d]: %f", i, Gx_3[i], i, Gy_3[i]));
-    // end
-    // for (int i = 0; i < 64; i++) begin
-    //   $display($sformatf("Gx_4[%0d]: %f, Gy_4[%0d]: %f", i, Gx_4[i], i, Gy_4[i]));
-    // end
     for(int i = 0; i < 64; i++) begin
       Magnitude_1[i] = $sqrt(Gx_1[i] ** 2 + Gy_1[i] ** 2);
       Magnitude_2[i] = $sqrt(Gx_2[i] ** 2 + Gy_2[i] ** 2);
@@ -187,21 +176,21 @@ class base_scoreboard extends uvm_scoreboard;
     end
 
     `ifdef DEBUG
-      for (int i = 0; i < 9; i++) begin
-        $display($sformatf("temp_fea_a[%0d]: %f", i, temp_fea_a[i]));
-      end
-      $display(" ");
-      for (int i = 0; i < 9; i++) begin
-        $display($sformatf("temp_fea_b[%0d]: %f", i, temp_fea_b[i]));
-      end
-      $display(" ");
-      for (int i = 0; i < 9; i++) begin
-        $display($sformatf("temp_fea_c[%0d]: %f", i, temp_fea_c[i]));
-      end
-      $display(" ");
-      for (int i = 0; i < 9; i++) begin
-        $display($sformatf("temp_fea_d[%0d]: %f", i, temp_fea_d[i]));
-      end
+        for (int i = 0; i < 9; i++) begin
+          $display($sformatf("temp_fea_a[%0d]: %f", i, temp_fea_a[i]));
+        end
+        $display(" ");
+        for (int i = 0; i < 9; i++) begin
+          $display($sformatf("temp_fea_b[%0d]: %f", i, temp_fea_b[i]));
+        end
+        $display(" ");
+        for (int i = 0; i < 9; i++) begin
+          $display($sformatf("temp_fea_c[%0d]: %f", i, temp_fea_c[i]));
+        end
+        $display(" ");
+        for (int i = 0; i < 9; i++) begin
+          $display($sformatf("temp_fea_d[%0d]: %f", i, temp_fea_d[i]));
+        end
     `endif 
   endfunction
 
@@ -310,6 +299,8 @@ class base_scoreboard extends uvm_scoreboard;
     //   Gy[i] = Gy[i-1];
     // end
     // if (item.i_valid == 1) begin
+    // $display("Captured from drv: %d", cnt_2);
+    // cnt_2 ++;
     top = item.data[31:24];
     bot = item. data [23:16];
     left = item.data [15:8];
@@ -323,23 +314,25 @@ class base_scoreboard extends uvm_scoreboard;
     Gy[0][cnt_pixel] = bot - top;
     // $display($sformatf("Gx: %f, Gy: %f, In bin[%d]: %f", right - left, bot - top, cnt_pixel, int'($floor(orientation / 20)) % 9));
     cnt_pixel = cnt_pixel + 1;
-
     if (cnt_pixel == 64) begin
+      $display("Pixel: %d, Col: %d, Row: %d", cnt_2, col, row);
       cnt_pixel = 0;
+      cnt_2++;
       cnt = cnt + 1;
       if (cnt == 42) begin
         if (cnt_addr % 40 != 0) begin
           $display("Count_addr: %0d", cnt_addr);
           `uvm_info(get_type_name(), "Feature valid message", UVM_LOW)
           extract_feature(Gx[41], Gx[40], Gx[1], Gx[0], Gy[41], Gy[40], Gy[1], Gy[0]);
+
           drv_fea_a[row][col % 39] = temp_fea_a;
           drv_fea_b[row][col % 39] = temp_fea_b;
           drv_fea_c[row][col % 39] = temp_fea_c;
           drv_fea_d[row][col % 39] = temp_fea_d;
 
           if (col % 39 >= 6 && row >= 14) begin
-            // $display("Enter frame num: %d", count);
-            // count ++;
+            $display("Enter frame num: %d", count);
+            count ++;
             for (int i = 0; i < 15; i++) begin
               for (int j = 0; j < 7; j++) begin
                 fea_a_cal[i][j] = drv_fea_a[i + row - 14][j + col % 39 - 6];
@@ -359,31 +352,31 @@ class base_scoreboard extends uvm_scoreboard;
         Gx[i] = Gx[i-1];
         Gy[i] = Gy[i-1];
       end
+      cnt_addr ++;
     end
-    cnt_addr ++;
-
-    if (cnt_addr == 76800) begin
-      cnt = 0;
-      cnt_addr = 0;
-      for (int i = 0; i < 42; i++) begin
-        for (int j = 0; j < 64; j++) begin
-          Gx[i][j] = 0;
-          Gy[i][j] = 0;
-        end
-      end
-      for (int i = 0; i < 29; i++) begin
-        for (int j = 0; j < 39; j++) begin
-          for (int k = 0; k < 9; k++) begin
-            drv_fea_a[i][j][k] = 0;
-            drv_fea_b[i][j][k] = 0;
-            drv_fea_c[i][j][k] = 0;
-            drv_fea_d[i][j][k] = 0;
-          end
-        end
-      end
-      col = 0;
-      row = 0;
-    end
+    
+    // if (cnt_addr == 76800) begin
+    //   cnt = 0;
+    //   cnt_addr = 0;
+    //   for (int i = 0; i < 42; i++) begin
+    //     for (int j = 0; j < 64; j++) begin
+    //       Gx[i][j] = 0;
+    //       Gy[i][j] = 0;
+    //     end
+    //   end
+    //   for (int i = 0; i < 29; i++) begin
+    //     for (int j = 0; j < 39; j++) begin
+    //       for (int k = 0; k < 9; k++) begin
+    //         drv_fea_a[i][j][k] = 0;
+    //         drv_fea_b[i][j][k] = 0;
+    //         drv_fea_c[i][j][k] = 0;
+    //         drv_fea_d[i][j][k] = 0;
+    //       end
+    //     end
+    //   end
+    //   col = 0;
+    //   row = 0;
+    // end
   endfunction
 
   virtual function void write_mon(base_item item);
