@@ -26,22 +26,30 @@ module svm #(
     input                       i_valid,
     input   [FEA_W - 1  : 0]    fea,
     // output info
-    output                      o_valid,
+    output reg                  o_valid,
     output                      is_person,
     output  [FEA_W - 1  : 0]    result,
-    output  [SW_W - 1   : 0]    sw_id // slide window index
+    output reg [SW_W - 1   : 0] sw_id // slide window index
 );
 
     localparam N_BUF = ROW - 1;
     
-    localparam BUF_DEPTH = 32;
-
+    localparam BUF_DEPTH = 33;
+    wire o_valid_w;
+    wire [SW_W - 1   : 0] sw_id_w;
+    always @(posedge clk) begin
+        sw_id <= sw_id_w;
+        if(~rst)
+            o_valid <= 0;
+        else
+            o_valid <= o_valid_w;
+    end
     wire [RAM_DW - 1 : 0] o_data_b;
     wire [ADDR_W - 1 : 0] addr_b;
     wire [COEF_W - 1 : 0] coef [0 : N_COEF - 1];
     reg [COEF_W - 1 : 0] bias_r;
     always @(posedge clk) begin
-        if(~rst)
+        if(~rst) 
             bias_r <= 0;
         else if(b_load)
             bias_r <= bias;
@@ -84,9 +92,9 @@ module svm #(
         // control buffer
         .valid_buf     (valid_buf),
         // output info
-        .sw_id         (sw_id),
+        .sw_id         (sw_id_w),
         // slide window index
-        .o_valid       (o_valid)
+        .o_valid       (o_valid_w)
     );
     wire [FEA_W - 1 : 0] o_data[0 : N_COEF - 1];
     wire [FEA_W - 1 : 0] o_data_buf [0 : N_BUF - 1];
