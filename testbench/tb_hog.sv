@@ -68,7 +68,7 @@ module tb_hog;
         // integer part of bin
         .FEA_I           (4),
         // integer part of hog feature
-        .FEA_F           (12),
+        .FEA_F           (16),
         // fractional part of hog feature
         .SW_W            (11),
         // slide window width
@@ -111,13 +111,6 @@ module tb_hog;
 //            initial u_hog_svm.u_svm.u_dp_ram2.ram[j][(i / 36)*COEF_W +: COEF_W] = 3780 - i - 1;
 //        end
     endgenerate
-    // initial begin
-    //     for(integer i = 0; i < MEM_S; i = i + 1) begin
-    //         for(integer i = 0; i < MEM_S; i = i + 1) begin
-    //         end
-    //     end
-    //         u_hog_svm.u_svm.u_dp_ram2.ram[i] = $urandom();
-    // end  
     class base_item;
         rand bit [IN_W - 1 : 0] my_cell;
     endclass 
@@ -128,8 +121,16 @@ module tb_hog;
         rst = 1;
     endtask
     task driver;
-        forever begin
+        repeat (1) begin
             my_item.randomize();
+            @(posedge clk);
+            #0.01;
+            i_data_fetch <= my_item.my_cell;
+            ready <= 1;
+            wait(request);
+        end
+        forever begin
+            my_item.my_cell = 0;
             @(posedge clk);
             #0.01;
             i_data_fetch <= my_item.my_cell;

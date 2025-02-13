@@ -149,7 +149,7 @@ module normalize #(
     
     assign fea = {4'b0, sqrt_q};
     
-    localparam s_valid_time = div_with_fea_a + 11;
+    localparam s_valid_time = div_with_fea_a + FEA_F + 3;
     localparam e_valid_time = s_valid_time + 36;
     assign o_valid = (cnt >= MAX_ADDR && s_valid_time <= cnt_after_valid && cnt_after_valid < e_valid_time && cnt % LINE != 1);
     // function lists
