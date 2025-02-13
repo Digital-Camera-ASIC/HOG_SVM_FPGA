@@ -11,9 +11,8 @@ module hog #(
 ) (
     input                       clk,
     input                       rst,
-    input                       ready,
+    input                       i_valid,
     input   [IN_W - 1   : 0]    i_data,
-    output                      request,
     output  [FEA_W - 1  : 0]    fea,
     output                      o_valid
 );
@@ -22,7 +21,6 @@ module hog #(
     localparam BIN_F = MAG_F;
     localparam MAG_W = MAG_I + MAG_F;
     localparam BIN_W = BIN_I + BIN_F;
-    assign request = 1'b1;
     wire [MAG_W - 1 : 0] magnitude;
     wire [TAN_W - 1 : 0] tan;
     wire [BIN_W * 9 - 1 : 0] bin;
@@ -40,7 +38,7 @@ module hog #(
     ) u_mag_cal (
         .clk          (clk),
         .rst          (rst),
-        .i_valid      (ready),
+        .i_valid      (i_valid),
         .pixel        (i_data),
         .magnitude    (magnitude),
         .tan          (tan),

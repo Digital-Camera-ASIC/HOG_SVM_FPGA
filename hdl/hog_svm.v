@@ -5,9 +5,11 @@ module hog_svm#(
     parameter   TAN_F   = 16, // tan width
     parameter   BIN_I   = 16, // integer part of bin
     parameter   FEA_I   = 4, // integer part of hog feature
-    parameter   FEA_F   = 8, // fractional part of hog feature
+    parameter   FEA_F   = 12, // fractional part of hog feature
     parameter   SW_W    = 11, // slide window width
-    localparam  IN_W    = PIX_W * 4,
+    parameter   CELL_S  = 10, // Size of cell, default 8x8 pixel and border
+    localparam  PIX_N   = CELL_S * CELL_S - 4, // number of cell 
+    localparam  IN_W    = PIX_W * PIX_N,
     localparam  FEA_W   = FEA_I + FEA_F,
     localparam  COEF_W  = FEA_W,
     localparam  ROW     = 15,
@@ -21,7 +23,7 @@ module hog_svm#(
     input                       rst,
     input                       ready,
     output                      request,
-    input   [IN_W - 1   : 0]    i_data_hog,
+    input   [IN_W - 1   : 0]    i_data_fetch,
     //// svm if
     // ram interface
     input   [ADDR_W - 1 : 0]    addr_a,
@@ -39,6 +41,24 @@ module hog_svm#(
 );
     wire [FEA_W - 1 : 0]          fea_sig;
     wire     i_valid_sig;
+    wire     i_valid_hog;
+    wire [PIX_W * 4 - 1 : 0] i_data_hog;
+    hog_fetch #(
+        .PIX_W      (PIX_W),
+        .CELL_S     (CELL_S)
+        // Size of cell, default 8x8 pixel and border
+    ) u_hog_fetch (
+        .clk        (clk),
+        .rst        (rst),
+        // fifo if
+        .ready      (ready),
+        .request    (request),
+        .i_data     (i_data_fetch),
+        // hog if
+        .i_valid    (i_valid_hog),
+        // top, bot left, right
+        .o_data     (i_data_hog)
+    );
     hog #(
         .PIX_W      (PIX_W),
         // pixel width
@@ -57,9 +77,8 @@ module hog_svm#(
     ) u_hog (
         .clk        (clk),
         .rst        (rst),
-        .ready      (ready),
+        .i_valid    (i_valid_hog),
         .i_data     (i_data_hog),
-        .request    (request),
         .fea        (fea_sig),
         .o_valid    (i_valid_sig)
     );

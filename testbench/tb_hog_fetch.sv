@@ -19,7 +19,7 @@ interface hog_fet_if(
 );
     logic   [8*96 - 1 : 0]    data = 0;
     logic               ready = 0;
-
+    logic               request = 0;
     clocking cb @(posedge clk);
         default input #1ps output #1ps;
         output  data, ready;
@@ -37,32 +37,21 @@ module tb_hog_fetch;
     reg rst;
     hog_fet_if vif(clk);
     `CLK_GEN(clk, cycle)
-
     hog_fetch #(
-        .ADDR_W      (10),
-        .PIX_W       (8),
-        // pixel width
-        .PIX_N       (96),
-        .MAG_I       (9),
-        // integer part of magnitude
-        .MAG_F       (16),
-        // fraction part of magnitude
-        .TAN_W       (19),
-        // tan width
-        .BIN_I       (16),
-        // integer part of bin
-        // fractional part of bin
-        .BIN_F       (16)
+        .PIX_W      (8),
+        .CELL_S     (10)
+        // Size of cell, default 8x8 pixel and border
     ) u_hog_fetch (
-        .clk         (clk),
-        .rst         (rst),
-        .ready       (vif.ready),
-        .i_data      (vif.data),
-        .request     (),
-        .o_valid     (),
-        .addr_fw     (),
-        .address     (),
-        .bin         ()
+        .clk        (clk),
+        .rst        (rst),
+        // fifo if
+        .ready      (vif.ready),
+        .request    (vif.request),
+        .i_data     (vif.data),
+        // hog if
+        .i_valid    (i_valid),
+        // top, bot left, right
+        .o_data     (o_data)
     );
     item_f obj;
     function void build_phase;
@@ -78,7 +67,7 @@ module tb_hog_fetch;
     task driver;
         for(int i = 0; i < 200; i++) begin
             @vif.cb;
-            if(i % 3)
+            if(i > 63 && i < 72)
                 vif.cb.ready <= 0;
             else
                 vif.cb.ready <= 1;
