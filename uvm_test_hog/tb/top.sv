@@ -12,6 +12,7 @@ import base_uvm_pkg::*;
 `include "buffer_element.v"
 `include "buffer.v"
 `include "div.v"
+`include "div2.v"
 `include "dp_ram.v"
 `include "dp_ram2.v"
 `include "hog_svm.v"
@@ -23,7 +24,7 @@ import base_uvm_pkg::*;
 `include "svm_ctrl.v"
 `include "svm_pe.v"
 `include "svm.v"
-`include "syn_svm.v"
+// `include "syn_svm.v"
 
 `define CLK_GEN(clk, cycle)\
     initial begin\
@@ -38,10 +39,10 @@ module top;
   parameter PIX_W = 8;
   parameter MAG_F = 4;
   parameter TAN_I = 4;
-  parameter TAN_F = 8;
+  parameter TAN_F = 16;
   parameter BIN_I = 16;
   parameter FEA_I = 4;
-  parameter FEA_F = 8;
+  parameter FEA_F = 12;
 
   parameter cycle = 4;
   `CLK_GEN(clk, cycle);
@@ -70,9 +71,8 @@ module top;
   ) u_hog (
       .clk    (clk),
       .rst    (rst),
-      .ready  (vif.ready),
+      .i_valid(vif.cb.i_valid),
       .i_data (vif.i_data),
-      .request(vif.request),
       .fea    (vif.fea),
       .o_valid(vif.o_valid)
   );
@@ -80,16 +80,9 @@ module top;
   // always @ (posedge clk) begin
   //   // forever
   //   #1;
-  //   if(top.u_hog.u_hog_fetch.valid_r1) begin
-  //     $display("HEHE %f", 1.0 * top.u_hog.u_hog_fetch.bin0_s / (2**16));
-  //     $display("HEHE %f", 1.0 * top.u_hog.u_hog_fetch.bin20_s / (2**16));
-  //     $display("HEHE %f", 1.0 * top.u_hog.u_hog_fetch.bin40_s / (2**16));
-  //     $display("HEHE %f", 1.0 * top.u_hog.u_hog_fetch.bin60_s / (2**16));
-  //     $display("HEHE %f", 1.0 * top.u_hog.u_hog_fetch.bin80_s / (2**16));
-  //     $display("HEHE %f", 1.0 * top.u_hog.u_hog_fetch.bin100_s / (2**16));
-  //     $display("HEHE %f", 1.0 * top.u_hog.u_hog_fetch.bin120_s / (2**16));
-  //     $display("HEHE %f", 1.0 * top.u_hog.u_hog_fetch.bin140_s / (2**16));
-  //     $display("HEHE %f \n", 1.0 *top.u_hog.u_hog_fetch.bin160_s / (2**16));
+    
+  //   if(top.u_hog.u_mag_cal.o_valid) begin
+  //     $display("HEHE %f", {top.u_hog.u_bin_cal.u_bin_ctr.code[3:0]});
   //   end
   // end
 

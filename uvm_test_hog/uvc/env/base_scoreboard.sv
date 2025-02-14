@@ -10,6 +10,7 @@ class base_scoreboard extends uvm_scoreboard;
 
   parameter real pi = 3.141592653589793;
   parameter real epsilon = 0.00390625;
+  parameter int FEA_F = 12;
 
   real Gx[42][64];
   real Gy[42][64];
@@ -128,21 +129,21 @@ class base_scoreboard extends uvm_scoreboard;
       sum += bin_4[i];
     end
 
-    `ifdef DEBUG
-      for (int i = 0; i < 9; i++) begin
-        $display($sformatf("bin_1[%0d]: %f", i, bin_1[i]));
-      end
-      for (int i = 0; i < 9; i++) begin
-        $display($sformatf("bin_2[%0d]: %f", i, bin_2[i]));
-      end
-      for (int i = 0; i < 9; i++) begin
-        $display($sformatf("bin_3[%0d]: %f", i, bin_3[i]));
-      end
-      for (int i = 0; i < 9; i++) begin
-        $display($sformatf("bin_4[%0d]: %f", i, bin_4[i]));
-      end
-      $display($sformatf("sum: %f", sum));
-    `endif
+    // `ifdef DEBUG
+    for (int i = 0; i < 9; i++) begin
+      $display($sformatf("bin_1[%0d]: %f", i, bin_1[i]));
+    end
+    for (int i = 0; i < 9; i++) begin
+      $display($sformatf("bin_2[%0d]: %f", i, bin_2[i]));
+    end
+    for (int i = 0; i < 9; i++) begin
+      $display($sformatf("bin_3[%0d]: %f", i, bin_3[i]));
+    end
+    for (int i = 0; i < 9; i++) begin
+      $display($sformatf("bin_4[%0d]: %f", i, bin_4[i]));
+    end
+    $display($sformatf("sum: %f", sum));
+    // `endif
 
     sum += epsilon;
 
@@ -155,6 +156,7 @@ class base_scoreboard extends uvm_scoreboard;
 
     // `ifdef DEBUG
       for (int i = 0; i < 36; i++) begin
+        $display ($sformatf("temp_fea[%0d]: %f", i, temp_fea[i]));
         q_fea_golden.push_back(temp_fea[i]);
         // $display($sformatf("temp_fea[%0d]: %f", i, temp_fea[i]));
       end
@@ -181,7 +183,7 @@ class base_scoreboard extends uvm_scoreboard;
     top = item.data[31:24];
     bot = item. data [23:16];
     left = item.data [15:8];
-    right = item.data[7:0];
+    right = item.data[7:0]; 
 
     orientation = ($atan2(bot - top, right - left) * 180 / pi >= 0) ? $atan2(bot - top, right - left) * 180 / pi : $atan2(bot - top, right - left) * 180 / pi + 180;
 
@@ -198,7 +200,7 @@ class base_scoreboard extends uvm_scoreboard;
         // Do extraction
         if (cnt_addr % 40 != 0) begin
           `uvm_info(get_type_name(), "Feature valid message", UVM_LOW)
-          $display("Count_addr: %0d", cnt_addr);
+          // $display("Count_addr: %0d", cnt_addr);
           extract_feature(Gx[41], Gx[40], Gx[1], Gx[0], Gy[41], Gy[40], Gy[1], Gy[0]);
         end
         cnt = cnt - 1;
@@ -214,7 +216,7 @@ class base_scoreboard extends uvm_scoreboard;
 
   virtual function void write_mon(base_item item);
     // `uvm_info(get_type_name(), $sformatf("Captured packet from mon %s", item.sprint()), UVM_LOW)
-    q_fea.push_back(1.0 * (item.fea) / 2**8);
+    q_fea.push_back(1.0 * (item.fea) / 2** FEA_F);
     // $display($sformatf("Feature_mon: %f", 1.0 * (item.fea) / 2**8));
   endfunction
 
