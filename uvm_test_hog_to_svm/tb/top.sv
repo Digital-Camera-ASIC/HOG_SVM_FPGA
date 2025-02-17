@@ -23,7 +23,7 @@ import base_uvm_pkg::*;
 `include "svm_ctrl.v"
 `include "svm_pe.v"
 `include "svm.v"
-
+`include "hog_fetch.v"
 `define CLK_GEN(clk, cycle)\
     initial begin\
         clk = 0;\
@@ -32,21 +32,25 @@ import base_uvm_pkg::*;
 
 module top;
 
-  logic [107:0] coef_temp[420];
+  parameter   PIX_W   = 8; // pixel width
+  parameter   MAG_F   = 4;// fraction part of magnitude
+  parameter   TAN_I   = 4; // tan width
+  parameter   TAN_F   = 16; // tan width
+  parameter   BIN_I   = 16; // integer part of bin
+  parameter   FEA_I   = 4; // integer part of hog feature
+  parameter   FEA_F   = 16; // fractional part of hog feature
+  parameter   SW_W    = 11; // slide window width
+  parameter   CELL_S  = 10; // Size of cell, default 8x8 pixel and border
+
+  parameter int WIDTH = 9 * (FEA_I + FEA_F);
+
+  logic [WIDTH - 1:0] coef_temp[420];
   string coef_name;
   string file_path_ram, file_path_bias, file_path;
 
   bit clk = 0;
   bit rst = 0;
 
-  parameter PIX_W = 8;
-  parameter MAG_F = 4;
-  parameter TAN_I = 4;
-  parameter TAN_F = 16;
-  parameter BIN_I = 16;
-  parameter FEA_I = 4;
-  parameter FEA_F = 8;
-  parameter SW_W = 11;
 
   parameter cycle = 4;
   `CLK_GEN(clk, cycle);
@@ -59,61 +63,54 @@ module top;
       .BIN_I(BIN_I),
       .FEA_I(FEA_I),
       .FEA_F(FEA_F),
-      .SW_W (SW_W)
+      .SW_W (SW_W),
+      .CELL_S(CELL_S)
   ) vif (
       .clk(clk),
       .rst(rst)
   );
 
 hog_svm #(
-    .PIX_W         (8),
+    .PIX_W           (PIX_W),
     // pixel width
-    .MAG_F         (4),
+    .MAG_F           (MAG_F),
     // fraction part of magnitude
-    .TAN_I         (4),
+    .TAN_I           (TAN_I),
     // tan width
-    .TAN_F         (16),
+    .TAN_F           (TAN_F),
     // tan width
-    .BIN_I         (16),
+    .BIN_I           (BIN_I),
     // integer part of bin
-    .FEA_I         (4),
+    .FEA_I           (FEA_I),
     // integer part of hog feature
-    .FEA_F         (8),
+    .FEA_F           (FEA_F),
     // fractional part of hog feature
-    .SW_W          (11)
+    .SW_W            (SW_W),
     // slide window width
-    // .IN_W          (PIX_W*4),
-    // .FEA_W         (FEA_I+FEA_F),
-    // .COEF_W        (FEA_W),
-    // .ROW           (15),
-    // .COL           (7),
-    // .N_COEF        (ROW*COL),
-    // // number of coef in a fetch instruction
-    // .RAM_DW        (COEF_W*N_COEF),
-    // // ceil of log2(36)
-    // .ADDR_W        (6)
+    .CELL_S          (CELL_S)
+    // Size of cell, default 8x8 pixel and border
 ) u_hog_svm (
     //// hog if
-    .clk           (vif.clk),
-    .rst           (vif.rst),
-    .ready         (vif.ready),
-    .request       (vif.request),
-    .i_data_hog    (vif.i_data),
+    .clk             (vif.clk),
+    .rst             (vif.rst),
+    .ready           (vif.ready),
+    .request         (vif.request),
+    .i_data_fetch    (vif.i_data_fetch),
     //// svm if
     // ram interface
-    .addr_a        (vif.addr_a),
-    .write_en      (vif.write_en),
-    .i_data_a      (vif.i_data_a),
-    .o_data_a      (vif.o_data_a),
+    .addr_a          (vif.addr_a),
+    .write_en        (vif.write_en),
+    .i_data_a        (vif.i_data_a),
+    .o_data_a        (vif.o_data_a),
     // bias
-    .bias          (vif.bias),
-    .b_load        (vif.b_load),
+    .bias            (vif.bias),
+    .b_load          (vif.b_load),
     // output info
-    .o_valid       (vif.o_valid),
-    .is_person     (vif.is_person),
-    .result        (vif.result),
+    .o_valid         (vif.o_valid),
+    .is_person       (vif.is_person),
+    .result          (vif.result),
     // slide window index
-    .sw_id         (vif.sw_id)
+    .sw_id           (vif.sw_id)
 );
   initial begin
     string file_path_ram = "C:/Users/datph/Desktop/Thesis/Testing/phase_2/HOG_SVM_FPGA/uvm_test_svm/uvc/env/coef_2.txt";
@@ -132,7 +129,7 @@ hog_svm #(
     for (int i = 0; i < 420; i++) begin
       // $display("coef_temp[%0d]: %h", i, coef_temp[i]);
       coef_name = {"coef_", $sformatf("%0d", i)};
-      uvm_config_db#(logic [107:0])::set(null, "*", coef_name, coef_temp[i]);
+      uvm_config_db#(logic [WIDTH - 1:0])::set(null, "*", coef_name, coef_temp[i]);
     end
 
     uvm_config_db#(virtual dut_if)::set(null, "*", "vif", vif);

@@ -1,13 +1,15 @@
 class base_item extends uvm_sequence_item;
 
-  rand bit [7:0] data_temp [4];
+  parameter int FEA_I = 4;
+  parameter int FEA_F = 16;
+  rand bit [7:0] data_temp [96];
   logic ready;
   logic request;
-  logic [31:0] data;
+  logic [767:0] data;
 
   logic is_person;
   logic o_valid;
-  logic [11:0] result;
+  logic [FEA_I + FEA_F - 1:0] result;
   logic [10 : 0] sw_id;
   
   logic [5 : 0] addr_a;
@@ -43,7 +45,7 @@ class base_item extends uvm_sequence_item;
   endfunction
   
   function void post_randomize();
-    for (int i = 0; i < 4; i++) begin
+    for (int i = 0; i < 96; i++) begin
       data[i*8+:8] = data_temp[i];
     end
   endfunction

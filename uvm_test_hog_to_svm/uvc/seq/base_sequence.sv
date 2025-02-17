@@ -16,21 +16,34 @@ class init_read_seq extends uvm_sequence #(base_item);
   endtask
 
   virtual task body();
-    repeat (10) begin
-      `uvm_do_with(req, {
+    // repeat (10) begin
+    //   `uvm_do_with(req, {
 
-      })
-      get_response(req); 
-    end
+    //   })
+    //   get_response(req); 
+    // end
+    // repeat (60) begin
+    //   `uvm_do_with(req, {
+    //     // data_temp[0] == 0;
+    //     // data_temp[16] == 100;
+    //     // data_temp[9] == 200;
+    //     // data_temp[72] == 0;
+    //     // foreach(data_temp[i]) {
+    //     //   if (i != 0 && i != 16 && i != 9 && i != 72) data_temp[i] == 0;
+    //     // }
+    //   })
+    // get_response(req);
+    // end
 
-    repeat (76790) begin // toi 82 la no van k co error
+
+    repeat (1200) begin // toi 82 la no van k co error
       `uvm_do_with(req,
                    {
-                      req.data_temp[0] == 0;
-                      req.data_temp[1] == 0;
-                      req.data_temp[2] == 0;
-                      req.data_temp[3] == 0;
-
+                    // foreach(req.data_temp[i]) {
+                    //   req.data_temp[i] == 0;/
+                    //   // req.data_temp[0] == cnt % 256;
+                    //   // if (i != 0) req.data_temp[i] == 0;
+                    // }
                    })
 
 
