@@ -28,7 +28,9 @@ module svm #(
     // output info
     output reg                  o_valid,
     output                      is_person,
+`ifdef SIM
     output  [FEA_W - 1  : 0]    result,
+`endif
     output reg [SW_W - 1   : 0] sw_id // slide window index
 );
 
@@ -190,5 +192,7 @@ module svm #(
     );
 
     assign is_person = ~o_data[N_COEF - 1][FEA_W - 1];
+`ifdef SIM
     assign result = o_data[N_COEF - 1];
+`endif
 endmodule

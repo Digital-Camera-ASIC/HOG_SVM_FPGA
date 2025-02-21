@@ -1,3 +1,4 @@
+
 module hog_svm#(
     parameter   PIX_W   = 8, // pixel width
     parameter   MAG_F   = 4,// fraction part of magnitude
@@ -36,7 +37,9 @@ module hog_svm#(
     // output info
     output                      o_valid,
     output                      is_person,
+`ifdef SIM
     output  [FEA_W - 1  : 0]    result,
+`endif
     output  [SW_W - 1   : 0]    sw_id // slide window index
 );
     wire [FEA_W - 1 : 0]          fea_sig;
@@ -106,7 +109,9 @@ module hog_svm#(
     // output info
     .o_valid      (o_valid),
     .is_person    (is_person),
+`ifdef SIM
     .result       (result),
+`endif
     // slide window index
     .sw_id        (sw_id)
 );

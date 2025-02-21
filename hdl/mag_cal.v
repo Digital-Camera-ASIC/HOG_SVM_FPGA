@@ -84,7 +84,7 @@ module mag_cal #(
         end
     endgenerate
     
-    generate;
+    generate
         always @(posedge clk) begin
             if(!rst)  valid_r[0] <= 0;
             else valid_r[0] <= i_valid;
