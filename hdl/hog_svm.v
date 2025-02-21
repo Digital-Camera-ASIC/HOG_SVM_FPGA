@@ -5,7 +5,7 @@ module hog_svm#(
     parameter   TAN_F   = 16, // tan width
     parameter   BIN_I   = 16, // integer part of bin
     parameter   FEA_I   = 4, // integer part of hog feature
-    parameter   FEA_F   = 8, // fractional part of hog feature
+    parameter   FEA_F   = 16, // fractional part of hog feature
     parameter   SW_W    = 11, // slide window width
     parameter   CELL_S  = 10, // Size of cell, default 8x8 pixel and border
     localparam  PIX_N   = CELL_S * CELL_S - 4, // number of cell 
