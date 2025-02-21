@@ -34,6 +34,10 @@ module hog_svm#(
     // bias
     input   [COEF_W - 1 : 0]    bias,
     input                       b_load,
+    // svm if
+    output                      o_valid,
+    output                      is_person,
+    output  [SW_W - 1   : 0]    sw_id,
     // led
     output                      led
 );
