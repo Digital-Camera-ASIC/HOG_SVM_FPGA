@@ -34,13 +34,8 @@ module hog_svm#(
     // bias
     input   [COEF_W - 1 : 0]    bias,
     input                       b_load,
-    // output info
-    output                      o_valid,
-    output                      is_person,
-`ifdef SIM
-    output  [FEA_W - 1  : 0]    result,
-`endif
-    output  [SW_W - 1   : 0]    sw_id // slide window index
+    // led
+    output                      led
 );
     wire [FEA_W - 1 : 0]          fea_sig;
     wire     i_valid_sig;
@@ -115,4 +110,16 @@ module hog_svm#(
     // slide window index
     .sw_id        (sw_id)
 );
+    led_control #(
+        // slide window width
+        .SW_W         (SW_W)
+    ) u_led_control (
+        .clk          (clk),
+        .rst          (rst),
+        .o_valid      (o_valid),
+        .is_person    (is_person),
+        .sw_id        (sw_id),
+        // slide window index
+        .led          (led)
+    );
 endmodule

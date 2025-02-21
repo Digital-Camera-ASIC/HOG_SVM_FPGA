@@ -1,6 +1,5 @@
 module led_control #(
     parameter   SW_W    = 11 // slide window width
-
 ) (
     input                       clk,
     input                       rst,
