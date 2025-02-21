@@ -235,19 +235,19 @@ class init_read_seq extends uvm_sequence #(base_item);
     //             })
 
     // get_response(rsp);
-    repeat (10) begin
-      `uvm_do_with(req, {
+    // repeat (10) begin
+    //   `uvm_do_with(req, {
 
-      })
-      get_response(req); 
-    end
-    repeat (2870) begin // 45 cells * 64 pixels
+    //   })
+    //   get_response(req); 
+    // end
+    repeat (76800) begin // 45 cells * 64 pixels
       `uvm_do_with(req,
                    {
-                      req.data_temp[0] == 0;
-                      req.data_temp[1] == 0;
-                      req.data_temp[2] == 0;
-                      req.data_temp[3] == 0;
+                      // req.data_temp[0] == 0;
+                      // req.data_temp[1] == 0;
+                      // req.data_temp[2] == 0;
+                      // req.data_temp[3] == 0;
                    }) 
       // cnt_2 = cnt_2 + 1;
       // if (cnt_2 % 64 == 0) cnt = cnt + 3;
