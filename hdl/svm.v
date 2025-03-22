@@ -51,10 +51,7 @@ module svm #(
     wire [COEF_W - 1 : 0] coef [0 : N_COEF - 1];
     reg [COEF_W - 1 : 0] bias_r;
     always @(posedge clk) begin
-        if(~rst) 
-            bias_r <= 0;
-        else if(b_load)
-            bias_r <= bias;
+        if(b_load) bias_r <= bias;
     end
     dp_ram2 #(
         .DATA_W      (RAM_DW),
