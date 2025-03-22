@@ -11,9 +11,9 @@ module led_control #(
     always @(posedge clk) begin
         if(~rst)
             led <= 0;
-        else if(o_valid && ~|sw_id && ~is_person) begin // valid and sw_id == 0 and not person
+        else if(~|sw_id) begin // valid and sw_id == 0 and not person
             led <= 0;
-        end else if(is_person)
+        end else if(is_person && o_valid)
             led <= 1;
     end
 endmodule
