@@ -29,7 +29,7 @@ module normalize #(
         if(!rst)
             cnt <= 0;
         else if(i_valid) begin
-            if(cnt == CELL_NUM)
+            if(cnt == CELL_NUM - 1)
                 cnt <= 0;
             else
                 cnt <= cnt + 1;
