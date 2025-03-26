@@ -3,6 +3,7 @@ class base_test extends uvm_test;
   `uvm_component_utils(base_test)
   base_env bus_env;
   init_read_seq seq0;
+  init_read_seq_2 seq1;
   bit test_pass;
 
   // The test's constructor
@@ -25,7 +26,10 @@ class base_test extends uvm_test;
   task run_phase(uvm_phase phase);
     phase.raise_objection(this);
     seq0 = init_read_seq::type_id::create("sequence0");
+    seq1 = init_read_seq_2::type_id::create("sequence1");
     seq0.start(bus_env.master.sequencer);
+    #1076us;
+    seq1.start(bus_env.master.sequencer);
     #2000ns; // 26ns
     phase.drop_objection(this);
   endtask

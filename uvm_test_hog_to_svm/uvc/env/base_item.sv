@@ -10,6 +10,7 @@ class base_item extends uvm_sequence_item;
   logic is_person;
   logic o_valid;
   logic  led;
+  logic [FEA_I + FEA_F - 1:0] result;
   logic [10 : 0] sw_id;
   
   logic [5 : 0] addr_a;
@@ -24,6 +25,7 @@ class base_item extends uvm_sequence_item;
   `uvm_object_utils_begin(base_item)
     `uvm_field_sarray_int(data_temp, UVM_ALL_ON);
     `uvm_field_int(ready, UVM_ALL_ON);
+    `uvm_field_int(result, UVM_ALL_ON);
     `uvm_field_int(request, UVM_ALL_ON);
     `uvm_field_int(data, UVM_ALL_ON);
 

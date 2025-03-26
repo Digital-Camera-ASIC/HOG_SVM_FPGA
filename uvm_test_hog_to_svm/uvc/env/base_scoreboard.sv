@@ -411,7 +411,7 @@ class base_scoreboard extends uvm_scoreboard;
 
     cnt_addr ++;
 
-    if (cnt_addr == 1201) begin
+    if (cnt_addr == 1200) begin
       frame_num ++;
       cnt = 0;
       cnt_addr = 0;
@@ -435,8 +435,12 @@ class base_scoreboard extends uvm_scoreboard;
 
   virtual function void write_mon(base_item item);
     // `uvm_info(get_type_name(), $sformatf("Captured packet from mon %s", item.sprint()), UVM_LOW)
-
-    temp_result_mon= item.led;
+    if (item.result[int_part + frac_part - 1] == 1'b1) begin  
+      temp_result_mon = -1.0*(~item.result + 1'b1)/(2**frac_part);
+    end
+    else begin
+      temp_result_mon= (1.0 * item.result / (2 ** frac_part));
+    end
     // $display("result mon: %f", temp_result_mon);
     mon_result.push_back(temp_result_mon);
   endfunction
@@ -471,7 +475,7 @@ class base_scoreboard extends uvm_scoreboard;
     // while (mon_result.size() > 0 && golden_result.size() > 0) begin
     //   $display(cnt_compare);
     //   if ((mon_result[0] - golden_result[0]) > 1e-2 || (mon_result[0] - golden_result[0]) < -1e-2) begin
-    //     `uvm_error(get_type_name(), "Result is not match")
+    //  @cn   `uvm_error(get_type_name(), "Result is not match")
     //     `uvm_info(get_type_name(), $sformatf("Golden: %f, Actual: %f", golden_result[0], mon_result[0]), UVM_LOW)
     //   end
     //   else begin
@@ -489,7 +493,7 @@ class base_scoreboard extends uvm_scoreboard;
       if (max_space < abs(mon_result[0] - golden_result[0])) begin
         max_space = abs(mon_result[0] - golden_result[0]);
       end
-      $display(cnt_compare);
+      $display(cnt_compare, cnt_compare/ 495);
       // if ((mon_result[0] - golden_result[0]) > 1e-1 || (mon_result[0] - golden_result[0]) < -1e-1) begin
       if ((mon_result[0] * golden_result[0]) < 0) begin
         `uvm_error(get_type_name(), "Result is not match")

@@ -1,5 +1,5 @@
 `timescale 1ns / 1ps
-
+`define SIM
 `include "apb_if.sv"
 `include "uvm_macros.svh"
 import uvm_pkg::*;
@@ -25,6 +25,7 @@ import base_uvm_pkg::*;
 `include "svm.v"
 `include "hog_fetch.v"
 `include "led_control.v"
+
 `define CLK_GEN(clk, cycle)\
     initial begin\
         clk = 0;\
@@ -111,6 +112,9 @@ hog_svm #(
     .o_valid         (vif.o_valid),
     .is_person       (vif.is_person),
     .led          (vif.led),
+    `ifdef SIM
+    .result       (vif.result),
+    `endif
     // slide window index
     .sw_id           (vif.sw_id)
 );

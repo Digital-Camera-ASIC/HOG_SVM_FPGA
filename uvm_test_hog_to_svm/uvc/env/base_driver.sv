@@ -34,23 +34,20 @@ class base_driver extends uvm_driver #(base_item);
   endtask
 
   task drive_item(base_item item);
+    @vif.cb;
     wait (vif.rst);
-    wait (vif.request);
-    #1ps;
     @vif.cb;
     vif.cb.i_data_fetch <= item.data;
-    // `uvm_info("DEBUG-DRIVER", $sformatf("data: %h", item.data), UVM_LOW)
     vif.cb.ready <= 1;
+    wait (vif.request);
     cnt++;
-
-
-    if (cnt == 1201) begin
-      repeat(5) begin
-        @vif.cb;
-        vif.cb.ready <= 0;
-      end
+    if (cnt == 1200) begin
+      // repeat(5) begin
       @vif.cb;
-      vif.cb.ready <= 1;
+      vif.cb.ready <= 0;
+      // end
+      // @vif.cb;
+      // vif.cb.ready <= 1;
       cnt = 0;
     end
     // if (cnt == 1200) begin

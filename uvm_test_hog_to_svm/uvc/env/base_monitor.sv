@@ -36,6 +36,8 @@ class base_monitor extends uvm_monitor;
       @vif.cb;
       if (vif.cb.o_valid) begin
         trans_collected.is_person = vif.cb.is_person;
+
+        trans_collected.result = vif.cb.result;
         trans_collected.led = vif.cb.led;
         trans_collected.sw_id = vif.cb.sw_id;
         trans_collected.o_valid = vif.cb.o_valid;
