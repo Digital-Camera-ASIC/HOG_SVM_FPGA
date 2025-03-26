@@ -57,7 +57,7 @@ module svm_ctrl #(
         if(~rst) begin
             sw_id <= 0;
         end else if (accumulate) begin
-            if(sw_id == MAX_SW_ID - 1)
+            if(sw_id == MAX_SW_ID)
                 sw_id <= 0;
             else
                 sw_id <= sw_id + 1'b1;
