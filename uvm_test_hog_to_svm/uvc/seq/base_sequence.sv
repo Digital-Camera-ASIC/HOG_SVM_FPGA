@@ -4,56 +4,50 @@ class init_read_seq extends uvm_sequence #(base_item);
     `uvm_field_object(req, UVM_ALL_ON)
   `uvm_object_utils_end
   int cnt = 0;
-  logic [40][767:0] fifo;
+  logic[767:0] fifo[1200];
+
   function new(string name = "init_read_seq");
     super.new(name);
   endfunction : new
 
   virtual task pre_body();
-    for (int i = 0; i < 40; i++) begin
-      fifo[i] = 0;
-    end
+    string file_path = "C:/Users/datph/Desktop/Thesis/Testing/phase_2/HOG_SVM_FPGA/uvm_test_hog_to_svm/pic/test_2.txt";
+    $readmemh(file_path, fifo);
+    $display("fifo[0]: %h", fifo[0]);
+    $display("fifo[1199]: %h", fifo[1199]);
   endtask
 
+//   virtual task body();
+//     repeat (1200) begin
+//       `uvm_do_with(req,
+//                    {
+//                     // data == cnt;
+//                    })
+//       // $display("FIFO[%0d]: %h", cnt, fifo[cnt]);
+//       cnt++;
+//       get_response(rsp);
+//     end
+// // $display("FIFO[%0d]: %h", cnt, fifo[cnt]);
+//     cnt = 0;
+//     // repeat (1200) begin
+//     //   `uvm_do_with(req,
+//     //                {
+//     //                 // data == cnt;
+//     //                })
+//     //   // $display("FIFO[%0d]: %h", cnt, fifo[cnt]);
+//     //   cnt++;
+//     //   get_response(rsp);
+//     // end
+//   endtask
+
   virtual task body();
-    // repeat (10) begin
-    //   `uvm_do_with(req, {
-
-    //   })
-    //   get_response(req); 
-    // end
-    // repeat (60) begin
-    //   `uvm_do_with(req, {
-    //     // data_temp[0] == 0;
-    //     // data_temp[16] == 100;
-    //     // data_temp[9] == 200;
-    //     // data_temp[72] == 0;
-    //     // foreach(data_temp[i]) {
-    //     //   if (i != 0 && i != 16 && i != 9 && i != 72) data_temp[i] == 0;
-    //     // }
-    //   })
-    // get_response(req);
-    // end
-
-
-    repeat (1200) begin // toi 82 la no van k co error
+    repeat (1200) begin
       `uvm_do_with(req,
                    {
-                    // foreach(req.data_temp[i]) {
-                    //   req.data_temp[i] == 0;/
-                    //   // req.data_temp[0] == cnt % 256;
-                    //   // if (i != 0) req.data_temp[i] == 0;
-                    // }
+                    data == fifo[cnt];
                    })
-
-
-      // for (int j = 39; j > 0; j--) begin
-      //   fifo[j] = fifo[j-1];
-      // end      
-      // fifo[0] = req.data;
-      // $display("fifo[0]: captured hehe %h", fifo[0]);
+      // $display("FIFO[%0d]: %h", cnt, fifo[cnt]);
       cnt++;
-
       get_response(rsp);
     end
   endtask

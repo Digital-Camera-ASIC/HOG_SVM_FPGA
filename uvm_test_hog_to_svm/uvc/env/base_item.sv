@@ -2,14 +2,14 @@ class base_item extends uvm_sequence_item;
 
   parameter int FEA_I = 4;
   parameter int FEA_F = 16;
-  rand bit [7:0] data_temp [96];
+  bit [7:0] data_temp [96];
   logic ready;
   logic request;
-  logic [767:0] data;
+  rand bit [767:0] data;
 
   logic is_person;
   logic o_valid;
-  logic [FEA_I + FEA_F - 1:0] result;
+  logic  led;
   logic [10 : 0] sw_id;
   
   logic [5 : 0] addr_a;
@@ -28,7 +28,7 @@ class base_item extends uvm_sequence_item;
     `uvm_field_int(data, UVM_ALL_ON);
 
     `uvm_field_int(o_valid, UVM_ALL_ON);
-    `uvm_field_int(result, UVM_ALL_ON);
+    `uvm_field_int(led, UVM_ALL_ON);
     `uvm_field_int(sw_id, UVM_ALL_ON);
     `uvm_field_int(is_person, UVM_ALL_ON);
   
@@ -44,9 +44,9 @@ class base_item extends uvm_sequence_item;
     super.new(name);
   endfunction
   
-  function void post_randomize();
-    for (int i = 0; i < 96; i++) begin
-      data[i*8+:8] = data_temp[i];
-    end
-  endfunction
+  // function void post_randomize();
+  //   for (int i = 0; i < 96; i++) begin
+  //     data[i*8+:8] = data_temp[i];
+  //   end
+  // endfunction
 endclass : base_item

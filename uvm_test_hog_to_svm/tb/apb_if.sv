@@ -36,13 +36,13 @@ interface dut_if #(
 
   logic                  o_valid = 0;
   logic                  is_person = 0;
-  logic [ FEA_W - 1 : 0] result = 0;
+  logic [ FEA_W - 1 : 0] led = 0;
   logic [  SW_W - 1 : 0] sw_id = 0;
 
 
   clocking cb @(posedge clk);
     default input #1ps output #1ps;
     output ready, i_data_fetch, addr_a, write_en, i_data_a, bias, b_load;
-    input is_person, o_valid, result, sw_id, request, o_data_a;
+    input is_person, o_valid, led, sw_id, request, o_data_a;
   endclocking
 endinterface
