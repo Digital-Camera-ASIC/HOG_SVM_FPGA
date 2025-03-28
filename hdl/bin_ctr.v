@@ -1,8 +1,8 @@
 module bin_ctr #(
-    localparam  TAN_W   = 20,
-    localparam  CODE_W  = 4,
-    localparam  CNT_W   = 6,
-    localparam  MAX_CNT = 64
+    parameter  TAN_W   = 20,
+    parameter  CODE_W  = 4,
+    parameter  CNT_W   = 6,
+    parameter  MAX_CNT = 64
 )(
     input                               clk,
     input                               rst,
