@@ -4,13 +4,13 @@ module svm #(
     parameter   FEA_I   = 4, // integer part of hog feature
     parameter   FEA_F   = 8, // fractional part of hog feature
     parameter   SW_W    = 11, // slide window width
-    localparam  FEA_W   = FEA_I + FEA_F,
-    localparam  COEF_W  = FEA_W,
-    localparam  ROW     = 15,
-    localparam  COL     = 7,
-    localparam  N_COEF  = ROW * COL, // number of coef in a fetch instruction
-    localparam  RAM_DW  = COEF_W * N_COEF,
-    localparam  ADDR_W  = 6 // ceil of log2(36)
+    parameter  FEA_W   = FEA_I + FEA_F,
+    parameter  COEF_W  = FEA_W,
+    parameter  ROW     = 15,
+    parameter  COL     = 7,
+    parameter  N_COEF  = ROW * COL, // number of coef in a fetch instruction
+    parameter  RAM_DW  = COEF_W * N_COEF,
+    parameter  ADDR_W  = 6 // ceil of log2(36)
 ) (
     input                       clk,
     input                       rst,
@@ -49,7 +49,7 @@ module svm #(
     wire [RAM_DW - 1 : 0] o_data_b;
     wire [ADDR_W - 1 : 0] addr_b;
     wire [COEF_W - 1 : 0] coef [0 : N_COEF - 1];
-    reg [COEF_W - 1 : 0] bias_r;
+    reg [COEF_W - 1 : 0] bias_r = 'hBD80F;
     always @(posedge clk) begin
         if(b_load) bias_r <= bias;
     end
@@ -67,7 +67,7 @@ module svm #(
     );
     genvar i;
     generate
-        for(i = 0; i < N_COEF; i = i + 1) begin
+        for(i = 0; i < N_COEF; i = i + 1) begin : COEF_ASSIGN
             assign coef[i] = o_data_b[COEF_W * i +: COEF_W];
         end
     endgenerate
@@ -115,7 +115,7 @@ module svm #(
     );
     generate
         // svm middle 1 2 ...
-        for(i = 1; i <= N_COEF - 2; i = ((i + 2) % COL == 0) ? i + 2 : i + 1) begin
+        for(i = 1; i <= N_COEF - 2; i = ((i + 2) % COL == 0) ? i + 2 : i + 1) begin : SVM_PE_GEN_MIDDLE
             svm_pe #(
                 .FEA_I         (FEA_I),
                 // integer part of hog feature
@@ -133,7 +133,7 @@ module svm #(
         end
 
         // svm need store in buf: 6, 13, ..., 97
-        for(i = COL - 1; i < N_COEF - COL; i = i + COL) begin
+        for(i = COL - 1; i < N_COEF - COL; i = i + COL) begin : SVM_PE_GEN_BUF
             svm_pe #(
                 .FEA_I         (FEA_I),
                 // integer part of hog feature
@@ -150,7 +150,7 @@ module svm #(
             );
         end
         // 14 buffers
-        for(i = 0; i < N_BUF; i = i + 1) begin
+        for(i = 0; i < N_BUF; i = i + 1) begin : GEN_BUFFER
             buffer #(
                 .DATA_W     (FEA_W),
                 .DEPTH      (BUF_DEPTH)
