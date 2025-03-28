@@ -3,8 +3,8 @@ module normalize #(
     parameter BIN_F     = 4, // fractional part of bin
     parameter FEA_I     = 4, // integer part of hog feature
     parameter FEA_F     = 8, // fractional part of hog feature
-    localparam BIN_W    = BIN_I + BIN_F, // fractional part of hog feature
-    localparam FEA_W    = FEA_I + FEA_F // fractional part of hog feature
+    parameter BIN_W    = BIN_I + BIN_F, // fractional part of hog feature
+    parameter FEA_W    = FEA_I + FEA_F // fractional part of hog feature
 ) (
     input                           clk,
     input                           rst,
@@ -25,6 +25,7 @@ module normalize #(
     localparam epsilon = 12'h1;
     // shared mem for rd and wr
     reg [CNT_W - 1 : 0] cnt;
+    reg o_valid_r;
     always @(posedge clk) begin
         if(!rst)
             cnt <= 0;
@@ -33,6 +34,8 @@ module normalize #(
                 cnt <= 0;
             else
                 cnt <= cnt + 1;
+        end else if(cnt == CELL_NUM && o_valid_r && ~o_valid) begin
+                cnt <= 0;
         end
     end
     
@@ -152,6 +155,10 @@ module normalize #(
     localparam s_valid_time = div_with_fea_a + FEA_F + 3;
     localparam e_valid_time = s_valid_time + 36;
     assign o_valid = (cnt >= MAX_ADDR && s_valid_time <= cnt_after_valid && cnt_after_valid < e_valid_time && cnt % LINE != 1);
+    
+    always @(posedge clk) begin
+        o_valid_r <= o_valid;
+    end
     // function lists
     // bin_sum: sum of 9 bins
     function [21 : 0] bin_sum(input [179 : 0] bin);
