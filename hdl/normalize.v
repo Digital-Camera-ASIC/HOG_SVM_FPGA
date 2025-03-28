@@ -3,8 +3,8 @@ module normalize #(
     parameter BIN_F     = 4, // fractional part of bin
     parameter FEA_I     = 4, // integer part of hog feature
     parameter FEA_F     = 8, // fractional part of hog feature
-    localparam BIN_W    = BIN_I + BIN_F, // fractional part of hog feature
-    localparam FEA_W    = FEA_I + FEA_F // fractional part of hog feature
+    parameter BIN_W    = BIN_I + BIN_F, // fractional part of hog feature
+    parameter FEA_W    = FEA_I + FEA_F // fractional part of hog feature
 ) (
     input                           clk,
     input                           rst,
