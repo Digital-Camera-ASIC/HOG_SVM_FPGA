@@ -6,7 +6,7 @@ module div2 #(
     parameter   B_W     = 9,
     parameter   O_I_W   = 4, // output integer width
     parameter   O_F_W   = 8, // output integer width
-    localparam  O_W     = O_I_W + O_F_W // output width
+    parameter  O_W     = O_I_W + O_F_W // output width
 ) (
     input                       clk,
     input   [A_W - 1    : 0]    a,
