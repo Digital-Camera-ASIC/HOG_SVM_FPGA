@@ -3,8 +3,8 @@
 module sqrt #(
     parameter           IN_W    = 18,
     parameter           OUT_F   = 4,
-    localparam integer  OUT_I   = $ceil(IN_W * 1.0 / 2),
-    localparam          OUT_W   = OUT_I + OUT_F
+    parameter integer  OUT_I   = (IN_W + 2 - 1) / 2, //$ceil(IN_W * 1.0 / 2),
+    parameter          OUT_W   = OUT_I + OUT_F
 ) (
     input                       clk,
     input  [IN_W - 1    : 0]    in,
@@ -43,7 +43,7 @@ module sqrt #(
             .q_o     (q_o[0])
             // output of new quotient
         );
-        for(i = 2 ; i <= OUT_W; i = i + 1) begin
+        for(i = 2 ; i <= OUT_W; i = i + 1) begin : SQRT_PE_GEN
             if(2 * i < OUT_W + 2) begin
                 sqrt_pe #(
                     .Q_W     (OUT_W),
@@ -87,7 +87,7 @@ endmodule
 module sqrt_pe2 #(
     parameter Q_W   = 12, //quotient width
     parameter LOOP  = 1, //the loop to calculate cut
-    localparam D_W  = 2 * Q_W //divident width
+    parameter D_W  = 2 * Q_W //divident width
 ) (
     input                       clk,
     input       [D_W - 1 :  0]  d_i, // input of divident
@@ -150,7 +150,7 @@ endmodule
 module sqrt_pe #(
     parameter Q_W   = 12, //quotient width
     parameter LOOP  = 1, //the loop to calculate cut
-    localparam D_W  = 2 * Q_W //divident width
+    parameter D_W  = 2 * Q_W //divident width
 ) (
     input                       clk,
     input       [D_W - 1 :  0]  d_i, // input of divident
