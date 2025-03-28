@@ -9,15 +9,15 @@ module hog_svm#(
     parameter   FEA_F   = 16, // fractional part of hog feature
     parameter   SW_W    = 11, // slide window width
     parameter   CELL_S  = 10, // Size of cell, default 8x8 pixel and border
-    localparam  PIX_N   = CELL_S * CELL_S - 4, // number of cell 
-    localparam  IN_W    = PIX_W * PIX_N,
-    localparam  FEA_W   = FEA_I + FEA_F,
-    localparam  COEF_W  = FEA_W,
-    localparam  ROW     = 15,
-    localparam  COL     = 7,
-    localparam  N_COEF  = ROW * COL, // number of coef in a fetch instruction
-    localparam  RAM_DW  = COEF_W * N_COEF,
-    localparam  ADDR_W  = 6 // ceil of log2(36)
+    parameter  PIX_N   = CELL_S * CELL_S - 4, // number of cell 
+    parameter  IN_W    = PIX_W * PIX_N,
+    parameter  FEA_W   = FEA_I + FEA_F,
+    parameter  COEF_W  = FEA_W,
+    parameter  ROW     = 15,
+    parameter  COL     = 7,
+    parameter  N_COEF  = ROW * COL, // number of coef in a fetch instruction
+    parameter  RAM_DW  = COEF_W * N_COEF,
+    parameter  ADDR_W  = 6 // ceil of log2(36)
 )(
     //// hog if
     input                       clk,
