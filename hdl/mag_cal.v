@@ -4,9 +4,9 @@ module mag_cal #(
     parameter   MAG_F = 4,// fraction part of magnitude
     parameter   TAN_I = 4, // tan integer (signed number)
     parameter   TAN_F = 16, // tan fraction
-    localparam  MAG_I = PIX_W + 1, // integer part of magnitude
-    localparam  MAG_W = MAG_I + MAG_F,
-    localparam  TAN_W = TAN_I + TAN_F
+    parameter  MAG_I = PIX_W + 1, // integer part of magnitude
+    parameter  MAG_W = MAG_I + MAG_F,
+    parameter  TAN_W = TAN_I + TAN_F
 ) (
     input                           clk,
     input                           rst,
@@ -77,7 +77,7 @@ module mag_cal #(
         always @(posedge clk) begin
             tan_r[0] <= tan_w;
         end
-        for(i = 1; i <= pi_remain - 1; i = i + 1) begin
+        for(i = 1; i <= pi_remain - 1; i = i + 1) begin : TAN_ASSIGN
             always @(posedge clk) begin
                 tan_r[i] <= tan_r[i - 1];
             end
@@ -89,7 +89,7 @@ module mag_cal #(
             if(!rst)  valid_r[0] <= 0;
             else valid_r[0] <= i_valid;
         end
-        for(i = 1; i <= pi_cycles - 1; i = i + 1) begin
+        for(i = 1; i <= pi_cycles - 1; i = i + 1) begin : VALID_GEN
             always @(posedge clk) begin
                 if(!rst)  valid_r[i] <= 0;
                 else valid_r[i] <= valid_r[i - 1];
