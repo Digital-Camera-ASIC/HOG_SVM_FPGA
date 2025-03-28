@@ -29,7 +29,7 @@ module buffer #(
     );
     genvar i;
     generate
-        for (i = 0; i < DEPTH; i = i + 1) begin
+        for (i = 0; i < DEPTH; i = i + 1) begin : BUFFER_ELEMENT_GEN
             buffer_element #(
                 .DATA_W     (DATA_W)
             ) u_buffer_element (
