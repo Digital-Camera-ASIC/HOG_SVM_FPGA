@@ -2,8 +2,8 @@
 module svm_pe #(
     parameter   FEA_I   = 4, // integer part of hog feature
     parameter   FEA_F   = 8, // fractional part of hog feature
-    localparam  FEA_W   = FEA_I + FEA_F,
-    localparam  COEF_W  = FEA_W
+    parameter  FEA_W   = FEA_I + FEA_F,
+    parameter  COEF_W  = FEA_W
 ) (
     input                               clk,
     input                               init,
