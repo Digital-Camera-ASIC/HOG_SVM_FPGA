@@ -1,9 +1,9 @@
 module hog_fetch #(
     parameter   PIX_W   = 8,
     parameter   CELL_S  = 10, // Size of cell, default 8x8 pixel and border
-    localparam  PIX_N   = CELL_S * CELL_S - 4, // number of cell 
-    localparam  IN_W    = PIX_W * PIX_N,
-    localparam  OUT_W   = PIX_W * 4 // top, bot, left, right
+    parameter  PIX_N   = CELL_S * CELL_S - 4, // number of cell 
+    parameter  IN_W    = PIX_W * PIX_N,
+    parameter  OUT_W   = PIX_W * 4 // top, bot, left, right
 ) (
     input                       clk,
     input                       rst,
