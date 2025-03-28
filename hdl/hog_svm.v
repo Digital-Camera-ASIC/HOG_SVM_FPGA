@@ -6,18 +6,18 @@ module hog_svm#(
     parameter   TAN_F   = 16, // tan width
     parameter   BIN_I   = 16, // integer part of bin
     parameter   FEA_I   = 4, // integer part of hog feature
-    parameter   FEA_F   = 8, // fractional part of hog feature
+    parameter   FEA_F   = 16, // fractional part of hog feature
     parameter   SW_W    = 11, // slide window width
     parameter   CELL_S  = 10, // Size of cell, default 8x8 pixel and border
-    localparam  PIX_N   = CELL_S * CELL_S - 4, // number of cell 
-    localparam  IN_W    = PIX_W * PIX_N,
-    localparam  FEA_W   = FEA_I + FEA_F,
-    localparam  COEF_W  = FEA_W,
-    localparam  ROW     = 15,
-    localparam  COL     = 7,
-    localparam  N_COEF  = ROW * COL, // number of coef in a fetch instruction
-    localparam  RAM_DW  = COEF_W * N_COEF,
-    localparam  ADDR_W  = 6 // ceil of log2(36)
+    parameter  PIX_N   = CELL_S * CELL_S - 4, // number of cell 
+    parameter  IN_W    = PIX_W * PIX_N,
+    parameter  FEA_W   = FEA_I + FEA_F,
+    parameter  COEF_W  = FEA_W,
+    parameter  ROW     = 15,
+    parameter  COL     = 7,
+    parameter  N_COEF  = ROW * COL, // number of coef in a fetch instruction
+    parameter  RAM_DW  = COEF_W * N_COEF,
+    parameter  ADDR_W  = 6 // ceil of log2(36)
 )(
     //// hog if
     input                       clk,
@@ -34,13 +34,12 @@ module hog_svm#(
     // bias
     input   [COEF_W - 1 : 0]    bias,
     input                       b_load,
-    // output info
+    // svm if
     output                      o_valid,
     output                      is_person,
-`ifdef SIM
-    output  [FEA_W - 1  : 0]    result,
-`endif
-    output  [SW_W - 1   : 0]    sw_id // slide window index
+    output  [SW_W - 1   : 0]    sw_id,
+    // led
+    output                      led
 );
     wire [FEA_W - 1 : 0]          fea_sig;
     wire     i_valid_sig;
@@ -115,4 +114,16 @@ module hog_svm#(
     // slide window index
     .sw_id        (sw_id)
 );
+    led_control #(
+        // slide window width
+        .SW_W         (SW_W)
+    ) u_led_control (
+        .clk          (clk),
+        .rst          (rst),
+        .o_valid      (o_valid),
+        .is_person    (is_person),
+        .sw_id        (sw_id),
+        // slide window index
+        .led          (led)
+    );
 endmodule
