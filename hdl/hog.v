@@ -6,8 +6,8 @@ module hog #(
     parameter   BIN_I   = 16, // integer part of bin
     parameter   FEA_I   = 4, // integer part of hog feature
     parameter   FEA_F   = 8, // fractional part of hog feature
-    localparam  FEA_W   = FEA_I + FEA_F,
-    localparam  IN_W    = PIX_W * 4
+    parameter  FEA_W   = FEA_I + FEA_F,
+    parameter  IN_W    = PIX_W * 4
 ) (
     input                       clk,
     input                       rst,
