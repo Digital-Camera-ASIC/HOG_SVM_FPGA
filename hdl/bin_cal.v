@@ -3,9 +3,9 @@ module bin_cal #(
     parameter   MAG_I   = 9,
     parameter   MAG_F   = 4,
     parameter   BIN_I   = 16, // integer part of bin
-    localparam  BIN_F   = MAG_F, // fractional part of bin
-    localparam  BIN_W   = BIN_I + BIN_F, // fractional part of bin
-    localparam  MAG_W   = MAG_I + MAG_F
+    parameter  BIN_F   = MAG_F, // fractional part of bin
+    parameter  BIN_W   = BIN_I + BIN_F, // fractional part of bin
+    parameter  MAG_W   = MAG_I + MAG_F
 ) (
     input                           clk,
     input                           rst,
