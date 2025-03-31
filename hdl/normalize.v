@@ -25,7 +25,8 @@ module normalize #(
     localparam epsilon = 12'h1;
     // shared mem for rd and wr
     reg [CNT_W - 1 : 0] cnt;
-    reg o_valid_r;
+    reg o_valid_r [0 : 13];
+    wire o_valid_;
     always @(posedge clk) begin
         if(!rst)
             cnt <= 0;
@@ -34,12 +35,12 @@ module normalize #(
                 cnt <= 0;
             else
                 cnt <= cnt + 1;
-        end else if(cnt == CELL_NUM && o_valid_r && ~o_valid) begin
+        end else if(cnt == CELL_NUM && o_valid_r[0] && ~o_valid_) begin
                 cnt <= 0;
         end
     end
     
-    // controller for write into ram (every 80 cycles)
+    // controller for write into ram (every 64 cycles)
     wire [ADDR_W - 1 : 0] addr_a;
     
     assign addr_a = cnt % MAX_ADDR;
@@ -126,6 +127,7 @@ module normalize #(
     wire [QUO_W - 1 : 0] quotient; 
 
     div2 #(
+        // do not change parameters
         .A_W      (BIN_W),
         .B_W      (SUM_W),
         .O_I_W    (QUO_I),
@@ -153,12 +155,22 @@ module normalize #(
     assign fea = {4'b0, sqrt_q};
     
     localparam s_valid_time = div_with_fea_a + FEA_F + 3;
+    
     localparam e_valid_time = s_valid_time + 36;
-    assign o_valid = (cnt >= MAX_ADDR && s_valid_time <= cnt_after_valid && cnt_after_valid < e_valid_time && cnt % LINE != 1);
+    assign o_valid_ = (cnt >= MAX_ADDR && s_valid_time <= cnt_after_valid && cnt_after_valid < e_valid_time && cnt % LINE != 1);
     
     always @(posedge clk) begin
-        o_valid_r <= o_valid;
+        o_valid_r[0] <= o_valid_;
     end
+    generate
+        genvar i;
+        for (i = 0; i < 13; i = i + 1) begin
+            always @(posedge clk) begin
+                o_valid_r[i + 1] <= o_valid_r[i];
+            end
+        end
+    endgenerate
+    assign o_valid = o_valid_r[13];
     // function lists
     // bin_sum: sum of 9 bins
     function [21 : 0] bin_sum(input [179 : 0] bin);

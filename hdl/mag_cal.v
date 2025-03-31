@@ -21,13 +21,11 @@ module mag_cal #(
     wire signed [PIX_W - 1 : 0] left;
     wire signed [PIX_W - 1 : 0] right;
 
-    wire [PIX_W : 0] ver_diff;
-    wire [PIX_W : 0] hor_diff;
     wire [2 * PIX_W : 0] result;
     
     assign {top, bot, left, right} = pixel;
     
-    // *_diff valid after 1 cycle
+    
     // result valid after 3 cycles
     sum_sq_diff #(
         .PIX_W       (PIX_W)
@@ -37,16 +35,22 @@ module mag_cal #(
         .bot         (bot),
         .left        (left),
         .right       (right),
-        .ver_diff    (ver_diff),
-        // the difference of vertical (bot - top)
-        .hor_diff    (hor_diff),
-        // the difference of horizon (right - left)
         .result      (result)
     );
-
+    
+    // diff calculation
+    // *_diff valid after 1 cycle
+    reg [PIX_W - 1: 0] ver_diff; // the difference of vertical (bot - top)
+    reg [PIX_W -1 : 0] hor_diff; // the difference of horizon (right - left)
+    reg sign_diff;
+    always @(posedge clk) begin
+        ver_diff <= (bot > top) ? bot - top : top - bot;
+        hor_diff <= (right > left) ? right - left : left - right;
+        sign_diff <= (bot > top) ^ (right > left);
+    end
     // magnitude valid after 13 cycles --> from pixel to mag costs 16 cycles
     localparam pi_cycles = 16; // total pipeline cycles
-    localparam pi_remain = pi_cycles - 4;
+    localparam pi_remain = pi_cycles - 13;
     wire [TAN_W - 1 : 0] tan_w;
     reg [TAN_W - 1 : 0] tan_r [0 : pi_remain - 1];
     reg valid_r [0 : pi_cycles - 1];
@@ -58,19 +62,20 @@ module mag_cal #(
         .in       (result),
         .out      (magnitude)
     );
-
+    // pipeline div 13 cycles
     div #(
-        .A_W      (PIX_W + 1),
-        .B_W      (PIX_W + 1),
-        .O_I_W    (TAN_I),
+        .A_W            (PIX_W),
+        .B_W            (PIX_W),
+        .O_I_W          (TAN_I),
         // output integer width
-        .O_F_W    (TAN_F)
+        .O_F_W          (TAN_F)
         // output fraction width
     ) u_div (
-        .clk      (clk),
-        .a        (ver_diff),
-        .b        (hor_diff),
-        .o        (tan_w)
+        .clk            (clk),
+        .a              (ver_diff),
+        .b              (hor_diff),
+        .i_sign_diff    (sign_diff),
+        .o              (tan_w)
     );
     genvar i;
     generate

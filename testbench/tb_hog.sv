@@ -92,7 +92,6 @@ module tb_hog;
         // output info
         .o_valid         (o_valid),
         .is_person       (is_person),
-        .result          (result),
         // slide window index
         .sw_id           (sw_id)
     );
@@ -101,6 +100,7 @@ module tb_hog;
     initial begin
     string file_path_ram = "E:/dai_hoc/CE_project/coef_2.txt";
     $readmemh(file_path_ram, u_hog_svm.u_svm.u_dp_ram2.ram);
+    u_hog_svm.u_svm.bias_r <= 0;
     end
     generate;
         genvar i;

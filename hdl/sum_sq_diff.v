@@ -8,14 +8,14 @@ module sum_sq_diff # (
     input               [PIX_W - 1  : 0]    bot,  
     input               [PIX_W - 1  : 0]    left,  
     input               [PIX_W - 1  : 0]    right,
-    output reg signed   [PIX_W      : 0]    ver_diff, // the difference of vertical (bot - top)
-    output reg signed   [PIX_W      : 0]    hor_diff, // the difference of horizon (right - left)
     output              [2 * PIX_W  : 0]    result
 );
     // 
     reg [2 * PIX_W : 0]        ver_sq; // the square of ver_diff
     reg [2 * PIX_W : 0]        hor_sq; // the square of hor_diff
-
+    
+    reg signed   [PIX_W      : 0]    ver_diff; // the difference of vertical (bot - top)
+    reg signed   [PIX_W      : 0]    hor_diff; // the difference of horizon (right - left)
     reg [2 * PIX_W : 0] sum; // sum of ver_sq and hor_sq
     // reg [2 * PIX_W + 1 : 0] sum_r; // sum of ver_sq and hor_sq
     always @(posedge clk) begin
