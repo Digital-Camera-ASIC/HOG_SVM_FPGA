@@ -38,6 +38,9 @@ module hog_svm#(
     output                      o_valid,
     output                      is_person,
     output  [SW_W - 1   : 0]    sw_id,
+    `ifdef SIM
+    output  [FEA_W - 1  : 0]    result,
+    `endif
     // led
     output                      led
 );

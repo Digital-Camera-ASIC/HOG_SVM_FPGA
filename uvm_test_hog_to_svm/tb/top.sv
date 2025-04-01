@@ -25,6 +25,7 @@ import base_uvm_pkg::*;
 `include "svm.v"
 `include "hog_fetch.v"
 `include "led_control.v"
+`include "left_shift_msb.v"
 
 `define CLK_GEN(clk, cycle)\
     initial begin\

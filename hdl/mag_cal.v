@@ -16,10 +16,10 @@ module mag_cal #(
     output  [TAN_W - 1      : 0]    tan,
     output                          o_valid
 );
-    wire signed [PIX_W - 1 : 0] top;
-    wire signed [PIX_W - 1 : 0] bot;
-    wire signed [PIX_W - 1 : 0] left;
-    wire signed [PIX_W - 1 : 0] right;
+    wire [PIX_W - 1 : 0] top;
+    wire [PIX_W - 1 : 0] bot;
+    wire [PIX_W - 1 : 0] left;
+    wire [PIX_W - 1 : 0] right;
 
     wire [2 * PIX_W : 0] result;
     

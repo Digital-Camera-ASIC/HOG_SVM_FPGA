@@ -22,7 +22,7 @@ interface dut_if #(
     input bit rst
 );
 
-  logic                  ready = 1;
+  logic                  ready = 0;
   logic                  request = 0;
   logic [  IN_W - 1 : 0] i_data_fetch = 0;
 

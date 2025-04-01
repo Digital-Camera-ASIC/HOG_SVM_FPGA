@@ -360,12 +360,12 @@ class base_scoreboard extends uvm_scoreboard;
     fifo[0] = item.data;
 
     cnt = cnt + 1;
-    `ifdef DEBUG
-      $display($sformatf("cnt = %0d", cnt));
-      for (int i = 0; i < cnt; i++) begin
-        $display($sformatf("FIFO[%0d]: %h", i, fifo[i]));
-      end
-    `endif
+    // `ifdef DEBUG
+    //   $display($sformatf("cnt = %0d", cnt));
+    //   for (int i = 0; i < cnt; i++) begin
+    //     $display($sformatf("FIFO[%0d]: %h", i, fifo[i]));
+    //   end
+    // `endif
     if (cnt == 42) begin
       if (cnt_addr % 40 != 0) begin
         // `uvm_info(get_type_name(), "Feature valid message", UVM_LOW)
