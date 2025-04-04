@@ -61,7 +61,7 @@ module div #(
     generate
         genvar i;
         
-        for (i = 1; i < 9; i = i + 1) begin
+        for (i = 1; i < 9; i = i + 1) begin : DIV_PE_GEN
             div_pe u_div_pe (
                 .clk      (clk),
                 .a        (a_new[i]),

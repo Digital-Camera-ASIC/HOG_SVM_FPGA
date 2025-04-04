@@ -164,7 +164,7 @@ module normalize #(
     end
     generate
         genvar i;
-        for (i = 0; i < 13; i = i + 1) begin
+        for (i = 0; i < 13; i = i + 1) begin : OVALID_GEN
             always @(posedge clk) begin
                 o_valid_r[i + 1] <= o_valid_r[i];
             end

@@ -7,7 +7,7 @@ module div2 #(
     parameter  B_W     = 22,
     parameter  O_I_W   = 0, // output integer width
     parameter  O_F_W   = 32, // output integer width
-    localparam  O_W     = O_I_W + O_F_W // output width
+    parameter  O_W     = O_I_W + O_F_W // output width
 ) (
     input                       clk,
     input   [A_W - 1    : 0]    a,
@@ -49,7 +49,7 @@ module div2 #(
     );
     generate
         genvar i;
-        for (i = 0; i < 15; i = i + 1) begin
+        for (i = 0; i < 15; i = i + 1) begin : DIV2_PE_GEN
             div2_pe u_div2_pe (
                 .clk      (clk),
                 .a        (a_new[i]),
